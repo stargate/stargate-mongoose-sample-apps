@@ -13,14 +13,20 @@ module.exports = async function connect() {
   }
   conn = mongoose.connection;
 
-  let uri = config.stargateJSONUri;
+  const isAstra = config.astraJSONUri;
 
-  await mongoose.connect(uri, {
-    username: config.stargateJSONUsername,
-    password: config.stargateJSONPassword,
-    authUrl: config.stargateJSONAuthUrl
-  });
-  
+  const uri = isAstra ? config.astraJSONUri : config.stargateJSONUri;
+  const options =
+    isAstra ? {
+      createNamespaceOnConnect: false
+    } :
+      {
+        username: config.stargateJSONUsername,
+        password: config.stargateJSONPassword,
+        authUrl: config.stargateJSONAuthUrl
+      };
+  await mongoose.connect(uri, options);
+
   await Promise.all(Object.values(mongoose.connection.models).map(Model => Model.init()));
   return conn;
 };
