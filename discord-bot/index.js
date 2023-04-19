@@ -52,12 +52,15 @@ client.on('interactionCreate', async interaction => {
 run();
 
 async function run() {
-  console.log('Connecting to', process.env.STARGATE_JSON_API_URL);
-  await mongoose.connect(process.env.STARGATE_JSON_API_URL, {
+  const url = process.env.ASTRA_JSON_API_URL || process.env.STARGATE_JSON_API_URL;
+  const isAstra = process.env.ASTRA_JSON_API_URL;
+  const options = isAstra ? { createNamespaceOnConnect: false } : {
     username: process.env.STARGATE_JSON_USERNAME,
     password: process.env.STARGATE_JSON_PASSWORD,
     authUrl: process.env.STARGATE_JSON_AUTH_URL
-  });
+  };
+  console.log('Connecting to', url);
+  await mongoose.connect(url, options);
   // Login to Discord with your client's token
   client.login(token);
 }
