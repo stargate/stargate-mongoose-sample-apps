@@ -1,4 +1,3 @@
-import assert from 'assert';
 import mongoose from './mongoose';
 
 const stargateJSONAPIURL = process.env.STARGATE_JSON_API_URL ?? '';
@@ -18,11 +17,11 @@ if (!authUrl) {
   throw new Error('Must set STARGATE_JSON_AUTH_URL environment variable');
 }
 
-export default async function connect() {
-  console.log('Connecting to', process.env.STARGATE_JSON_API_URL);
+export default async function connect(autoCreate = true) {
+  console.log('Connecting to', process.env.STARGATE_JSON_API_URL, mongoose.connect.toString());
   await mongoose.connect(
     stargateJSONAPIURL,
-    { username, password, authUrl } as mongoose.ConnectOptions
+    { username, password, authUrl, autoCreate } as mongoose.ConnectOptions
   );
 }
 

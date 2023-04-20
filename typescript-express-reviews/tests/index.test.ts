@@ -5,35 +5,30 @@ dotenv.config({
 
 import { after, before, beforeEach } from 'mocha';
 import connect from '../src/models/connect';
-import mongoose from 'mongoose';
+import mongoose from '../src/models/mongoose';
 
 before(async function() {
   this.timeout(10000);
 
-  await connect();
+  await connect(false);
 
-  // Make sure all collections are created in Stargate, _after_ calling
-  // `connect()`. stargate-mongoose doesn't currently support buffering on
-  // connection helpers.
+  await mongoose.connection.dropDatabase();
+  await mongoose.connection.db.createDatabase();
+  // Make sure all collections are created in Stargate, because Stargate
+  // doesn't auto create collections.
   await Promise.all(Object.values(mongoose.models).map(Model => {
     return Model.createCollection();
   }));
 });
 
-// `deleteMany()` currently does nothing
-/*beforeEach(async function clearDb() {
+beforeEach(async function clearDb() {
   this.timeout(30000);
 
-  await Promise.all(Object.values(mongoose.models).map(Model => {
-    return Model.deleteMany({});
-  }));
-});*/
+  await Promise.all(Object.values(mongoose.models).map(Model => Model.deleteMany({})));
+});
 
 after(async function() {
   this.timeout(30_000);
-  await Promise.all(Object.values(mongoose.connection.models).map(async Model => {
-    await mongoose.connection.dropCollection(Model.collection.collectionName);
-  }));
-
+  await mongoose.connection.dropDatabase();
   await mongoose.disconnect();
 });

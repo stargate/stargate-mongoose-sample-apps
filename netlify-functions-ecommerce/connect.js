@@ -7,7 +7,7 @@ require('./models');
 
 let conn = null;
 
-module.exports = async function connect() {
+module.exports = async function connect(autoCreate = true) {
   if (conn != null) {
     return conn;
   }
@@ -18,7 +18,8 @@ module.exports = async function connect() {
   await mongoose.connect(uri, {
     username: config.stargateJSONUsername,
     password: config.stargateJSONPassword,
-    authUrl: config.stargateJSONAuthUrl
+    authUrl: config.stargateJSONAuthUrl,
+    autoCreate
   });
   
   await Promise.all(Object.values(mongoose.connection.models).map(Model => Model.init()));
