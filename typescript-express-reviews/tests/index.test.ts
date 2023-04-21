@@ -13,7 +13,6 @@ before(async function() {
   await connect(false);
 
   await mongoose.connection.dropDatabase();
-  await mongoose.connection.db.createDatabase();
   // Make sure all collections are created in Stargate, because Stargate
   // doesn't auto create collections.
   await Promise.all(Object.values(mongoose.models).map(Model => {

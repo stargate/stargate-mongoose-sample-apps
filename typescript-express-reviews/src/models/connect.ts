@@ -18,7 +18,7 @@ if (!authUrl) {
 }
 
 export default async function connect(autoCreate = true) {
-  console.log('Connecting to', process.env.STARGATE_JSON_API_URL, mongoose.connect.toString());
+  console.log('Connecting to', process.env.STARGATE_JSON_API_URL);
   await mongoose.connect(
     stargateJSONAPIURL,
     { username, password, authUrl, autoCreate } as mongoose.ConnectOptions
