@@ -9,7 +9,9 @@ before(async function() {
   await connect();
 
   await mongoose.connection.dropDatabase();
-  await Promise.all(Object.values(mongoose.connection.models).map(Model => Model.createCollection()));
+
+  const models = Object.values(mongoose.connection.models);
+  await Promise.all(models.map(Model => Model.createCollection()));
 });
 
 after(async function() {
