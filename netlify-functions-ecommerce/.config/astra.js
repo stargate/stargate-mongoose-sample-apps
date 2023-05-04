@@ -1,13 +1,12 @@
 'use strict';
 
 module.exports = Object.freeze({
-  jsonApiUrl: 'http://localhost:8080/v1/ecommerce_test',
+  jsonApiUrl: 'https://xyz.apps.astra.datastax.com/api/json/v1/my-keyspace?applicationToken=AstraCS:my-application-token',
   jsonApiConnectOptions: {
-    username: 'cassandra',
-    password: 'cassandra',
-    authUrl: 'http://localhost:8081/v1/auth'
+    isAstra: true
   },
   stripeSecretKey: 'test',
   stripeSuccessUrl: 'http://localhost:8888/order-confirmation',
   stripeCancelUrl: 'http://localhost:8888/cart'
 });
+

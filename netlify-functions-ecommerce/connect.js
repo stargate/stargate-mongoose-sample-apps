@@ -13,13 +13,9 @@ module.exports = async function connect() {
   }
   conn = mongoose.connection;
 
-  let uri = config.stargateJSONUri;
+  let uri = config.jsonApiUrl;
 
-  await mongoose.connect(uri, {
-    username: config.stargateJSONUsername,
-    password: config.stargateJSONPassword,
-    authUrl: config.stargateJSONAuthUrl
-  });
+  await mongoose.connect(uri, config.jsonApiConnectOptions);
   
   await Promise.all(Object.values(mongoose.connection.models).map(Model => Model.init()));
   return conn;
