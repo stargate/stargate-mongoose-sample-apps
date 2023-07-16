@@ -13,13 +13,14 @@ Make sure you have a local stargate instance running as described on the [main p
 
 ## Running This Example
 
-1. Run `npm install`
-1. Run `npm run seed`
-1. Run `npm run build` to compile the frontend
-1. (Optional) set `stripeSecretKey` in `.config/development.js` to a test Stripe API key to enable Stripe checkout.
-1. Run `npm start`
+1. Run `env NODE_ENV=development`
+2. Run `npm install`
+3. Run `npm run seed`
+4. Run `npm run build` to compile the frontend
+5. (Optional) set `stripeSecretKey` in `.config/development.js` to a test Stripe API key to enable Stripe checkout.
+6. Run `npm start`
 Run `npm run test:smoke` to run a smoke test against `http://localhost:8888` that creates a cart using [Axios](https://masteringjs.io/axios).
-1. Visit `http://localhost:8888/` to see the UI
+7. Visit `http://localhost:8888/` to see the UI
 
 Then run `npm test`.
 

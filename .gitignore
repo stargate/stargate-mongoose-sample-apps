@@ -108,3 +108,5 @@ stargate-mongoose
 
 netlify-functions-ecommerce/frontend/public/app.js
 discord-bot/.env
+
+.idea

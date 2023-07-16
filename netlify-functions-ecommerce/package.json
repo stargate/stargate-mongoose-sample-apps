@@ -20,9 +20,9 @@
   },
   "scripts": {
     "build": "node ./frontend/build",
-    "seed": "env NODE_ENV=development node ./seed",
-    "start": "env NODE_ENV=development netlify dev --dir public",
-    "test": "env NODE_ENV=test mocha ./test/*.test.js",
+    "seed": "node ./seed",
+    "start": "netlify dev --dir public",
+    "test": "mocha ./test/*.test.js",
     "test:smoke": "node ./smoke-test"
   }
 }
