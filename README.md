@@ -23,3 +23,10 @@ to start the stack with [Docker](https://docker.com):
 cd stargate-mongoose-sample-apps 
 bin/start_json_api.sh
 ```
+
+## Troubleshooting
+
+### running JSON API locally instead of using a container
+
+When you have a node version higher than 17, you'll need to change localhost to 127.0.0.1 to avoid 'connect ECONNREFUSED' issue. More info in [node issue](https://github.com/nodejs/node/issues/47785).
+
