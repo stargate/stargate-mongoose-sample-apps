@@ -1,0 +1,36 @@
+<% if(photo !=null ) { %>
+
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page"><%- photo.name %></li>
+    </ol>
+  </nav>
+
+
+  <div class="row">
+
+    <div class="col-12 col-md-6">
+      <img src="/uploads/<%- photo.image %>" class="img-fluid sticky-top" style="top: 20px;" alt="<%- photo.name %>"
+        loading="lazy">
+    </div>
+
+    <div class="col-12 col-md-6">
+      <div class="row">
+        <div class="col-12">
+          <h1><%- photo.name %></h1>
+        </div>
+        <div class="col-12 mb-4"><i class="bi bi-tag"></i> <%- photo.category %></div>
+        <div class="col-12" style="white-space: pre-line;">
+          <%- photo.description %>
+        </div>
+      </div> 
+
+    </div>
+  </div>
+
+  <hr class="hr" />
+
+  <% } else { %>
+    <p>No item found.</p>
+    <% } %>

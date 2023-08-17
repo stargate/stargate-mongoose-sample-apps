@@ -1,0 +1,40 @@
+<h1 class="pb-9">Explore Categories</h1>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/categories">Categories</a></li>
+    <% if(typeof categoryName !== 'undefined') { %>
+    <li class="breadcrumb-item active" aria-current="page"><%= categoryName %></li>
+    <% } %>
+  </ol>
+</nav>
+
+<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3 mb-4">
+  <% if(typeof categories !== 'undefined' && categories.length > 0) { %>
+    <% categories.forEach(function(category, index) { %>
+      <a href="/categories/<%- category.name %>" class="col text-center category__link">
+        <div class="category__img shadow">
+          <img src="/img/<%- category.image %>" alt="<%- category.name %>" loading="lazy">
+        </div>
+        <div class="pt-1"><%- category.name %></div>
+      </a>
+    <% }) %>
+  <% } %>
+</div>
+
+
+<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+  <% if(typeof photosOfCategory !== 'undefined' && photosOfCategory.length > 0) { %>
+    <% photosOfCategory.forEach(function(photo, index){ %>
+    <a href="/photo/<%= photo._id %>" class="col text-center category__link">
+      <div class="category__img category__img--large shadow">
+        <img src="/uploads/<%= photo.image %>" alt="<%= photo.name %>" loading="lazy">
+      </div>
+      <div class="pt-1"><%= photo.name %></div>
+    </a>
+    <% }) %>
+  <% } else { %>
+    <!-- <p>No items found.</p> -->
+  <% } %>
+</div>

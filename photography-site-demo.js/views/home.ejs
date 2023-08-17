@@ -1,0 +1,160 @@
+<div class="row flex-lg-row-reverse align-items-center g-5 py-4 mb-4">
+  <!-- <div class="col-12 col-lg-6">
+    <img src="/img/hero-image.png" width="607" height="510" class="d-block mx-lg-auto img-fluid" loading="lazy" alt="Cooking With Node.js">
+  </div> -->
+
+  <div class="col-12 col-12">
+    <h1 class="display-7 fw-bold mb-3">Photography is the story I fail to put into words. </h1>
+    <p class="lead">
+        - Destin Sparks
+    </p>
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+      <a href="/explore-latest" class="btn btn-primary btn-dark btn-lg px-4 me-md-2">Explore Latest</a>
+      <a href="/explore-random" class="btn btn-outline-secondary btn-lg px-4 me-md-2">Show Random</a>
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- Categories Start -->
+
+
+<div class="row row-cols-2 row-cols-lg-6 g-2 g-lg-3 py-4">
+
+
+  <% if(categories != '') { %>
+    <% categories.forEach(function(category, index) { %>
+      <a href="/categories/<%- category.name %>" class="col text-center category__link">
+        <div class="category__img shadow">
+          <img src="img/<%- category.image %>" alt="<%- category.name %>" loading="lazy">
+        </div>
+        <div class="pt-1"><%- category.name %></div>
+      </a>
+    <% }) %>
+  <% } %>
+
+  <a href="/categories" class="col text-center category__link">
+    <div class="category__img shadow">
+      <img src="img/view-all.jpg" alt="View All Categories" loading="lazy">
+    </div>
+    <div class="pt-1">View All</div>
+  </a>
+
+</div>
+<!-- Categories End -->
+
+<hr class="hr" />
+
+<!-- Landscape Start -->
+<section class="pb-4 pt-4">
+  <div class="d-flex mb-2 align-items-center">
+    <h2>Landscape Photography</h2>
+    <a href="/categories/landscape" class="ms-auto">View More</a>
+  </div>
+
+  <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+    <% if(typeof photos.landscapes !== 'undefined' && photos.landscapes.length > 0) { %>
+      <% photos.landscapes.forEach(function(photo, index){ %>
+      <a href="/photo/<%= photo._id %>" class="col text-center category__link">
+        <div class="category__img category__img--large shadow">
+          <img src="/uploads/<%= photo.image %>" alt="<%= photo.name %>" loading="lazy">
+        </div>
+        <div class="pt-1"><%= photo.name %></div>
+      </a>
+      <% }) %>
+    <% } else { %>
+      <p>No items found.</p>
+    <% } %>
+  </div>
+</section>
+<!-- Landscape End -->
+
+<hr class="hr" />
+
+
+<!-- Street Start -->
+<section class="pb-4 pt-4">
+  <div class="d-flex mb-2 align-items-center">
+    <h2>Street Photography</h2>
+    <a href="/categories/street" class="ms-auto">View More</a>
+  </div>
+
+  <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+    <% if(typeof photos.streets !== 'undefined' && photos.streets.length > 0) { %>
+      <% photos.streets.forEach(function(photo, index){ %>
+      <a href="/photo/<%= photo._id %>" class="col text-center category__link">
+        <div class="category__img category__img--large shadow">
+          <img src="/uploads/<%= photo.image %>" alt="<%= photo.name %>" loading="lazy">
+        </div>
+        <div class="pt-1"><%= photo.name %></div>
+      </a>
+      <% }) %>
+    <% } else { %>
+      <p>No items found.</p>
+    <% } %>
+  </div>
+</section>
+<!-- Street End -->
+
+
+
+
+<hr class="hr" />
+
+<!-- Animal Start -->
+<section class="pb-4 pt-4">
+  <div class="d-flex mb-2 align-items-center">
+    <h2>Animal Photography</h2>
+    <a href="/categories/animal" class="ms-auto">View More</a>
+  </div>
+
+  <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+    <% if(typeof photos.animals !== 'undefined' && photos.animals.length > 0) { %>
+      <% photos.animals.forEach(function(photo, index){ %>
+      <a href="/photo/<%= photo._id %>" class="col text-center category__link">
+        <div class="category__img category__img--large shadow">
+          <img src="/uploads/<%= photo.image %>" alt="<%= photo.name %>" loading="lazy">
+        </div>
+        <div class="pt-1"><%= photo.name %></div>
+      </a>
+      <% }) %>
+    <% } else { %>
+      <p>No items found.</p>
+    <% } %>
+  </div>
+</section>
+<!-- Animal End -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<hr class="hr" />
+
+
+
+<!-- Submit - Start -->
+<section class="px-4 py-5 my-5 text-center">
+  <h1 class="display-5 fw-bold">Add a new photo for recording memory</h1>
+  <div class="col-lg-6 mx-auto">
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+      <a href="/add-photo" class="btn btn-primary btn-dark btn-lg">Add Photo</a>
+    </div>
+  </div>
+</section>
+ 
+<!-- Submit - End -->
