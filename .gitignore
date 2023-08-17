@@ -110,6 +110,8 @@ netlify-functions-ecommerce/frontend/public/app.js
 discord-bot/.env
 photography-site-demo/.env
 
+#mac files
+.DS_Store
 
 # idea files
 .idea
