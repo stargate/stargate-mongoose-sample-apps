@@ -11,7 +11,6 @@ The following is a list of available sample apps.
 * [discord-bot](discord-bot)
 * [typescript-express-reviews](typescript-express-reviews)
 * [photography-site-demo](photography-site-demo.js)
-* 
 
 ## Prerequisites
 
