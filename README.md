@@ -10,6 +10,8 @@ The following is a list of available sample apps.
 * [netlify-functions-ecommerce](netlify-functions-ecommerce)
 * [discord-bot](discord-bot)
 * [typescript-express-reviews](typescript-express-reviews)
+* [photography-site-demo](photography-site-demo.js)
+* 
 
 ## Prerequisites
 
