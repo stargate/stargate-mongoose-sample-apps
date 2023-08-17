@@ -28,5 +28,7 @@ bin/start_json_api.sh
 
 ### running JSON API locally instead of using a container
 
-When you have a node version higher than 17, you'll need to change localhost to 127.0.0.1 to avoid 'connect ECONNREFUSED' issue. More info in [node issue](https://github.com/nodejs/node/issues/47785).
-
+When you have a node version higher than 17, you may need to change localhost to 127.0.0.1 to avoid 'connect ECONNREFUSED' issue. More info in [node issue](https://github.com/nodejs/node/issues/47785).
+* [netlify-functions-ecommerce](netlify-functions-ecommerce/.config)  specific files: (development.js)(test.js)
+* [discord-bot](discord-bot/.env.example)
+* [typescript-express-reviews](typescript-express-reviews) specific files: (.env)(.env.test)
