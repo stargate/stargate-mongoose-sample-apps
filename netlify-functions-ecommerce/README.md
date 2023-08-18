@@ -33,7 +33,7 @@ Make sure you have a local stargate instance running as described on the [main p
 1. Run `npm install`
 2. Run `npm run seed`
 3. Run `npm run build` to compile the frontend
-4. (Optional) set `stripeSecretKey` in `.config/jsonapi.js` to a test Stripe API key to enable Stripe checkout.
+4. (Optional) set `stripeSecretKey` in `.config/jsonapi.js` or `.config/astra.js` depending on the NODE_ENV value, to a test Stripe API key to enable Stripe checkout.
 5. Run `npm start`
 Run `npm run test:smoke` to run a smoke test against `http://127.0.0.1:8888` that creates a cart using [Axios](https://masteringjs.io/axios).
 6. Visit `http://127.0.0.1:8888/` to see the UI
