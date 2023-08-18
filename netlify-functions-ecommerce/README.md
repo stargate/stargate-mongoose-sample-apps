@@ -27,7 +27,7 @@ Make sure you have a local stargate instance running as described on the [main p
 4. Set `ASTRA_DB_REGION` to your AstraDB database region
 5. Set `ASTRA_DB_KEYSPACE` to your AstraDB keyspace
 6. Set `ASTRA_DB_APPLICATION_TOKEN` to your AstraDB application token
-7. Set 'ASTRA_ENVIRONMENT' to 'DEVELOPMENT' or 'TEST' or 'PRODUCTION' depending on your AstraDB environment
+7. Set `ASTRA_ENVIRONMENT` to 'DEVELOPMENT' or 'TEST' or 'PRODUCTION' depending on your AstraDB environment.
 
 ### running the example
 1. Run `npm install`
