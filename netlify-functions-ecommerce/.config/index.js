@@ -1,13 +1,9 @@
 'use strict';
 
 if (process.env.NODE_ENV) {
-  try {
-    module.exports = require('./' + process.env.NODE_ENV);
-    console.log('Using ' + process.env.NODE_ENV); 
-  } catch (error) {
-    module.exports = require('./development');
-  }
+  console.log('Using ' + process.env.NODE_ENV + ' profile');
+  module.exports = require('./' + process.env.NODE_ENV);
 } else {
-  console.log('using production');
-  module.exports = require('./production');
+  console.log('Using jsonapi profile' + process.env.NODE_ENV);
+  module.exports = require('./jsonapi');
 }

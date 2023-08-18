@@ -107,6 +107,7 @@ astra-mongoose
 stargate-mongoose
 
 netlify-functions-ecommerce/frontend/public/app.js
+netlify-functions-ecommerce/.env
 discord-bot/.env
 photography-site-demo/.env
 

@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {
-    "stargate-mongoose": "0.2.0-ALPHA-3",
+    "dotenv": "^16.3.1",
     "mongoose": "7.x",
     "sinon": "14.0.0",
+    "stargate-mongoose": "0.2.0-ALPHA-3",
     "stripe": "9.6.0",
     "vanillatoasts": "1.6.0",
     "webpack": "5.x"

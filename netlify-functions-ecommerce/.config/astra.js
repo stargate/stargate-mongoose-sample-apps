@@ -1,7 +1,9 @@
 'use strict';
 
+const {createAstraUri, AstraEnvironment} = require("stargate-mongoose");
+
 module.exports = Object.freeze({
-  jsonApiUrl: `https://$\{ASTRA_DB_ID\}-$\{ASTRA_DB_REGION\}.apps.$\{ASTRA_DB_ENVIRONMENT\}.datastax.com/$\{ASTRA_DB_BASE_API_PATH\}/$\{ASTRA_DB_KEYSPACE\}?applicationToken=$\{AUTH_TOKEN\}`,
+  jsonApiUrl: createAstraUri(process.env.ASTRA_DBID, process.env.ASTRA_REGION, process.env.ASTRA_KEYSPACE, process.env.ASTRA_APPLICATION_TOKEN, process.env.ASTRA_ENVIRONMENT ? process.env.ASTRA_ENVIRONMENT : AstraEnvironment.PRODUCTION),
   jsonApiConnectOptions: {
     isAstra: true
   },

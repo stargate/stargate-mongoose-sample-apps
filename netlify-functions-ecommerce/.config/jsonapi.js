@@ -1,11 +1,11 @@
 'use strict';
 
 module.exports = Object.freeze({
-  jsonApiUrl: 'http://localhost:8181/v1/ecommerce_test',
+  jsonApiUrl: process.env.JSON_API_URL,
   jsonApiConnectOptions: {
-    username: 'cassandra',
-    password: 'cassandra',
-    authUrl: 'http://localhost:8081/v1/auth'
+    username: process.env.JSON_API_AUTH_USERNAME,
+    password: process.env.JSON_API_AUTH_PASSWORD,
+    authUrl: process.env.JSON_API_AUTH_URL
   },
   stripeSecretKey: 'test',
   stripeSuccessUrl: 'http://localhost:8888/order-confirmation',
