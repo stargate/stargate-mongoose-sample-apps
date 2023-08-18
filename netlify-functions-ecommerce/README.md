@@ -15,8 +15,8 @@ Make sure you have a local stargate instance running as described on the [main p
 ### Setting up .env file to run against JSON API
 1. Copy the `.env.example` file to `.env` and fill in the values for the environment variables.
 2. Set `NODE_ENV` to `jsonapi`
-3. Set `JSON_API_URL` to `http://localhost:8181/v1/ecommerce_test`
-4. Set `JSON_API_AUTH_URL` to `http://localhost:8181/v1/auth`
+3. Set `JSON_API_URL` to `http://127.0.0.1:8181/v1/ecommerce_test`
+4. Set `JSON_API_AUTH_URL` to `http://127.0.0.1:8181/v1/auth`
 5. Set `JSON_API_AUTH_USERNAME` to `cassandra`
 6. Set `JSON_API_AUTH_PASSWORD` to `cassandra`
 
@@ -35,8 +35,8 @@ Make sure you have a local stargate instance running as described on the [main p
 3. Run `npm run build` to compile the frontend
 4. (Optional) set `stripeSecretKey` in `.config/jsonapi.js` to a test Stripe API key to enable Stripe checkout.
 5. Run `npm start`
-Run `npm run test:smoke` to run a smoke test against `http://localhost:8888` that creates a cart using [Axios](https://masteringjs.io/axios).
-6. Visit `http://localhost:8888/` to see the UI
+Run `npm run test:smoke` to run a smoke test against `http://127.0.0.1:8888` that creates a cart using [Axios](https://masteringjs.io/axios).
+6. Visit `http://127.0.0.1:8888/` to see the UI
 
 Then run `npm test`.
 

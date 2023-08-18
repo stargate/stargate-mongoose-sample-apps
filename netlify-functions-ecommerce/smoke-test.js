@@ -3,7 +3,7 @@
 const assert = require('assert');
 const axios = require('axios');
 
-const baseUrl = 'http://localhost:8888/.netlify/functions';
+const baseUrl = 'http://127.0.0.1:8888/.netlify/functions';
 
 void async function main() {
   const products = await axios.get(`${baseUrl}/getProducts`).then(res => res.data);

@@ -8,6 +8,6 @@ module.exports = Object.freeze({
     isAstra: true
   },
   stripeSecretKey: 'test',
-  stripeSuccessUrl: 'http://localhost:8888/order-confirmation',
-  stripeCancelUrl: 'http://localhost:8888/cart'
+  stripeSuccessUrl: 'http://127.0.0.1:8888/order-confirmation',
+  stripeCancelUrl: 'http://127.0.0.1:8888/cart'
 });
