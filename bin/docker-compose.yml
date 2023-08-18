@@ -35,6 +35,7 @@ services:
       - stargate
     ports:
       - "8080:8080"
+      - "8181:8181"
     mem_limit: 2G
     environment:
       - QUARKUS_GRPC_CLIENTS_BRIDGE_HOST=coordinator
