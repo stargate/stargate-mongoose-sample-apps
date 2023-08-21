@@ -19,6 +19,7 @@ Make sure you have a local stargate instance running as described on the [main p
 4. Set `JSON_API_AUTH_URL` to `http://127.0.0.1:8081/v1/auth`
 5. Set `JSON_API_AUTH_USERNAME` to `cassandra`
 6. Set `JSON_API_AUTH_PASSWORD` to `cassandra`
+7. Remove `ASTRA_DB_ID`, `ASTRA_DB_REGION`, `ASTRA_DB_KEYSPACE`, `ASTRA_DB_APPLICATION_TOKEN`
 
 ### Setting up .env file to run against AstraDB
 1. Copy the `.env.example` file to `.env` and fill in the values for the environment variables.
@@ -27,12 +28,13 @@ Make sure you have a local stargate instance running as described on the [main p
 4. Set `ASTRA_DB_REGION` to your AstraDB database region
 5. Set `ASTRA_DB_KEYSPACE` to your AstraDB keyspace
 6. Set `ASTRA_DB_APPLICATION_TOKEN` to your AstraDB application token
+7. Remove `JSON_API_URL`, `JSON_API_AUTH_URL`, `JSON_API_AUTH_USERNAME`, `JSON_API_AUTH_PASSWORD`.
 
 ### running the example
 1. Run `npm install`
 2. Run `npm run seed`
 3. Run `npm run build` to compile the frontend
-4. (Optional) set `stripeSecretKey` in `.config/jsonapi.js` or `.config/astra.js` depending on the NODE_ENV value, to a test Stripe API key to enable Stripe checkout.
+4. (Optional) set `STRIPE_SECRET_KEY` to a test Stripe API key in your `.env` file. This will allow you to enable Stripe checkout.
 5. Run `npm start`
 Run `npm run test:smoke` to run a smoke test against `http://127.0.0.1:8888` that creates a cart using [Axios](https://masteringjs.io/axios).
 6. Visit `http://127.0.0.1:8888/` to see the UI
