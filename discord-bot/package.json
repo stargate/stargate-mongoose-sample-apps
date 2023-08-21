@@ -21,6 +21,6 @@
     "dotenv": "16.0.3",
     "eslint": "8.37.0",
     "mongoose": "7.x",
-    "stargate-mongoose": "0.2.0-ALPHA-3"
+    "stargate-mongoose": "0.2.0-ALPHA-5"
   }
 }
