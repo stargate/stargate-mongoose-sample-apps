@@ -16,7 +16,7 @@ Make sure you have a local stargate instance running as described on the [main p
 1. Copy the `.env.example` file to `.env` and fill in the values for the environment variables.
 2. Set `NODE_ENV` to `jsonapi`
 3. Set `JSON_API_URL` to `http://127.0.0.1:8181/v1/ecommerce_test`
-4. Set `JSON_API_AUTH_URL` to `http://127.0.0.1:8181/v1/auth`
+4. Set `JSON_API_AUTH_URL` to `http://127.0.0.1:8081/v1/auth`
 5. Set `JSON_API_AUTH_USERNAME` to `cassandra`
 6. Set `JSON_API_AUTH_PASSWORD` to `cassandra`
 
