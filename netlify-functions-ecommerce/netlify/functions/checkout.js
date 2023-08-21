@@ -1,7 +1,8 @@
 'use strict';
 
+require('dotenv').config();
+
 const stripe = require('../../integrations/stripe');
-const config = require('../../.config');
 const { Cart, Product } = require('../../models');
 const connect = require('../../connect');
 
@@ -33,7 +34,7 @@ const handler = async(event) => {
 
     cart.total = total;
 
-    if (config.stripeSecretKey === 'test') {
+    if (process.env.STRIPE_SECRET_KEY === 'test') {
       await cart.save();
       return {
         statusCode: 200,
@@ -44,8 +45,8 @@ const handler = async(event) => {
     const session = await stripe.checkout.sessions.create({
       line_items: stripeProducts.line_items,
       mode: 'payment',
-      success_url: config.stripeSuccessUrl,
-      cancel_url: config.stripeCancelUrl
+      success_url: process.env.STRIPE_SUCCESS_URL,
+      cancel_url: process.env.STRIPE_CANCEL_URL
     });
 
     cart.stripeSessionId = session.id;

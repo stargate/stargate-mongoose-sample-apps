@@ -1,5 +1,7 @@
 'use strict';
 
+require('dotenv').config();
+
 if (process.env.NODE_ENV) {
   console.log('Using ' + process.env.NODE_ENV + ' profile');
   module.exports = require('./' + process.env.NODE_ENV);
