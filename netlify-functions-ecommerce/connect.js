@@ -21,7 +21,6 @@ module.exports = async function connect() {
     jsonApiConnectOptions = {
       isAstra: true
     }
-    uri = uri.replace('astra.datastax.com', 'astra-dev.datastax.com');
   } else {
     uri = process.env.JSON_API_URL;
     jsonApiConnectOptions = {
