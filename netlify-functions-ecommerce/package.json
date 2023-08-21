@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {
+    "dotenv": "16.3.1",
     "mongoose": "7.x",
     "sinon": "14.0.0",
     "stargate-mongoose": "0.2.0-ALPHA-5",
@@ -20,9 +21,9 @@
   },
   "scripts": {
     "build": "node ./frontend/build",
-    "seed": "env NODE_ENV=development node ./seed",
-    "start": "env NODE_ENV=development netlify dev --dir public",
-    "test": "env NODE_ENV=test mocha ./test/*.test.js",
+    "seed": "node ./seed",
+    "start": "netlify dev --dir public",
+    "test": "mocha ./test/*.test.js",
     "test:smoke": "node ./smoke-test"
   }
 }
