@@ -25,7 +25,7 @@
     "mongodb": "^4.1.2",
     "mongoose": "^7.4.0",
     "python-shell": "^5.0.0",
-    "stargate-mongoose": "/Users/yuqi.du/idea_workspace/stargate-mongoose"
+    "stargate-mongoose": "0.2.0-ALPHA-5"
 
   },
   "devDependencies": {
