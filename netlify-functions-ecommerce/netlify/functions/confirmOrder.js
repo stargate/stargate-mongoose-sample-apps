@@ -1,8 +1,9 @@
 'use strict';
 
+require('dotenv').config();
+
 const stripe = require('../../integrations/stripe');
 const { Cart, Order } = require('../../models');
-const config = require('../../.config');
 const connect = require('../../connect');
 
 const handler = async(event) => {
@@ -22,7 +23,7 @@ const handler = async(event) => {
         body: JSON.stringify({ cart, order })
       };
     }
-    if (config.stripeSecretKey === 'test') {
+    if (process.env.STRIPE_SECRET_KEY === 'test') {
       const order = await Order.create({
         items: cart.items,
         name: 'Stripe Test',

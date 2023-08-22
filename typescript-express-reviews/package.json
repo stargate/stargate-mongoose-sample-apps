@@ -19,7 +19,7 @@
     "dotenv": "16.0.1",
     "express": "4.x",
     "mongoose": "7.x",
-    "stargate-mongoose": "0.2.0-ALPHA-3"
+    "stargate-mongoose": "0.2.0-ALPHA-5"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",

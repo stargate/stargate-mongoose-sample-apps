@@ -1,5 +1,3 @@
 'use strict';
 
-const config = require('../.config');
-
-module.exports = require('stripe')(config.stripeSecretKey);
+module.exports = require('stripe')(process.env.STRIPE_SECRET_KEY);
