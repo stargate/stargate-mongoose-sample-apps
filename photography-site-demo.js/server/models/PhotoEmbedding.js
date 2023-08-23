@@ -7,8 +7,7 @@ const options = {
       "size": 1280, //embedding array size for google embedding support, image->vector
       "function": "cosine",
     }
-  },
-  "strict": false
+  }
 };
 
 const photoEmbeddingSchema = new mongoose.Schema({
@@ -29,6 +28,10 @@ const photoEmbeddingSchema = new mongoose.Schema({
     enum: ['landscape', 'street', 'animal'],
     required: 'This field is required.'
   },
+  $vector: {
+    type: [Number],
+    validate: v => v == null || v.length === 1280
+  }
 }, options);
 
 
