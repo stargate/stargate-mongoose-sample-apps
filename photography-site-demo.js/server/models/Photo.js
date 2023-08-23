@@ -7,8 +7,7 @@ const options = {
       "size": 1536, //embedding array size for openAI embedding api, text->vector
       "function": "cosine",
     }
-  },
-  "strict": false
+  }
 };
 
 const photoSchema = new mongoose.Schema({
@@ -29,6 +28,10 @@ const photoSchema = new mongoose.Schema({
     enum: ['landscape', 'street', 'animal'],
     required: 'This field is required.'
   },
+  $vector: {
+    type: [Number],
+    validate: v => v == null || v.length === 1536
+  }
 }, options);
 
 
