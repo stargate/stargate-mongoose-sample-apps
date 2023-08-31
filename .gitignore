@@ -116,3 +116,5 @@ photography-site-demo/.env
 
 # idea files
 .idea
+# Local Netlify folder
+.netlify
