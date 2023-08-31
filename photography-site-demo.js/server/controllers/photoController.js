@@ -15,7 +15,6 @@ const fs = require('fs');
  * based on the embedding vector of photo description
 */
 exports.searchByPhotoDescriptionByVSearch = async (req, res) => {
-  await connect();
   let searchTerm = req.body.searchTerm;
   const description_embedding = await getTextEmbedding(searchTerm);
   let photo = null;
@@ -37,7 +36,6 @@ exports.searchByPhotoDescriptionByVSearch = async (req, res) => {
  * based on the embedding vector of photo itself
 */
 exports.searchByPhotoByVSearch = async (req, res) => {
-  await connect();
   try {
     let imageUploadFile;
     let uploadPath;
@@ -74,7 +72,6 @@ exports.searchByPhotoByVSearch = async (req, res) => {
  * POST /add-photo
 */
 exports.addPhotoOnPost = async (req, res) => {
-  await connect();
   try {
 
     let imageUploadFile;
@@ -153,7 +150,6 @@ exports.contactPage = async (req, res) => {
  * Categories 
 */
 exports.exploreCategories = async (req, res) => {
-  await connect();
   try {
     const limitNumber = 20;
     const categories = await Category.find({}).limit(limitNumber);
@@ -169,7 +165,6 @@ exports.exploreCategories = async (req, res) => {
  * Categories By Id -> id in cassandra
 */
 exports.exploreCategoriesByName = async (req, res) => {
-  await connect();
   try {
     let categoryName = req.params.name;
     const limitNumber = 20;
@@ -184,7 +179,6 @@ exports.exploreCategoriesByName = async (req, res) => {
  * GET /photo/:id
 */
 exports.explorePhoto = async (req, res) => {
-  await connect();
   try {
     let photoId = req.params.id;
     const photo = await Photo.findById(photoId);
@@ -196,7 +190,6 @@ exports.explorePhoto = async (req, res) => {
 
 
 exports.explorePhotoEmbedding = async (req, res) => {
-  await connect();
   try {
     let photoEmbeddingId = req.params.id;
     const photo = await PhotoEmbedding.findById(photoEmbeddingId);
@@ -211,7 +204,6 @@ exports.explorePhotoEmbedding = async (req, res) => {
  * SearchByPhotoNameExact 
 */
 exports.searchPhotoByNameExact = async (req, res) => {
-  await connect();
   try {
     let searchTerm = req.body.searchTerm;
     let photo = await Photo.find({ 'name': { '$eq': searchTerm } });
@@ -227,7 +219,6 @@ exports.searchPhotoByNameExact = async (req, res) => {
  * Explplore Latest 
 */
 exports.exploreLatest = async (req, res) => {
-  await connect();
   try {
     const limitNumber = 20;
     const photo = await Photo.find({}).sort({ _id: -1 }).limit(limitNumber);
@@ -242,7 +233,6 @@ exports.exploreLatest = async (req, res) => {
  * GET /explore-random
 */
 exports.exploreRandom = async (req, res) => {
-  await connect();
   try {
     let count = await Photo.find().countDocuments();
     let random = Math.floor(Math.random() * count);

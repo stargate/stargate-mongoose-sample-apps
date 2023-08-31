@@ -6,15 +6,19 @@ This sample app demonstrates a photography site by using [`express`](https://www
 
 ## Environment
 
+### node
 Make sure you have Node.js 17 or higher
 
+### cassandra backend
 Make sure you have Cassandra support
 
 > If want to run cassandra locally, you need to have a local Stargate instance(DSE-Next) running as described on  the [main page](../README.md) of this repo.
 >
 > If want to run against AstraDB, please go to [AstraDB](https://dev.cloud.datastax.com/) create your database and keyspace 'photography' .
 
-Make sure you have a local python environment and install google-mediapipe `pip install mediapipe`
+### python
+Make sure you have a local python environment \
+install google-mediapipe `pip install mediapipe`
 
 
 ## .env
