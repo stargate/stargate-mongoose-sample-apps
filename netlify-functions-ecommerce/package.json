@@ -14,7 +14,7 @@
   "devDependencies": {
     "axios": "1.5.0",
     "mocha": "10.2.0",
-    "netlify-cli": "10.7.1"
+    "netlify-cli": "16.2.0"
   },
   "engines": {
     "node": ">=14.0.0"
