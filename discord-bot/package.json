@@ -14,7 +14,7 @@
     "node": ">=14.0.0"
   },
   "dependencies": {
-    "@discordjs/rest": "1.1.0",
+    "@discordjs/rest": "2.0.1",
     "@masteringjs/eslint-config": "0.0.1",
     "@sapphire/framework": "4.5.3",
     "discord.js": "14.13.0",
