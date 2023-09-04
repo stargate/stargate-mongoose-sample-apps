@@ -22,7 +22,7 @@
     "express-ejs-layouts": "^2.5.1",
     "express-fileupload": "^1.2.1",
     "express-session": "^1.17.2",
-    "mongodb": "^4.1.2",
+    "mongodb": "^6.0.0",
     "mongoose": "^7.4.0",
     "python-shell": "^5.0.0",
     "stargate-mongoose": "0.2.0-ALPHA-5"
