@@ -17,8 +17,8 @@ Make sure you have Cassandra support
 > If want to run against AstraDB, please go to [AstraDB](https://dev.cloud.datastax.com/) create your database and keyspace 'photography' .
 
 ### python
-Make sure you have a local python environment \
-install google-mediapipe `pip install mediapipe`
+Make sure you have a local python (3.8 - 3.11) environment \
+install [google-mediapipe](https://developers.google.com/mediapipe/solutions/guide) `pip install mediapipe`
 
 
 ## .env
