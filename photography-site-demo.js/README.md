@@ -9,9 +9,9 @@ This sample app demonstrates a photography site by using [`express`](https://www
 ### cassandra backend
 Make sure you have Cassandra support
 
+> If want to run against AstraDB, please go to [AstraDB](https://dev.cloud.datastax.com/) create your **vector database** and set keyspace as 'photography' .
+
 > If want to run cassandra locally, you need to have a local Stargate instance(DSE-Next) and JSON API running as described on  the [main page](../README.md) of this repo.
->
-> If want to run against AstraDB, please go to [AstraDB](https://dev.cloud.datastax.com/) create your database and keyspace 'photography' .
 
 
 ### python and google-mediapipe
