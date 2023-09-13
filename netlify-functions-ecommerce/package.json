@@ -14,7 +14,7 @@
   "devDependencies": {
     "axios": "1.5.0",
     "mocha": "10.2.0",
-    "netlify-cli": "10.7.1"
+    "netlify-cli": "16.2.0"
   },
   "engines": {
     "node": ">=14.0.0"
@@ -22,7 +22,7 @@
   "scripts": {
     "build": "node ./frontend/build",
     "seed": "node ./seed",
-    "start": "netlify dev --dir public",
+    "start": "netlify dev --dir public --functions netlify/functions",
     "test": "mocha ./test/*.test.js",
     "test:smoke": "node ./smoke-test"
   }
