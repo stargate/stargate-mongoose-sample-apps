@@ -14,6 +14,10 @@ button {
   cursor: pointer;
 }
 
+button img {
+  height: 1em;
+}
+
 input {
   border: 1px solid #ddd;
   border-radius: 8px;
