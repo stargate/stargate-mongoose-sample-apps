@@ -9,6 +9,8 @@ const fs = require('fs');
 const path = require('node:path');
 const mongoose = require('./mongoose');
 
+const { createAstraUri } = require('stargate-mongoose');
+
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -52,12 +54,24 @@ client.on('interactionCreate', async interaction => {
 run();
 
 async function run() {
-  console.log('Connecting to', process.env.STARGATE_JSON_API_URL);
-  await mongoose.connect(process.env.STARGATE_JSON_API_URL, {
-    username: process.env.STARGATE_JSON_USERNAME,
-    password: process.env.STARGATE_JSON_PASSWORD,
-    authUrl: process.env.STARGATE_JSON_AUTH_URL
-  });
+  let uri = '';
+  let jsonApiConnectOptions = {};
+  if (process.env.IS_ASTRA === 'true') {
+    uri = createAstraUri(process.env.ASTRA_DBID, process.env.ASTRA_REGION, process.env.ASTRA_KEYSPACE, process.env.ASTRA_APPLICATION_TOKEN);
+    jsonApiConnectOptions = {
+      isAstra: true
+    };
+  } else {
+    uri = process.env.JSON_API_URL;
+    jsonApiConnectOptions = {
+      username: process.env.JSON_API_AUTH_USERNAME,
+      password: process.env.JSON_API_AUTH_PASSWORD,
+      authUrl: process.env.JSON_API_AUTH_URL
+    };
+  }
+  await mongoose.connect(uri, jsonApiConnectOptions);
+  console.log('Connecting to', uri);
+  await mongoose.connect(uri, jsonApiConnectOptions);
   // Login to Discord with your client's token
   client.login(token);
 }
