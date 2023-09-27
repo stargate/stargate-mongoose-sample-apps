@@ -49,6 +49,9 @@ const BaseComponent = __webpack_require__(/*! ../BaseComponent */ "./frontend/sr
 
 module.exports = app => app.component('cart', {
   inject: ['state'],
+  data: () => ({
+    submitting: false
+  }),
   computed: {
     cartTotal() {
       return '$' + this.state.cart.items.reduce((sum, item) => {
@@ -69,6 +72,7 @@ module.exports = app => app.component('cart', {
       return `$${total}`;
     },
     async checkout() {
+      this.submitting = true;
       const res = await fetch('/.netlify/functions/checkout', {
         method: 'PUT',
         headers: {
@@ -82,6 +86,7 @@ module.exports = app => app.component('cart', {
       if (res.url) {
         window.location.href = res.url;
       }
+      this.submitting = false;
     }
   },
   extends: BaseComponent(__webpack_require__(/*! ./cart.html */ "./frontend/src/cart/cart.html"), __webpack_require__(/*! ./cart.css */ "./frontend/src/cart/cart.css"))
@@ -102,11 +107,15 @@ const BaseComponent = __webpack_require__(/*! ../BaseComponent */ "./frontend/sr
 
 module.exports = app => app.component('home', {
   inject: ['state'],
+  data: () => ({
+    submitting: null
+  }),
   methods: {
     formatPrice(price) {
       return `$${price.toFixed(2)}`;
     },
     async addToCart(product) {
+      this.submitting = product;
       const body = {
         items: [{ productId: product._id, quantity: 1 }]
       };
@@ -121,10 +130,11 @@ module.exports = app => app.component('home', {
         body: JSON.stringify(body)
       }).then(res => res.json());
       this.state.cart = res;
-      if (!this.state.cartId) {
+      if (!this.state.cartId || this.state.cartId !== res._id) {
         this.state.cartId = res._id;
         window.localStorage.setItem('__cartKey', res._id);
       }
+      this.submitting = null;
     }
   },
   extends: BaseComponent(__webpack_require__(/*! ./home.html */ "./frontend/src/home/home.html"), __webpack_require__(/*! ./home.css */ "./frontend/src/home/home.css"))
@@ -205,6 +215,9 @@ const BaseComponent = __webpack_require__(/*! ../BaseComponent */ "./frontend/sr
 module.exports = app => app.component('product', {
   inject: ['state'],
   props: ['productId'],
+  data: () => ({
+    submitting: null
+  }),
   computed: {
     product() {
       return this.state.products.find(p => p._id === this.productId);
@@ -215,6 +228,7 @@ module.exports = app => app.component('product', {
       return `$${price.toFixed(2)}`;
     },
     async addToCart(product) {
+      this.submitting = product;
       const body = {
         items: [{ productId: product._id, quantity: 1 }]
       };
@@ -233,6 +247,7 @@ module.exports = app => app.component('product', {
         this.state.cartId = res._id;
         window.localStorage.setItem('__cartKey', res._id);
       }
+      this.submitting = null;
     }
   },
   extends: BaseComponent(__webpack_require__(/*! ./product.html */ "./frontend/src/product/product.html"), __webpack_require__(/*! ./product.css */ "./frontend/src/product/product.css"))
@@ -253,11 +268,15 @@ const BaseComponent = __webpack_require__(/*! ../BaseComponent */ "./frontend/sr
 
 module.exports = app => app.component('products', {
   inject: ['state'],
+  data: () => ({
+    submitting: null
+  }),
   methods: {
     formatPrice(price) {
       return `$${price.toFixed(2)}`;
     },
     async addToCart(product) {
+      this.submitting = product;
       const body = {
         items: [{ productId: product._id, quantity: 1 }]
       };
@@ -272,10 +291,11 @@ module.exports = app => app.component('products', {
         body: JSON.stringify(body)
       }).then(res => res.json());
       this.state.cart = res;
-      if (!this.state.cartId) {
+      if (!this.state.cartId || this.state.cartId !== res._id) {
         this.state.cartId = res._id;
         window.localStorage.setItem('__cartKey', res._id);
       }
+      this.submitting = null;
     }
   },
   extends: BaseComponent(__webpack_require__(/*! ./products.html */ "./frontend/src/products/products.html"), __webpack_require__(/*! ./products.css */ "./frontend/src/products/products.css"))
@@ -335,7 +355,7 @@ module.exports = ".cart .cart-item {\n  display: flex;\n  gap: 10px;\n  width: 1
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<div class=\"cart\">\n  <h1>My Cart</h1>\n  <div v-if=\"state.cart\">\n    <div v-for=\"item in state.cart.items\" class=\"cart-item\">\n      <div class=\"product-image\">\n        <img :src=\"product(item).image\">\n      </div>\n      <div class=\"item-description\">\n        <div class=\"name\">\n          {{product(item).name}}\n        </div>\n        <div class=\"quantity\">\n          x{{item.quantity}}\n        </div>\n      </div>\n      <div class=\"subtotal\">\n        {{formatTotal(item, product(item))}}\n      </div>\n    </div>\n    <div class=\"total\">\n      <div class=\"total-text\">\n        Total\n      </div>\n      <div class=\"total-price\">\n        {{cartTotal}}\n      </div>\n    </div>\n\n    <div class=\"checkout\">\n      <button @click=\"checkout\">Check Out</button>\n    </div>\n  </div>\n</div>";
+module.exports = "<div class=\"cart\">\n  <h1>My Cart</h1>\n  <div v-if=\"state.cart\">\n    <div v-for=\"item in state.cart.items\" class=\"cart-item\">\n      <div class=\"product-image\">\n        <img :src=\"product(item).image\">\n      </div>\n      <div class=\"item-description\">\n        <div class=\"name\">\n          {{product(item).name}}\n        </div>\n        <div class=\"quantity\">\n          x{{item.quantity}}\n        </div>\n      </div>\n      <div class=\"subtotal\">\n        {{formatTotal(item, product(item))}}\n      </div>\n    </div>\n    <div class=\"total\">\n      <div class=\"total-text\">\n        Total\n      </div>\n      <div class=\"total-price\">\n        {{cartTotal}}\n      </div>\n    </div>\n\n    <div class=\"checkout\">\n      <button @click=\"checkout\" :disabled=\"submitting\">\n        <span v-if=\"!submitting\">Check Out</span>\n        <span v-else><img src=\"/images/loader.gif\"></span>\n      </button>\n    </div>\n  </div>\n</div>";
 
 /***/ }),
 
@@ -357,7 +377,7 @@ module.exports = ".home {\n  margin-bottom: 80px;\n}\n\n.home .hero {\n  backgro
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<div class=\"home\">\n  <div class=\"hero\">\n    <div class=\"image-bg\">\n      <img src=\"/images/woman-with-iphone.png\">\n    </div>\n    <h1>\n      Get the Latest iPhones<br>at the Best Prices \n    </h1>\n    <router-link to=\"/products\">\n      <button>Shop Now!</button>\n    </router-link>\n  </div>\n  <div>\n    <h2>iPhones For You</h2>\n\n    <div class=\"iphone-container\">\n      <div v-for=\"product in state.products\" class=\"iphone\">\n        <div class=\"image-wrapper\">\n          <router-link :to=\"'/products/' + product._id\">\n            <img :src=\"product.image\">\n          </router-link>\n        </div>\n        <div class=\"info-wrapper\">\n          <router-link :to=\"'/products/' + product._id\">\n            {{product.name}}\n          </router-link>\n          <div class=\"price\">\n            {{formatPrice(product.price)}}\n          </div>\n        </div>\n        <div class=\"add-to-cart\">\n          <button @click=\"addToCart(product)\">\n            Add to Cart\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>";
+module.exports = "<div class=\"home\">\n  <div class=\"hero\">\n    <div class=\"image-bg\">\n      <img src=\"/images/woman-with-iphone.png\">\n    </div>\n    <h1>\n      Get the Latest iPhones<br>at the Best Prices \n    </h1>\n    <router-link to=\"/products\">\n      <button>Shop Now!</button>\n    </router-link>\n  </div>\n  <div>\n    <h2>iPhones For You</h2>\n\n    <div class=\"iphone-container\">\n      <div v-for=\"product in state.products\" class=\"iphone\">\n        <div class=\"image-wrapper\">\n          <router-link :to=\"'/products/' + product._id\">\n            <img :src=\"product.image\">\n          </router-link>\n        </div>\n        <div class=\"info-wrapper\">\n          <router-link :to=\"'/products/' + product._id\">\n            {{product.name}}\n          </router-link>\n          <div class=\"price\">\n            {{formatPrice(product.price)}}\n          </div>\n        </div>\n        <div class=\"add-to-cart\">\n          <button @click=\"addToCart(product)\" :disabled=\"submitting === product\">\n            <span v-if=\"submitting !== product\">Add to Cart</span>\n            <span v-else><img src=\"/images/loader.gif\"></span>\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>";
 
 /***/ }),
 
@@ -423,7 +443,7 @@ module.exports = ".product .product-wrapper {\n  display: flex;\n  gap: 20px;\n}
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<div class=\"product\">\n  <div class=\"breadcrumbs\" v-if=\"product\">\n    <router-link to=\"/products\">All Products</router-link>\n    /\n    {{product.name}}\n  </div>\n  <div class=\"product-wrapper\" v-if=\"product\">\n    <div class=\"product-image\">\n      <img :src=\"product.image\">\n    </div>\n    <div class=\"product-description\">\n      <div class=\"name\">\n        {{product.name}}\n      </div>\n      <div class=\"price\">\n        {{formatPrice(product.price)}}\n      </div>\n      <div class=\"description\">\n        {{product.description}}\n      </div>\n  \n      <div class=\"add-to-cart\">\n        <button @click=\"addToCart(product)\">\n          Add to Cart\n        </button>\n      </div>\n    </div>\n  </div>\n</div>";
+module.exports = "<div class=\"product\">\n  <div class=\"breadcrumbs\" v-if=\"product\">\n    <router-link to=\"/products\">All Products</router-link>\n    /\n    {{product.name}}\n  </div>\n  <div class=\"product-wrapper\" v-if=\"product\">\n    <div class=\"product-image\">\n      <img :src=\"product.image\">\n    </div>\n    <div class=\"product-description\">\n      <div class=\"name\">\n        {{product.name}}\n      </div>\n      <div class=\"price\">\n        {{formatPrice(product.price)}}\n      </div>\n      <div class=\"description\">\n        {{product.description}}\n      </div>\n  \n      <div class=\"add-to-cart\">\n        <button @click=\"addToCart(product)\" :disabled=\"submitting === product\">\n          <span v-if=\"submitting !== product\">Add to Cart</span>\n          <span v-else><img src=\"/images/loader.gif\"></span>\n        </button>\n      </div>\n    </div>\n  </div>\n</div>";
 
 /***/ }),
 
@@ -445,7 +465,7 @@ module.exports = ".products .iphone {\n  width: 25%;\n}\n\n.products .iphone .im
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<div class=\"products\">\n  <h1>All Products</h1>\n  <div class=\"iphone-container\">\n    <div v-for=\"product in state.products\" class=\"iphone\">\n      <div class=\"image-wrapper\">\n        <router-link :to=\"'/products/' + product._id\">\n          <img :src=\"product.image\">\n        </router-link>\n      </div>\n      <div class=\"info-wrapper\">\n        <div>\n          <router-link :to=\"'/products/' + product._id\">\n            {{product.name}}\n          </router-link>\n        </div>\n        <div class=\"price\">\n          {{formatPrice(product.price)}}\n        </div>\n      </div>\n      <div class=\"add-to-cart\">\n        <button @click=\"addToCart(product)\">\n          Add to Cart\n        </button>\n      </div>\n    </div>\n  </div>\n</div>";
+module.exports = "<div class=\"products\">\n  <h1>All Products</h1>\n  <div class=\"iphone-container\">\n    <div v-for=\"product in state.products\" class=\"iphone\">\n      <div class=\"image-wrapper\">\n        <router-link :to=\"'/products/' + product._id\">\n          <img :src=\"product.image\">\n        </router-link>\n      </div>\n      <div class=\"info-wrapper\">\n        <div>\n          <router-link :to=\"'/products/' + product._id\">\n            {{product.name}}\n          </router-link>\n        </div>\n        <div class=\"price\">\n          {{formatPrice(product.price)}}\n        </div>\n      </div>\n      <div class=\"add-to-cart\">\n        <button @click=\"addToCart(product)\" :disabled=\"submitting === product\">\n          <span v-if=\"submitting !== product\">Add to Cart</span>\n          <span v-else><img src=\"/images/loader.gif\"></span>\n        </button>\n      </div>\n    </div>\n  </div>\n</div>";
 
 /***/ })
 

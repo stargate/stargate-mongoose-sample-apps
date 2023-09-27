@@ -5,6 +5,9 @@ const BaseComponent = require('../BaseComponent');
 module.exports = app => app.component('product', {
   inject: ['state'],
   props: ['productId'],
+  data: () => ({
+    submitting: null
+  }),
   computed: {
     product() {
       return this.state.products.find(p => p._id === this.productId);
@@ -15,6 +18,7 @@ module.exports = app => app.component('product', {
       return `$${price.toFixed(2)}`;
     },
     async addToCart(product) {
+      this.submitting = product;
       const body = {
         items: [{ productId: product._id, quantity: 1 }]
       };
@@ -33,6 +37,7 @@ module.exports = app => app.component('product', {
         this.state.cartId = res._id;
         window.localStorage.setItem('__cartKey', res._id);
       }
+      this.submitting = null;
     }
   },
   extends: BaseComponent(require('./product.html'), require('./product.css'))

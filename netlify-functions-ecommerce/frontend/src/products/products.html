@@ -18,8 +18,9 @@
         </div>
       </div>
       <div class="add-to-cart">
-        <button @click="addToCart(product)">
-          Add to Cart
+        <button @click="addToCart(product)" :disabled="submitting === product">
+          <span v-if="submitting !== product">Add to Cart</span>
+          <span v-else><img src="/images/loader.gif"></span>
         </button>
       </div>
     </div>

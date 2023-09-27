@@ -4,6 +4,9 @@ const BaseComponent = require('../BaseComponent');
 
 module.exports = app => app.component('cart', {
   inject: ['state'],
+  data: () => ({
+    submitting: false
+  }),
   computed: {
     cartTotal() {
       return '$' + this.state.cart.items.reduce((sum, item) => {
@@ -24,6 +27,7 @@ module.exports = app => app.component('cart', {
       return `$${total}`;
     },
     async checkout() {
+      this.submitting = true;
       const res = await fetch('/.netlify/functions/checkout', {
         method: 'PUT',
         headers: {
@@ -37,6 +41,7 @@ module.exports = app => app.component('cart', {
       if (res.url) {
         window.location.href = res.url;
       }
+      this.submitting = false;
     }
   },
   extends: BaseComponent(require('./cart.html'), require('./cart.css'))
