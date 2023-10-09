@@ -9,6 +9,7 @@ Make sure you have Node.js 14 or higher and a local Stargate instance running as
 ## Running This Example
 
 1. Run `npm install`
+1. Create a `.env` file using the instructions in `.env.example`
 1. Run `npm run seed`
 1. Run `npm run build` to build the example
 1. Run `npm start`
