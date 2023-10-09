@@ -27,7 +27,10 @@
     </div>
 
     <div class="checkout">
-      <button @click="checkout">Check Out</button>
+      <button @click="checkout" :disabled="submitting">
+        <span v-if="!submitting">Check Out</span>
+        <span v-else><img src="/images/loader.gif"></span>
+      </button>
     </div>
   </div>
 </div>
