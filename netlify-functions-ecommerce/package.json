@@ -7,7 +7,7 @@
     "mongoose": "7.x",
     "sinon": "16.0.0",
     "stargate-mongoose": "0.2.0-ALPHA-8",
-    "stripe": "13.7.0",
+    "stripe": "13.9.0",
     "vanillatoasts": "1.6.0",
     "webpack": "5.x"
   },
