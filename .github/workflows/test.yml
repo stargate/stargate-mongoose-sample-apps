@@ -27,11 +27,11 @@ jobs:
       - name: Set up JSON API
         run: |
           chmod +x bin/start_json_api.sh
-          bin/start_json_api.sh -t v2.0.13 -j v1.0.0-ALPHA-9
+          bin/start_json_api.sh
         working-directory: stargate-mongoose
       - name: Wait for services
         run: |
-          while ! nc -z localhost 8080; do sleep 1; done
+          while ! nc -z localhost 8181; do sleep 1; done
           while ! nc -z localhost 8081; do sleep 1; done
         working-directory: stargate-mongoose
       ## Set up and run ecommerce sample app tests
