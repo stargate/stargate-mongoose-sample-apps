@@ -43,6 +43,8 @@ jobs:
       
       - run: npm install
         working-directory: discord-bot
+      - run: npm run lint
+        working-directory: discord-bot
       - run: npm test
         working-directory: discord-bot
   test-ecommerce:
@@ -81,6 +83,8 @@ jobs:
           node-version: ${{ matrix.node }}
       
       - run: npm install
+        working-directory: netlify-functions-ecommerce
+      - run: npm run lint
         working-directory: netlify-functions-ecommerce
       - run: npm test
         working-directory: netlify-functions-ecommerce

@@ -2,12 +2,12 @@
 
 require('dotenv').config({ path: `${__dirname}/../.env.test` });
 
-const { after } = require('mocha');
+const { after, before } = require('mocha');
 const connect = require('../connect');
 const mongoose = require('../mongoose');
 
 before(async function() {
-  this.timeout(30_000);
+  this.timeout(30000);
   await connect();
 
   await Promise.all(Object.values(mongoose.connection.models).map(Model => Model.createCollection()));
@@ -15,7 +15,7 @@ before(async function() {
 });
 
 after(async function() {
-  this.timeout(30_000);
+  this.timeout(30000);
   await Promise.all(Object.values(mongoose.connection.models).map(async Model => {
     await mongoose.connection.dropCollection(Model.collection.collectionName);
   }));

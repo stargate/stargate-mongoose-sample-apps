@@ -12,7 +12,9 @@
     "webpack": "5.x"
   },
   "devDependencies": {
+    "@masteringjs/eslint-config": "0.0.1",
     "axios": "1.6.2",
+    "eslint": "8.54.0",
     "mocha": "10.2.0",
     "netlify-cli": "17.5.1"
   },
@@ -21,6 +23,7 @@
   },
   "scripts": {
     "build": "node ./frontend/build",
+    "lint": "eslint .",
     "seed": "node ./seed",
     "start": "netlify dev --dir public --functions netlify/functions",
     "test": "mocha ./test/*.test.js",
