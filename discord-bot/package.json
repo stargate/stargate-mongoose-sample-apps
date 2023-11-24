@@ -14,13 +14,13 @@
     "node": ">=14.0.0"
   },
   "dependencies": {
-    "@discordjs/rest": "2.0.1",
+    "@discordjs/rest": "2.2.0",
     "@masteringjs/eslint-config": "0.0.1",
-    "@sapphire/framework": "4.6.1",
-    "discord.js": "14.13.0",
+    "@sapphire/framework": "4.8.2",
+    "discord.js": "14.14.1",
     "dotenv": "16.3.1",
-    "eslint": "8.51.0",
+    "eslint": "8.54.0",
     "mongoose": "7.x",
-    "stargate-mongoose": "0.2.0-ALPHA-8"
+    "stargate-mongoose": "0.3.0"
   }
 }
