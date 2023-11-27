@@ -4,7 +4,7 @@
   "description": "demo app for stargate-mongoose",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha ./tests/*.test.js",
     "seed": "env NODE_ENV=development node ./server/models/seed",
     "start": "nodemon app.js"
   },
@@ -28,6 +28,9 @@
 
   },
   "devDependencies": {
+    "mocha": "10.2.0",
     "nodemon": "^3.0.1"
   }
 }
+
+
