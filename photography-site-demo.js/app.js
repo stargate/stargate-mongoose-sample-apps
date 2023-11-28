@@ -1,3 +1,4 @@
+'use strict';
 //use nodemon to start app.js in package.json
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
@@ -29,7 +30,7 @@ app.use(fileUpload());
 app.set('layout', './layouts/main');
 app.set('view engine', 'ejs');
 
-const routes = require('./server/routes/photoRoutes.js')
+const routes = require('./server/routes/photoRoutes.js');
 app.use('/', routes);
 const cors = require('cors');
 app.use(cors());

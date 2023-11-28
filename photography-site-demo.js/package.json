@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha ./tests/*.test.js",
     "seed": "env NODE_ENV=development node ./server/models/seed",
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "lint": "eslint ."
   },
   "keywords": [],
   "author": "",
@@ -24,8 +25,9 @@
     "express-session": "^1.17.2",
     "mongoose": "^7.4.0",
     "python-shell": "^5.0.0",
-    "stargate-mongoose": "0.3.0"
-
+    "stargate-mongoose": "0.3.0",
+    "eslint": "8.54.0",
+    "@masteringjs/eslint-config": "0.0.1"
   },
   "devDependencies": {
     "mocha": "10.2.0",

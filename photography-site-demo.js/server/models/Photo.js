@@ -1,11 +1,11 @@
 'use strict';
-const mongoose = require('./mongoose')
+const mongoose = require('./mongoose');
 
 const options = {
-  "collectionOptions": {
-    "vector": {
-      "size": 1536, //embedding array size for openAI embedding api, text->vector
-      "function": "cosine",
+  collectionOptions: {
+    vector: {
+      size: 1536, //embedding array size for openAI embedding api, text->vector
+      function: 'cosine'
     }
   }
 };
