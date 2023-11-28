@@ -31,7 +31,7 @@ jobs:
         working-directory: stargate-mongoose
       - name: Wait for services
         run: |
-          while ! nc -z localhost 8080; do sleep 1; done
+          while ! nc -z localhost 8181; do sleep 1; done
           while ! nc -z localhost 8081; do sleep 1; done
         working-directory: stargate-mongoose
       ## Set up and run ecommerce sample app tests
