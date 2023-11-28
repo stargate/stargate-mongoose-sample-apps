@@ -1,4 +1,6 @@
 'use strict';
+require('dotenv').config({ path: `${__dirname}/../.env.test` });
+
 const { before, after } = require('mocha');
 const connect = require('../server/models/connect');
 const mongoose = require('../server/models/mongoose');
