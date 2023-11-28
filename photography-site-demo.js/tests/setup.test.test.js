@@ -1,23 +1,32 @@
 'use strict';
+
 require('dotenv').config({ path: `${__dirname}/../.env.test` });
 
-const { before, after } = require('mocha');
-const connect = require('../server/models/connect');
+const Photo = require('../server/models/Photo');
+const Category = require('../server/models/Category');
+const PhotoEmbedding = require('../server/models/PhotoEmbedding');
+
+const { before } = require('mocha');
 const mongoose = require('../server/models/mongoose');
 
+const uri = process.env.JSON_API_URL;
+const jsonApiConnectOptions = {
+  username: process.env.JSON_API_AUTH_USERNAME,
+  password: process.env.JSON_API_AUTH_PASSWORD,
+  authUrl: process.env.JSON_API_AUTH_URL
+};
+
 before(async function() {
+  console.log('Connecting to', uri);
   this.timeout(30000);
-  await connect();
+  await mongoose.connect(uri, jsonApiConnectOptions);
+  await Photo.db.dropCollection('photos').catch(() => {});
+  await Category.db.dropCollection('categorys').catch(() => {});
+  await PhotoEmbedding.db.dropCollection('photoEmbeddings').catch(() => {});
+  await Photo.createCollection();
+  await Category.createCollection();
+  await PhotoEmbedding.createCollection();
 
-  await Promise.all(Object.values(mongoose.connection.models).map(Model => Model.createCollection()));
-  await Promise.all(Object.values(mongoose.connection.models).map(Model => Model.deleteMany({})));
 });
 
-after(async function() {
-  this.timeout(30000);
-  await Promise.all(Object.values(mongoose.connection.models).map(async Model => {
-    await mongoose.connection.dropCollection(Model.collection.collectionName);
-  }));
 
-  await mongoose.disconnect();
-});
