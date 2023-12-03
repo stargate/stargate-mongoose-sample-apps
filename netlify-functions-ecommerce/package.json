@@ -5,22 +5,25 @@
   "dependencies": {
     "dotenv": "16.3.1",
     "mongoose": "7.x",
-    "sinon": "16.1.0",
-    "stargate-mongoose": "0.2.0-ALPHA-8",
-    "stripe": "13.9.0",
+    "sinon": "17.0.1",
+    "stargate-mongoose": "0.3.0",
+    "stripe": "14.5.0",
     "vanillatoasts": "1.6.0",
     "webpack": "5.x"
   },
   "devDependencies": {
-    "axios": "1.5.1",
+    "@masteringjs/eslint-config": "0.0.1",
+    "axios": "1.6.2",
+    "eslint": "8.54.0",
     "mocha": "10.2.0",
-    "netlify-cli": "16.5.1"
+    "netlify-cli": "17.6.0"
   },
   "engines": {
     "node": ">=14.0.0"
   },
   "scripts": {
     "build": "node ./frontend/build",
+    "lint": "eslint .",
     "seed": "node ./seed",
     "start": "netlify dev --dir public --functions netlify/functions",
     "test": "mocha ./test/*.test.js",
