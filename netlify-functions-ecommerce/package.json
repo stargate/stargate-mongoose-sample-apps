@@ -14,7 +14,7 @@
   "devDependencies": {
     "@masteringjs/eslint-config": "0.0.1",
     "axios": "1.6.2",
-    "eslint": "8.54.0",
+    "eslint": "8.55.0",
     "mocha": "10.2.0",
     "netlify-cli": "17.10.1"
   },
