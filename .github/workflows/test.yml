@@ -47,6 +47,7 @@ jobs:
         working-directory: discord-bot
       - run: npm test
         working-directory: discord-bot
+
   test-ecommerce:
     runs-on: ${{ matrix.os }}
     strategy:
@@ -88,3 +89,45 @@ jobs:
         working-directory: netlify-functions-ecommerce
       - run: npm test
         working-directory: netlify-functions-ecommerce
+
+  test-reviews:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [16]
+        os: [ubuntu-20.04]
+    name: Reviews Sample App
+    steps:
+      ## Set up Stargate
+      - name: disable and stop mono-xsp4.service
+        run: |
+          sudo kill -9 $(sudo lsof -t -i:8084)
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+        with:
+          repository: stargate/stargate-mongoose
+          path: stargate-mongoose
+          ref: main
+      - name: Set up JSON API
+        run: |
+          chmod +x bin/start_json_api.sh
+          bin/start_json_api.sh
+        working-directory: stargate-mongoose
+      - name: Wait for services
+        run: |
+          while ! nc -z localhost 8181; do sleep 1; done
+          while ! nc -z localhost 8081; do sleep 1; done
+        working-directory: stargate-mongoose
+      ## Set up and run reviews sample app tests
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
+      - name: Setup node
+        uses: actions/setup-node@eeb10cff27034e7acf239c5d29f62154018672fd # v3.1.1
+        with:
+          node-version: ${{ matrix.node }}
+      
+      - run: npm install
+        working-directory: typescript-express-reviews
+      - run: npm run build
+        working-directory: typescript-express-reviews
+      - run: npm test
+        working-directory: typescript-express-reviews

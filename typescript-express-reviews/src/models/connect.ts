@@ -1,29 +1,33 @@
-import assert from 'assert';
+import { createAstraUri } from 'stargate-mongoose';
 import mongoose from './mongoose';
+
+const isAstra = process.env.IS_ASTRA ?? '';
 
 const stargateJSONAPIURL = process.env.STARGATE_JSON_API_URL ?? '';
 const username = process.env.STARGATE_JSON_USERNAME ?? '';
 const password = process.env.STARGATE_JSON_PASSWORD ?? '';
 const authUrl = process.env.STARGATE_JSON_AUTH_URL ?? '';
-if (!stargateJSONAPIURL) {
-  throw new Error('Must set STARGATE_JSON_API_URL environment variable');
-}
-if (!username) {
-  throw new Error('Must set STARGATE_JSON_USERNAME environment variable');
-}
-if (!password) {
-  throw new Error('Must set STARGATE_JSON_PASSWORD environment variable');
-}
-if (!authUrl) {
-  throw new Error('Must set STARGATE_JSON_AUTH_URL environment variable');
-}
+
+const astraDbId = process.env.ASTRA_DBID ?? '';
+const astraRegion = process.env.ASTRA_REGION ?? '';
+const astraKeyspace = process.env.ASTRA_KEYSPACE ?? '';
+const astraApplicationToken = process.env.ASTRA_APPLICATION_TOKEN ?? '';
 
 export default async function connect() {
-  console.log('Connecting to', process.env.STARGATE_JSON_API_URL);
-  await mongoose.connect(
-    stargateJSONAPIURL,
-    { username, password, authUrl } as mongoose.ConnectOptions
-  );
+  if (isAstra) {
+    const uri = createAstraUri(astraDbId, astraRegion, astraKeyspace, astraApplicationToken);
+    console.log('Connecting to', uri);
+    await mongoose.connect(
+      uri,
+      { isAstra: true } as mongoose.ConnectOptions
+    );
+  } else {
+    console.log('Connecting to', stargateJSONAPIURL);
+    await mongoose.connect(
+      stargateJSONAPIURL,
+      { username, password, authUrl } as mongoose.ConnectOptions
+    );
+  }
 }
 
 
