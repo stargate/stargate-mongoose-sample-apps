@@ -3,7 +3,7 @@
 require('dotenv').config({ path: `${__dirname}/../.env.test` });
 
 const Bot = require('../models/bot');
-const { before } = require('mocha');
+const { after, before } = require('mocha');
 const mongoose = require('../mongoose');
 
 const uri = process.env.JSON_API_URL;
@@ -14,8 +14,13 @@ const jsonApiConnectOptions = {
 };
 
 before(async function() {
-  console.log('Connecting to', uri);
+  this.timeout(15000);
   await mongoose.connect(uri, jsonApiConnectOptions);
+  // dropCollection() can be slower
   await Bot.db.dropCollection('bots').catch(() => {});
   await Bot.createCollection();
+});
+
+after(async function() {
+  await mongoose.disconnect();
 });
