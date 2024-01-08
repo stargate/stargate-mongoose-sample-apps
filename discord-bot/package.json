@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
-    "test": "mocha --exit test/*.js",
+    "test": "mocha test/*.js",
     "start": "node ./index.js"
   },
   "author": "",
