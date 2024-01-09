@@ -21,14 +21,15 @@ async function run() {
   await Promise.all(Object.values(mongoose.connection.models).map(async Model => {
     await Model.init();
   }));
-  // Then drop all collections to clear db
-  await Promise.all(Object.values(mongoose.connection.models).map(async Model => {
-    await mongoose.connection.dropCollection(Model.collection.collectionName);
-  }));
-  // Then recreate all collections. Workaround for lack of `dropDatabase()` and `deleteMany()`
-  await Promise.all(Object.values(mongoose.connection.models).map(async Model => {
-    await mongoose.connection.createCollection(Model.collection.collectionName);
-  }));
+  for (const Model of Object.values(mongoose.connection.models)) {
+    console.log('Resetting collection', Model.collection.collectionName);
+    // Then drop all collections to clear db.
+    // Ignore errors because sometimes `dropCollection()` times out even though the collection is dropped
+    await mongoose.connection.dropCollection(Model.collection.collectionName).catch(() => {});
+    // Then recreate all collections. Workaround for lack of `dropDatabase()` and `deleteMany()`
+    // Ignore errors because `createCollection()` sometimes times out.
+    await mongoose.connection.createCollection(Model.collection.collectionName).catch(() => {});
+  }
 
   const users = await User.create([
     {

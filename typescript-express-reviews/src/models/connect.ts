@@ -16,7 +16,7 @@ const astraApplicationToken = process.env.ASTRA_APPLICATION_TOKEN ?? '';
 export default async function connect() {
   if (isAstra) {
     const uri = createAstraUri(astraDbId, astraRegion, astraKeyspace, astraApplicationToken);
-    console.log('Connecting to', uri);
+    console.log('Connecting to Astra:', uri);
     await mongoose.connect(
       uri,
       { isAstra: true } as mongoose.ConnectOptions
