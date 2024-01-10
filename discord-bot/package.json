@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "clean-db": "env MONGOOSE_AUTO_CREATE=false node ./dropCollections",
     "lint": "eslint .",
     "test": "mocha test/*.js",
     "start": "node ./index.js"

@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
+    "clean-db": "env MONGOOSE_AUTO_CREATE=false ts-node src/seed/dropCollections",
     "seed": "ts-node src/seed/seed",
     "start": "ts-node src/api",
     "test": "ts-mocha tests/*.test.ts"

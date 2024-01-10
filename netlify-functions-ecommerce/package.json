@@ -23,6 +23,7 @@
   },
   "scripts": {
     "build": "node ./frontend/build",
+    "clean-db": "env MONGOOSE_AUTO_CREATE=false node ./dropCollections",
     "lint": "eslint .",
     "seed": "node ./seed",
     "start": "netlify dev --dir public --functions netlify/functions",

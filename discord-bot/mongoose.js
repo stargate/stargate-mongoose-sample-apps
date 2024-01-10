@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 
-mongoose.set('autoCreate', true);
+mongoose.set('autoCreate', process.env.MONGOOSE_AUTO_CREATE === 'false' ? false : true);
 mongoose.set('autoIndex', false);
 
 const { driver } = require('stargate-mongoose');
