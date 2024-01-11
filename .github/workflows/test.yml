@@ -140,7 +140,7 @@ jobs:
       matrix:
         node: [16]
         os: [ubuntu-20.04]
-    name: Reviews Sample App
+    name: Photography Sample App
     steps:
       ## Set up Stargate
       - name: disable and stop mono-xsp4.service
