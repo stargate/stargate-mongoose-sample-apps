@@ -69,7 +69,6 @@ async function run() {
       authUrl: process.env.JSON_API_AUTH_URL
     };
   }
-  await mongoose.connect(uri, jsonApiConnectOptions);
   console.log('Connecting to', uri);
   await mongoose.connect(uri, jsonApiConnectOptions);
   // Login to Discord with your client's token

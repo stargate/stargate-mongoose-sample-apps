@@ -6,21 +6,24 @@
     "dotenv": "16.3.1",
     "mongoose": "7.x",
     "sinon": "17.0.1",
-    "stargate-mongoose": "0.3.0",
-    "stripe": "14.5.0",
+    "stargate-mongoose": "0.3.1",
+    "stripe": "14.11.0",
     "vanillatoasts": "1.6.0",
     "webpack": "5.x"
   },
   "devDependencies": {
-    "axios": "1.6.2",
+    "@masteringjs/eslint-config": "0.0.1",
+    "axios": "1.6.5",
+    "eslint": "8.56.0",
     "mocha": "10.2.0",
-    "netlify-cli": "17.6.0"
+    "netlify-cli": "17.11.1"
   },
   "engines": {
     "node": ">=14.0.0"
   },
   "scripts": {
     "build": "node ./frontend/build",
+    "lint": "eslint .",
     "seed": "node ./seed",
     "start": "netlify dev --dir public --functions netlify/functions",
     "test": "mocha ./test/*.test.js",

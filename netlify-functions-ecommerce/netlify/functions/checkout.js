@@ -39,7 +39,7 @@ const handler = async(event) => {
       return {
         statusCode: 200,
         body: JSON.stringify({ cart: cart, url: '/order-confirmation' })
-      }
+      };
     }
 
     const session = await stripe.checkout.sessions.create({

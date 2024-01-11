@@ -4,10 +4,9 @@
   "description": "demo app for stargate-mongoose",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./tests/*.test.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "env NODE_ENV=development node ./server/models/seed",
-    "start": "nodemon app.js",
-    "lint": "eslint ."
+    "start": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
@@ -23,16 +22,12 @@
     "express-ejs-layouts": "^2.5.1",
     "express-fileupload": "^1.2.1",
     "express-session": "^1.17.2",
-    "mongoose": "^7.4.0",
+    "mongoose": "^8.0.3",
     "python-shell": "^5.0.0",
-    "stargate-mongoose": "0.3.0",
-    "eslint": "8.54.0",
-    "@masteringjs/eslint-config": "0.0.1"
+    "stargate-mongoose": "0.3.1"
+
   },
   "devDependencies": {
-    "mocha": "10.2.0",
     "nodemon": "^3.0.1"
   }
 }
-
-

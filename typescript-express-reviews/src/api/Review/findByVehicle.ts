@@ -6,10 +6,11 @@ async function findByVehicle (request: Request, response: Response): Promise<voi
   if (request.query?.limit != null) {
     limit = parseInt(request.query.limit.toString(), 10) || 5;
   }
-  let skip = 5;
+  let skip = 0;
   if (request.query?.skip != null) {
     skip = parseInt(request.query.skip.toString(), 10) || 0;
   }
+
   const reviews = await Review.
     find({ vehicleId: request.query?.vehicleId }).
     sort({ createdAt: -1 }).

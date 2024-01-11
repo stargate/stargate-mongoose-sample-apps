@@ -5,7 +5,7 @@ require('dotenv').config();
 const mongoose = require('./mongoose');
 
 require('./models');
-const {createAstraUri} = require("stargate-mongoose");
+const { createAstraUri } = require('stargate-mongoose');
 
 let conn = null;
 

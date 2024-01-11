@@ -10,7 +10,7 @@ module.exports = app => app.component('cart', {
   computed: {
     cartTotal() {
       return '$' + this.state.cart.items.reduce((sum, item) => {
-        return sum + (+(item.quantity * this.product(item).price).toFixed(2))
+        return sum + (+(item.quantity * this.product(item).price).toFixed(2));
       }, 0).toFixed(2);
     }
   },
