@@ -170,7 +170,5 @@ jobs:
 
       - run: npm install
         working-directory: photography-site-demo.js
-      - run: npm run build
-        working-directory: photography-site-demo.js
       - run: npm test
         working-directory: photography-site-demo.js
