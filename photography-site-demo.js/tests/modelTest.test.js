@@ -14,8 +14,7 @@ describe('Category test', function() {
       name: 'landscape',
       image: 'test.png'
     });
-    const testCategory = await Category.find({ name: 'landscape' }).limit(1);
-    console.log(testCategory);
+    const testCategory = await Category.find({ name: 'landscape' });
     assert.equal(testCategory.length, 1);
     assert.equal(testCategory[0].name, 'landscape');
     assert.equal(testCategory[0].image, 'test.png');
@@ -26,11 +25,10 @@ describe('Category test', function() {
       name: 'animal',
       image: 'test.png'
     });
-    const testCategory = await Category.find({});
-    console.log(testCategory);
-    assert.equal(testCategory.length, 2);
+    const testCategory = await Category.find({ name: 'animal' });
+    assert.equal(testCategory.length, 1);
+    assert.equal(testCategory[0].name, 'animal');
+    assert.equal(testCategory[0].image, 'test.png');
   });
-
-
 
 });
