@@ -18,7 +18,7 @@
     "bcryptjs": "^2.4.3",
     "dotenv": "16.3.1",
     "express": "4.x",
-    "mongoose": "7.x",
+    "mongoose": "8.x",
     "stargate-mongoose": "0.3.1"
   },
   "devDependencies": {
