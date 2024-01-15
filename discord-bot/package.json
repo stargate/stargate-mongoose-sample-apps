@@ -19,7 +19,7 @@
     "discord.js": "14.14.1",
     "dotenv": "16.3.1",
     "eslint": "8.56.0",
-    "mongoose": "7.x",
+    "mongoose": "8.x",
     "stargate-mongoose": "0.3.1"
   },
   "devDependencies": {
