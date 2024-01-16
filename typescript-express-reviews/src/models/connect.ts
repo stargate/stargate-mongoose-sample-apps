@@ -8,14 +8,17 @@ const username = process.env.STARGATE_JSON_USERNAME ?? '';
 const password = process.env.STARGATE_JSON_PASSWORD ?? '';
 const authUrl = process.env.STARGATE_JSON_AUTH_URL ?? '';
 
-const astraDbId = process.env.ASTRA_DBID ?? '';
-const astraRegion = process.env.ASTRA_REGION ?? '';
-const astraKeyspace = process.env.ASTRA_KEYSPACE ?? '';
+const astraAPIEndpoint = process.env.ASTRA_API_ENDPOINT ?? '';
+const astraNamespace = process.env.ASTRA_NAMESPACE ?? '';
 const astraApplicationToken = process.env.ASTRA_APPLICATION_TOKEN ?? '';
 
 export default async function connect() {
   if (isAstra) {
-    const uri = createAstraUri(astraDbId, astraRegion, astraKeyspace, astraApplicationToken);
+    const uri = createAstraUri(
+      astraAPIEndpoint,
+      astraApplicationToken,
+      astraNamespace
+    );
     console.log('Connecting to', uri);
     await mongoose.connect(
       uri,
