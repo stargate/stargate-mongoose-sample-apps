@@ -4,7 +4,7 @@
   "license": "MIT",
   "dependencies": {
     "dotenv": "16.3.1",
-    "mongoose": "7.x",
+    "mongoose": "8.x",
     "sinon": "17.0.1",
     "stargate-mongoose": "0.3.1",
     "stripe": "14.11.0",
