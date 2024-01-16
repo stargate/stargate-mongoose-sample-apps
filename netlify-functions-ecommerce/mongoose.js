@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 
-mongoose.set('autoCreate', true);
+mongoose.set('autoCreate', false);
 mongoose.set('autoIndex', false);
 mongoose.set('toJSON', { virtuals: true });
 mongoose.set('toObject', { virtuals: true });

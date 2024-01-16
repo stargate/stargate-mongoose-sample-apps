@@ -1,6 +1,6 @@
 'use strict';
 
-require('dotenv').config();
+require('../../config');
 
 const { Cart } = require('../../models');
 const connect = require('../../connect');
