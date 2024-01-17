@@ -13,7 +13,11 @@ module.exports = async function connect() {
   let uri = '';
   let jsonApiConnectOptions = {};
   if (process.env.IS_ASTRA === 'true') {
-    uri = createAstraUri(process.env.ASTRA_DBID, process.env.ASTRA_REGION, process.env.ASTRA_KEYSPACE, process.env.ASTRA_APPLICATION_TOKEN);
+    uri = createAstraUri(
+        process.env.ASTRA_API_ENDPOINT,
+        process.env.ASTRA_APPLICATION_TOKEN,
+        process.env.ASTRA_NAMESPACE
+    );
     jsonApiConnectOptions = {
       isAstra: true
     }

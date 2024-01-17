@@ -30,11 +30,9 @@ Make sure you have Node.js 17 or higher
 1. Copy the `.env.example` file to `.env` and fill in the values for the environment variables.
 2. Set `IS_ASTRA` to `true`
 3. Set `OPENAI_API_KEY` to your openAI api key
-4. Set `ASTRA_DBID` to your AstraDB database ID
-5. Set `ASTRA_REGION` to your AstraDB database region
-6. Set `ASTRA_KEYSPACE` to your AstraDB keyspace
-7. Set `ASTRA_APPLICATION_TOKEN` to your AstraDB application token
-
+4. Set `ASTRA_API_ENDPOINT` to your AstraDB database endpoint
+5. Set `ASTRA_NAMESPACE` to your AstraDB database keyspace
+6. Set `ASTRA_APPLICATION_TOKEN` to your AstraDB application token
 
 ### Setting up .env file to run against self-hosted DB
 1. Copy the `.env.example` file to `.env` and fill in the values for the environment variables.
