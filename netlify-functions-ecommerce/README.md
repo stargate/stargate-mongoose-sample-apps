@@ -32,7 +32,7 @@ Make sure you have a local stargate instance running as described on the [main p
 
 ### running the example
 1. Run `npm install`
-2. Run `npm run seed`
+2. Run `npm run seed` to create all collections and insert sample data
 3. Run `npm run build` to compile the frontend
 4. (Optional) set `STRIPE_SECRET_KEY` to a test Stripe API key in your `.env` file. This will allow you to enable Stripe checkout.
 5. Run `npm start`
