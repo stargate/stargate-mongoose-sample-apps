@@ -4,13 +4,19 @@ require('./config');
 
 const models = require('./models');
 const connect = require('./connect');
+const mongoose = require('./mongoose');
 
 async function createProducts() {
   await connect();
   
-  await Promise.all(
-    Object.values(models).map(Model => Model.createCollection())
-  );
+  const existingCollections = await mongoose.connection.listCollections();
+  for (const Model of Object.values(models)) {
+    if (existingCollections.includes(Model.collection.collectionName)) {
+      continue;
+    }
+    console.log('Creating', Model.collection.collectionName);
+    await Model.createCollection();
+  }
   await Promise.all(
     Object.values(models).map(Model => Model.deleteMany({}))
   );

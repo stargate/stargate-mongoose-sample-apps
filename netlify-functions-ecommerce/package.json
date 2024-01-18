@@ -6,7 +6,7 @@
     "dotenv": "16.3.1",
     "mongoose": "^8.1",
     "sinon": "17.0.1",
-    "stargate-mongoose": "0.4.2",
+    "stargate-mongoose": "0.4.3",
     "stripe": "14.12.0",
     "vanillatoasts": "1.6.0",
     "webpack": "5.x"
@@ -23,7 +23,7 @@
   },
   "scripts": {
     "build": "node ./frontend/build",
-    "clean-db": "env MONGOOSE_AUTO_CREATE=false node ./dropCollections",
+    "clean-db": "node ./dropCollections",
     "lint": "eslint .",
     "seed": "node ./seed",
     "start": "netlify dev --dir public --functions netlify/functions",

@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "clean-db": "env MONGOOSE_AUTO_CREATE=false ts-node src/seed/dropCollections",
+    "clean-db": "ts-node src/seed/dropCollections",
     "seed": "ts-node src/seed/seed",
     "start": "ts-node src/api",
     "test": "ts-mocha tests/*.test.ts"
@@ -20,7 +20,7 @@
     "dotenv": "16.3.1",
     "express": "4.x",
     "mongoose": "^8.1",
-    "stargate-mongoose": "0.4.2"
+    "stargate-mongoose": "0.4.3"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",

@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "clean-db": "env MONGOOSE_AUTO_CREATE=false node ./dropCollections",
+    "clean-db": "node ./dropCollections",
     "lint": "eslint .",
     "test": "mocha test/*.js",
+    "seed": "node ./seed",
     "start": "node ./index.js"
   },
   "author": "",
@@ -21,7 +22,7 @@
     "dotenv": "16.3.1",
     "eslint": "8.56.0",
     "mongoose": "^8.1",
-    "stargate-mongoose": "0.4.2"
+    "stargate-mongoose": "0.4.3"
   },
   "devDependencies": {
     "mocha": "10.2.0",

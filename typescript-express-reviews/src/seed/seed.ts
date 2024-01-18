@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import connect from '../models/connect';
-import mongoose from 'mongoose';
+import mongoose from '../models/mongoose';
 
 import Authentication from '../models/authentication';
 import Review from '../models/review';
@@ -18,10 +18,14 @@ run().catch(err => {
 async function run() {
   await connect();
 
+  const existingCollections = await mongoose.connection.listCollections() as unknown as string[];
+
   for (const Model of Object.values(mongoose.connection.models)) {
     console.log('Resetting collection', Model.collection.collectionName);
     // First ensure the collection exists
-    await mongoose.connection.createCollection(Model.collection.collectionName);
+    if (!existingCollections.includes(Model.collection.collectionName)) {
+      await mongoose.connection.createCollection(Model.collection.collectionName);
+    }
     // Then make sure the collection is empty
     await Model.deleteMany({});
   }

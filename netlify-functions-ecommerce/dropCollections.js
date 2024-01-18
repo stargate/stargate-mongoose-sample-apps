@@ -2,8 +2,8 @@
 
 require('dotenv').config();
 
-const models = require('./models');
 const connect = require('./connect');
+const mongoose = require('./mongoose');
 
 dropCollections().catch(err => {
   console.error(err);
@@ -13,14 +13,10 @@ dropCollections().catch(err => {
 async function dropCollections() {
   await connect();
 
-  for (const Model of Object.values(models)) {
-    console.log('Dropping', Model.collection.collectionName);
-    await Model.db.dropCollection(Model.collection.collectionName).catch(err => {
-      if (err?.errors?.[0]?.message === 'Request failed with status code 504') {
-        return;
-      }
-      throw err;
-    });
+  const collections = await mongoose.connection.listCollections();
+  for (const collection of collections) {
+    console.log('Dropping', collection);
+    await mongoose.connection.dropCollection(collection);
   }
 
   console.log('Done');

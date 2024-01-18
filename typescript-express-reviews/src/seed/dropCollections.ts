@@ -2,11 +2,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import connect from '../models/connect';
-
-import Authentication from '../models/authentication';
-import Review from '../models/review';
-import User from '../models/user';
-import Vehicle from '../models/vehicle';
+import mongoose from '../models/mongoose';
 
 dropCollections().catch(err => {
   console.error(err);
@@ -16,14 +12,10 @@ dropCollections().catch(err => {
 async function dropCollections() {
   await connect();
 
-  for (const Model of [Authentication, Review, User, Vehicle]) {
-    console.log('Dropping', Model.collection.collectionName);
-    await Model.db.dropCollection(Model.collection.collectionName).catch(err => {
-      if (err?.errors?.[0]?.message === 'Request failed with status code 504') {
-        return;
-      }
-      throw err;
-    });
+  const collections = await mongoose.connection.listCollections() as unknown as string[];
+  for (const collection of collections) {
+    console.log('Dropping', collection);
+    await mongoose.connection.dropCollection(collection);
   }
 
   console.log('Done');
