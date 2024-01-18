@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-mongoose.set('autoCreate', process.env.MONGOOSE_AUTO_CREATE === 'false' ? false : true);
+mongoose.set('autoCreate', false);
 mongoose.set('autoIndex', false);
 
 import { driver } from 'stargate-mongoose';

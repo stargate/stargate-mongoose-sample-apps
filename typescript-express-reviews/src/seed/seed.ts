@@ -17,18 +17,13 @@ run().catch(err => {
 
 async function run() {
   await connect();
-  // First wait for autoCreate to finish
-  await Promise.all(Object.values(mongoose.connection.models).map(async Model => {
-    await Model.init();
-  }));
+
   for (const Model of Object.values(mongoose.connection.models)) {
     console.log('Resetting collection', Model.collection.collectionName);
-    // Then drop all collections to clear db.
-    // Ignore errors because sometimes `dropCollection()` times out even though the collection is dropped
-    await mongoose.connection.dropCollection(Model.collection.collectionName).catch(() => {});
-    // Then recreate all collections. Workaround for lack of `dropDatabase()` and `deleteMany()`
-    // Ignore errors because `createCollection()` sometimes times out.
-    await mongoose.connection.createCollection(Model.collection.collectionName).catch(() => {});
+    // First ensure the collection exists
+    await mongoose.connection.createCollection(Model.collection.collectionName);
+    // Then make sure the collection is empty
+    await Model.deleteMany({});
   }
 
   const users = await User.create([
