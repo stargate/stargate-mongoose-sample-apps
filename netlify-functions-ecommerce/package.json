@@ -26,7 +26,7 @@
     "lint": "eslint .",
     "seed": "node ./seed",
     "start": "netlify dev --dir public --functions netlify/functions",
-    "test": "mocha ./test/*.test.js",
+    "test": "env NODE_ENV=test mocha ./test/*.test.js",
     "test:smoke": "node ./smoke-test"
   }
 }
