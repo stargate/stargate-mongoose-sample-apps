@@ -1,6 +1,6 @@
 'use strict';
 
-const mongoose = require('./mongoose.js')
+const mongoose = require('./mongoose.js');
 
 const categorySchema = new mongoose.Schema({
   name: {
@@ -10,7 +10,7 @@ const categorySchema = new mongoose.Schema({
   image: {
     type: String,
     required: 'This field is required.'
-  },
+  }
 });
 
 module.exports = mongoose.model('category', categorySchema);

@@ -1,11 +1,11 @@
 'use strict';
-const mongoose = require('./mongoose')
+const mongoose = require('./mongoose');
 
 const options = {
-  "collectionOptions": {
-    "vector": {
-      "size": 1280, //embedding array size for google embedding support, image->vector
-      "function": "cosine",
+  collectionOptions: {
+    vector: {
+      size: 1280, //embedding array size for google embedding support, image->vector
+      function: 'cosine'
     }
   }
 };
