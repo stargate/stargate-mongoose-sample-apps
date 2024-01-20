@@ -10,9 +10,10 @@ Make sure you have a local Stargate instance running as described on the [main p
 ## Running This Example
 
 1. Create a `.env` file with the keys from `.env.example` and the values from the developer portal and your Discord server.*
-1. Run npm install
-1. Run node ./deploy-commands.js
-1. Run node ./index.js
+1. Run `npm install`
+1. Run `npm run seed` to create the Bot collection in Astra
+1. Run `node ./deploy-commands.js`
+1. Run `node ./index.js`
 
 * `DISCORD_GUILD_ID`: go into your server's settings and click on "Widget". The "Server ID" is the `guildId`. See screenshot 1 below.
 * `DISCORD_CLIENT_ID`: go to the [Discord developer portal](https://discord.com/developers/applications), click your bot, and then click "OAuth2". The "Application ID" is the `clientId`. See screenshot 2 below.

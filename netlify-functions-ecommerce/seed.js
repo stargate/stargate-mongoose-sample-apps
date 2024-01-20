@@ -1,16 +1,26 @@
 'use strict';
 
-require('dotenv').config();
+require('./config');
 
-const { Product } = require('./models');
+const models = require('./models');
 const connect = require('./connect');
 const mongoose = require('./mongoose');
 
 async function createProducts() {
   await connect();
   
-  await Product.db.dropCollection('products');
-  await Product.createCollection();
+  const existingCollections = await mongoose.connection.listCollections();
+  for (const Model of Object.values(models)) {
+    if (existingCollections.includes(Model.collection.collectionName)) {
+      continue;
+    }
+    console.log('Creating', Model.collection.collectionName);
+    await Model.createCollection();
+  }
+  await Promise.all(
+    Object.values(models).map(Model => Model.deleteMany({}))
+  );
+  const { Product } = models;
 
   await Product.create({
     name: 'iPhone 12',

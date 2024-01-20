@@ -1,19 +1,9 @@
 'use strict';
 
-require('./config');
-
+const { createAstraUri } = require('stargate-mongoose');
 const mongoose = require('./mongoose');
 
-require('./models');
-const { createAstraUri } = require('stargate-mongoose');
-
-let conn = null;
-
 module.exports = async function connect() {
-  if (conn != null) {
-    return conn;
-  }
-  conn = mongoose.connection;
   let uri = '';
   let jsonApiConnectOptions = {};
   if (process.env.IS_ASTRA === 'true') {
@@ -33,8 +23,6 @@ module.exports = async function connect() {
       authUrl: process.env.JSON_API_AUTH_URL
     };
   }
+  console.log('Connecting to', uri);
   await mongoose.connect(uri, jsonApiConnectOptions);
-  
-  await Promise.all(Object.values(mongoose.connection.models).map(Model => Model.init()));
-  return conn;
 };

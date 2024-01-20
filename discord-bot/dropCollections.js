@@ -1,0 +1,26 @@
+'use strict';
+
+require('dotenv').config();
+
+const connect = require('./connect');
+const mongoose = require('./mongoose');
+
+require('./models/bot');
+
+dropCollections().catch(err => {
+  console.error(err);
+  process.exit(-1);
+});
+
+async function dropCollections() {
+  await connect();
+
+  const collections = await mongoose.connection.listCollections();
+  for (const collection of collections) {
+    console.log('Dropping', collection);
+    await mongoose.connection.dropCollection(collection);
+  }
+
+  console.log('Done');
+  process.exit(0);
+}

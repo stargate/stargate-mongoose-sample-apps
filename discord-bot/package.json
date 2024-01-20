@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "clean-db": "node ./dropCollections",
     "lint": "eslint .",
     "test": "mocha test/*.js",
+    "seed": "node ./seed",
     "start": "node ./index.js"
   },
   "author": "",
@@ -19,8 +21,8 @@
     "discord.js": "14.14.1",
     "dotenv": "16.3.1",
     "eslint": "8.56.0",
-    "mongoose": "7.x",
-    "stargate-mongoose": "0.3.1"
+    "mongoose": "^8.1",
+    "stargate-mongoose": "0.4.3"
   },
   "devDependencies": {
     "mocha": "10.2.0",

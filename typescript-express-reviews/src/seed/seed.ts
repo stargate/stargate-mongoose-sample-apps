@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import connect from '../models/connect';
-import mongoose from 'mongoose';
+import mongoose from '../models/mongoose';
 
 import Authentication from '../models/authentication';
 import Review from '../models/review';
@@ -17,18 +17,18 @@ run().catch(err => {
 
 async function run() {
   await connect();
-  // First wait for autoCreate to finish
-  await Promise.all(Object.values(mongoose.connection.models).map(async Model => {
-    await Model.init();
-  }));
-  // Then drop all collections to clear db
-  await Promise.all(Object.values(mongoose.connection.models).map(async Model => {
-    await mongoose.connection.dropCollection(Model.collection.collectionName);
-  }));
-  // Then recreate all collections. Workaround for lack of `dropDatabase()` and `deleteMany()`
-  await Promise.all(Object.values(mongoose.connection.models).map(async Model => {
-    await mongoose.connection.createCollection(Model.collection.collectionName);
-  }));
+
+  const existingCollections = await mongoose.connection.listCollections() as unknown as string[];
+
+  for (const Model of Object.values(mongoose.connection.models)) {
+    console.log('Resetting collection', Model.collection.collectionName);
+    // First ensure the collection exists
+    if (!existingCollections.includes(Model.collection.collectionName)) {
+      await mongoose.connection.createCollection(Model.collection.collectionName);
+    }
+    // Then make sure the collection is empty
+    await Model.deleteMany({});
+  }
 
   const users = await User.create([
     {
