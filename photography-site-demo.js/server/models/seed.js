@@ -116,7 +116,12 @@ async function createPhotos() {
 
 
 async function createPhotoEmbeddings() {
-  await PhotoEmbedding.createCollection();
+  // Need to disable indexing for embeddings, otherwise creating PhotoEmbeddings
+  // fails with the following error:
+  // "Term of column query_text_values exceeds the byte limit for index. Term size 1.115KiB. Max allowed size 1.000KiB.""
+  await PhotoEmbedding.createCollection({
+    indexing: { deny: ['description'] }
+  });
   for (let i = 0; i < data.length; i++) {
     await PhotoEmbedding.create({
       name: data[i].name,
@@ -136,4 +141,7 @@ async function populate() {
   await createPhotoEmbeddings();
 }
 
-populate();
+populate().catch(error => {
+  console.error(error);
+  process.exit(-1);
+});;
