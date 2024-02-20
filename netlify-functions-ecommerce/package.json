@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {
-    "dotenv": "16.4.1",
+    "dotenv": "16.4.5",
     "mongoose": "^8.1",
     "sinon": "17.0.1",
-    "stargate-mongoose": "0.4.3",
-    "stripe": "14.14.0",
+    "stargate-mongoose": "0.5.0",
+    "stripe": "14.17.0",
     "vanillatoasts": "1.6.0",
     "webpack": "5.x"
   },
@@ -15,8 +15,8 @@
     "@masteringjs/eslint-config": "0.0.1",
     "axios": "1.6.7",
     "eslint": "8.56.0",
-    "mocha": "10.2.0",
-    "netlify-cli": "17.15.3"
+    "mocha": "10.3.0",
+    "netlify-cli": "17.16.3"
   },
   "engines": {
     "node": ">=14.0.0"

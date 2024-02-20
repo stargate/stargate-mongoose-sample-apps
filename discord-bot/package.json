@@ -19,13 +19,13 @@
     "@discordjs/rest": "2.2.0",
     "@masteringjs/eslint-config": "0.0.1",
     "discord.js": "14.14.1",
-    "dotenv": "16.4.1",
+    "dotenv": "16.4.4",
     "eslint": "8.56.0",
     "mongoose": "^8.1",
-    "stargate-mongoose": "0.4.3"
+    "stargate-mongoose": "0.5.0"
   },
   "devDependencies": {
-    "mocha": "10.2.0",
+    "mocha": "10.3.0",
     "sinon": "17.0.1"
   }
 }
