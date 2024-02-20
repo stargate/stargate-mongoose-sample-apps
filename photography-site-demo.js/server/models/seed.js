@@ -1,11 +1,12 @@
 'use strict';
+
 const Category = require('./Category');
 const Photo = require('./Photo');
 const PhotoEmbedding = require('./PhotoEmbedding');
 const connect = require('./connect');
 const getPhotoEmbedding = require('../utils/imageEmbeddingGenerator');
 const getTextEmbedding = require('../utils/textEmbeddingGenerator');
-
+const mongoose = require('./mongoose');
 
 async function deleteAll() {
   await connect();
@@ -139,6 +140,9 @@ async function populate() {
   await createCategories();
   await createPhotos();
   await createPhotoEmbeddings();
+
+  await mongoose.disconnect();
+  console.log('Done');
 }
 
 populate().catch(error => {
