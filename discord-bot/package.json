@@ -22,7 +22,7 @@
     "dotenv": "16.4.1",
     "eslint": "8.56.0",
     "mongoose": "^8.1",
-    "stargate-mongoose": "0.4.3"
+    "stargate-mongoose": "0.5.0"
   },
   "devDependencies": {
     "mocha": "10.3.0",
