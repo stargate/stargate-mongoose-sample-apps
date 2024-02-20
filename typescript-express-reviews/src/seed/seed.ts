@@ -91,5 +91,6 @@ async function run() {
     }
   ]);
 
+  await mongoose.disconnect();
   console.log('Done');
 }
