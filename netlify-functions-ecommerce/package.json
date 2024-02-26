@@ -6,8 +6,8 @@
     "dotenv": "16.4.5",
     "mongoose": "^8.1",
     "sinon": "17.0.1",
-    "stargate-mongoose": "0.5.0",
-    "stripe": "14.17.0",
+    "stargate-mongoose": "0.5.1",
+    "stripe": "14.18.0",
     "vanillatoasts": "1.6.0",
     "webpack": "5.x"
   },
@@ -16,7 +16,7 @@
     "axios": "1.6.7",
     "eslint": "8.57.0",
     "mocha": "10.3.0",
-    "netlify-cli": "17.16.3"
+    "netlify-cli": "17.17.0"
   },
   "engines": {
     "node": ">=14.0.0"
