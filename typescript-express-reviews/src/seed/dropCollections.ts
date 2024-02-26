@@ -12,10 +12,10 @@ dropCollections().catch(err => {
 async function dropCollections() {
   await connect();
 
-  const collections = await mongoose.connection.listCollections() as unknown as string[];
+  const collections = await mongoose.connection.listCollections();
   for (const collection of collections) {
-    console.log('Dropping', collection);
-    await mongoose.connection.dropCollection(collection);
+    console.log('Dropping', collection.name);
+    await mongoose.connection.dropCollection(collection.name);
   }
 
   console.log('Done');
