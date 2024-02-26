@@ -14,7 +14,7 @@ const jsonApiConnectOptions = {
 };
 
 before(async function() {
-  this.timeout(15000);
+  this.timeout(30000);
   await mongoose.connect(uri, jsonApiConnectOptions);
   // dropCollection() can be slower
   await Bot.db.dropCollection('bots').catch(() => {});
