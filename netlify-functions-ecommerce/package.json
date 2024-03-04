@@ -16,7 +16,7 @@
     "axios": "1.6.7",
     "eslint": "8.57.0",
     "mocha": "10.3.0",
-    "netlify-cli": "17.17.0"
+    "netlify-cli": "17.17.1"
   },
   "engines": {
     "node": ">=14.0.0"
