@@ -11,8 +11,13 @@ async function findByVehicle (request: Request, response: Response): Promise<voi
     skip = parseInt(request.query.skip.toString(), 10) || 0;
   }
 
+  const vehicleId: string | null = typeof request.query.vehicleId === 'string' ? request.query.vehicleId : null;
+  if (vehicleId == null) {
+    throw new Error('vehicleId must be a string');
+  }
+
   const reviews = await Review.
-    find({ vehicleId: request.query?.vehicleId }).
+    find({ vehicleId }).
     sort({ createdAt: -1 }).
     skip(skip).
     limit(limit).

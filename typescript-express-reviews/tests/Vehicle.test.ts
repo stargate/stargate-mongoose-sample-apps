@@ -55,7 +55,7 @@ describe('Vehicle', function() {
     vehicle.numReviews = 5;
     vehicle.averageReview = 3;
     await vehicle.save();
-    const req = mockRequest({ _id: vehicle._id, limit: 5 });
+    const req = mockRequest({ _id: vehicle._id.toString(), limit: 5 });
     const res = mockResponse();
     await findById(req, res);
     assert(res.json.getCall(0).args[0].vehicle);

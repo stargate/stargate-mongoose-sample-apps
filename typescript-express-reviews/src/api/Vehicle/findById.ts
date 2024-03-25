@@ -8,11 +8,16 @@ async function last5(request: Request, response: Response): Promise<void> {
     limit = parseInt(request.query.limit.toString(), 10);
   }
 
+  const vehicleId: string | null = typeof request.query._id === 'string' ? request.query._id : null;
+  if (vehicleId == null) {
+    throw new Error('vehicleId must be a string');
+  }
+
   const vehicle = await Vehicle.
     findById({ _id: request.query?._id }).
     setOptions({ sanitizeFilter: true });
   const reviews = await Review.
-    find({ vehicleId: request.query._id }).
+    find({ vehicleId }).
     sort({ createdAt: -1 }).
     limit(limit).
     populate('user').

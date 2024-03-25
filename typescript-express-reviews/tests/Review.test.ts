@@ -43,7 +43,12 @@ describe('Review', function() {
         averageReview: 0
       }
     );
-    const req = mockRequest({ vehicleId: vehicle._id, userId: user._id, rating: 4, text: 'The length of this text must be greater than 30 to pass validation.' });
+    const req = mockRequest({
+      vehicleId: vehicle._id.toString(),
+      userId: user._id,
+      rating: 4,
+      text: 'The length of this text must be greater than 30 to pass validation.'
+    });
     const res = mockResponse();
     await create(req, res);
     assert(res.json.getCall(0).args[0].review);
@@ -89,7 +94,7 @@ describe('Review', function() {
     vehicle.numReviews = 6;
     vehicle.averageReview = 3;
     await vehicle.save();
-    const req = mockRequest({ vehicleId: vehicle._id, limit: 3, skip: 1 });
+    const req = mockRequest({ vehicleId: vehicle._id.toString(), limit: 3, skip: 1 });
     const res = mockResponse();
     await findByVehicle(req, res);
 
