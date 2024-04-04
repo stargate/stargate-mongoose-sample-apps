@@ -22,5 +22,5 @@ to start the stack with [Docker](https://docker.com):
 
 ```
 cd stargate-mongoose-sample-apps 
-bin/start_json_api.sh
+bin/start_data_api.sh
 ```
