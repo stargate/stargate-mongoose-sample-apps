@@ -24,7 +24,7 @@
     "express-session": "^1.17.2",
     "mongoose": "^8.0.3",
     "python-shell": "^5.0.0",
-    "mocha": "10.3.0",
+    "mocha": "10.4.0",
     "stargate-mongoose": "0.5.3"
   },
   "devDependencies": {
