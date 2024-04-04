@@ -26,8 +26,8 @@ jobs:
           ref: main
       - name: Set up JSON API
         run: |
-          chmod +x bin/start_json_api.sh
-          bin/start_json_api.sh
+          chmod +x bin/start_data_api.sh
+          bin/start_data_api.sh
         working-directory: stargate-mongoose
       - name: Wait for services
         run: |
@@ -68,8 +68,8 @@ jobs:
           ref: main
       - name: Set up JSON API
         run: |
-          chmod +x bin/start_json_api.sh
-          bin/start_json_api.sh
+          chmod +x bin/start_data_api.sh
+          bin/start_data_api.sh
         working-directory: stargate-mongoose
       - name: Wait for services
         run: |
@@ -110,8 +110,8 @@ jobs:
           ref: main
       - name: Set up JSON API
         run: |
-          chmod +x bin/start_json_api.sh
-          bin/start_json_api.sh
+          chmod +x bin/start_data_api.sh
+          bin/start_data_api.sh
         working-directory: stargate-mongoose
       - name: Wait for services
         run: |
@@ -153,8 +153,8 @@ jobs:
           ref: main
       - name: Set up JSON API
         run: |
-          chmod +x bin/start_json_api.sh
-          bin/start_json_api.sh
+          chmod +x bin/start_data_api.sh
+          bin/start_data_api.sh
         working-directory: stargate-mongoose
       - name: Wait for services
         run: |
