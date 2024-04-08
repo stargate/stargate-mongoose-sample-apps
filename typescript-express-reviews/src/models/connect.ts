@@ -3,10 +3,10 @@ import mongoose from './mongoose';
 
 const isAstra = process.env.IS_ASTRA ?? '';
 
-const stargateJSONAPIURL = process.env.STARGATE_JSON_API_URL ?? '';
-const username = process.env.STARGATE_JSON_USERNAME ?? '';
-const password = process.env.STARGATE_JSON_PASSWORD ?? '';
-const authUrl = process.env.STARGATE_JSON_AUTH_URL ?? '';
+const dataAPIURI = process.env.DATA_API_URI ?? '';
+const username = process.env.DATA_API_AUTH_USERNAME ?? '';
+const password = process.env.DATA_API_AUTH_PASSWORD ?? '';
+const authUrl = process.env.DATA_API_AUTH_URL ?? '';
 
 const astraAPIEndpoint = process.env.ASTRA_API_ENDPOINT ?? '';
 const astraNamespace = process.env.ASTRA_NAMESPACE ?? '';
@@ -25,9 +25,9 @@ export default async function connect() {
       { isAstra: true } as mongoose.ConnectOptions
     );
   } else {
-    console.log('Connecting to', stargateJSONAPIURL);
+    console.log('Connecting to', dataAPIURI);
     await mongoose.connect(
-      stargateJSONAPIURL,
+      dataAPIURI,
       { username, password, authUrl } as mongoose.ConnectOptions
     );
   }
