@@ -15,10 +15,10 @@ Make sure you have a local stargate instance running as described on the [main p
 ### Setting up .env file to run against JSON API
 1. Copy the `.env.example` file to `.env` and fill in the values for the environment variables.
 2. Set `IS_ASTRA` to `false`
-3. Set `JSON_API_URL` to `http://127.0.0.1:8181/v1/ecommerce_test`
-4. Set `JSON_API_AUTH_URL` to `http://127.0.0.1:8081/v1/auth`
-5. Set `JSON_API_AUTH_USERNAME` to `cassandra`
-6. Set `JSON_API_AUTH_PASSWORD` to `cassandra`
+3. Set `DATA_API_URI` to `http://127.0.0.1:8181/v1/ecommerce_test`
+4. Set `DATA_API_AUTH_URI` to `http://127.0.0.1:8081/v1/auth`
+5. Set `DATA_API_AUTH_USERNAME` to `cassandra`
+6. Set `DATA_API_AUTH_PASSWORD` to `cassandra`
 7. Remove `ASTRA_DB_ID`, `ASTRA_DB_REGION`, `ASTRA_DB_KEYSPACE`, `ASTRA_DB_APPLICATION_TOKEN`
 
 ### Setting up .env file to run against AstraDB
@@ -28,7 +28,7 @@ Make sure you have a local stargate instance running as described on the [main p
 4. Set `ASTRA_DB_REGION` to your AstraDB database region
 5. Set `ASTRA_DB_KEYSPACE` to your AstraDB keyspace
 6. Set `ASTRA_DB_APPLICATION_TOKEN` to your AstraDB application token
-7. Remove `JSON_API_URL`, `JSON_API_AUTH_URL`, `JSON_API_AUTH_USERNAME`, `JSON_API_AUTH_PASSWORD`.
+7. Remove `DATA_API_URI`, `DATA_API_AUTH_URI`, `DATA_API_AUTH_USERNAME`, `DATA_API_AUTH_PASSWORD`.
 
 ### running the example
 1. Run `npm install`
