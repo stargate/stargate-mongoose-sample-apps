@@ -9,6 +9,8 @@ Make sure you have a local Stargate instance running as described on the [main p
 
 ## Running This Example
 
+Due to Discord dependencies, this sample app requires Node >= 18.
+
 1. Create a `.env` file with the keys from `.env.example` and the values from the developer portal and your Discord server.*
 1. Run `npm install`
 1. Run `npm run seed` to create the Bot collection in Astra
