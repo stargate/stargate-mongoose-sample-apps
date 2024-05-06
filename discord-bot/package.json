@@ -18,7 +18,7 @@
   "dependencies": {
     "@discordjs/rest": "2.3.0",
     "@masteringjs/eslint-config": "0.0.1",
-    "discord.js": "14.14.1",
+    "discord.js": "14.15.2",
     "dotenv": "16.4.5",
     "eslint": "8.57.0",
     "mongoose": "^8.1",
