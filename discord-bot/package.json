@@ -13,10 +13,10 @@
   "author": "",
   "license": "ISC",
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18.0.0"
   },
   "dependencies": {
-    "@discordjs/rest": "2.2.0",
+    "@discordjs/rest": "2.3.0",
     "@masteringjs/eslint-config": "0.0.1",
     "discord.js": "14.15.2",
     "dotenv": "16.4.5",
