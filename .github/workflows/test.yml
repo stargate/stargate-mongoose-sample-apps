@@ -8,6 +8,7 @@ permissions:
 jobs:
   test-discord-bot:
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
     strategy:
       fail-fast: false
       matrix:
@@ -50,6 +51,7 @@ jobs:
 
   test-ecommerce:
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
     strategy:
       fail-fast: false
       matrix:
@@ -92,6 +94,7 @@ jobs:
 
   test-reviews:
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
     strategy:
       fail-fast: false
       matrix:
@@ -135,6 +138,7 @@ jobs:
 
   test-photograhy:
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
     strategy:
       fail-fast: false
       matrix:
