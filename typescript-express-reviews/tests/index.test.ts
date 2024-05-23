@@ -30,10 +30,5 @@ before(async function() {
 });*/
 
 after(async function() {
-  this.timeout(30_000);
-  await Promise.all(Object.values(mongoose.connection.models).map(async Model => {
-    await mongoose.connection.dropCollection(Model.collection.collectionName);
-  }));
-
   await mongoose.disconnect();
 });
