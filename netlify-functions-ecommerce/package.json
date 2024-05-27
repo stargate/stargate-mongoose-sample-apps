@@ -6,17 +6,17 @@
     "dotenv": "16.4.5",
     "mongoose": "^8.1",
     "sinon": "18.0.0",
-    "stargate-mongoose": "0.5.7",
+    "stargate-mongoose": "0.5.8",
     "stripe": "15.8.0",
     "vanillatoasts": "1.6.0",
     "webpack": "5.x"
   },
   "devDependencies": {
     "@masteringjs/eslint-config": "0.0.1",
-    "axios": "1.7.0",
+    "axios": "1.7.2",
     "eslint": "8.57.0",
     "mocha": "10.4.0",
-    "netlify-cli": "17.23.5"
+    "netlify-cli": "17.23.8"
   },
   "engines": {
     "node": ">=14.0.0"
