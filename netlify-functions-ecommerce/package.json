@@ -6,7 +6,7 @@
     "dotenv": "16.4.5",
     "mongoose": "^8.1",
     "sinon": "18.0.0",
-    "stargate-mongoose": "0.6.1",
+    "stargate-mongoose": "0.6.2",
     "stripe": "16.1.0",
     "vanillatoasts": "1.6.0",
     "webpack": "5.x"
