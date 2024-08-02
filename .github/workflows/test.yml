@@ -28,7 +28,7 @@ jobs:
       - name: Set up JSON API
         run: |
           awk 'NR>1{print prev} {prev=$0} END{}' bin/start_data_api.sh > temp && mv temp bin/start_data_api.sh
-          echo "docker compose -f $SCRIPTS_HOME/docker-compose.yml up -d" >> bin/start_data_api.sh
+          echo "docker compose -f bin/docker-compose.yml up -d" >> bin/start_data_api.sh
           cat bin/start_data_api.sh
           chmod +x bin/start_data_api.sh
           bin/start_data_api.sh
@@ -74,7 +74,7 @@ jobs:
       - name: Set up JSON API
         run: |
           awk 'NR>1{print prev} {prev=$0} END{}' bin/start_data_api.sh > temp && mv temp bin/start_data_api.sh
-          echo "docker compose -f $SCRIPTS_HOME/docker-compose.yml up -d" >> bin/start_data_api.sh
+          echo "docker compose -f bin/docker-compose.yml up -d" >> bin/start_data_api.sh
           cat bin/start_data_api.sh
           chmod +x bin/start_data_api.sh
           bin/start_data_api.sh
@@ -120,7 +120,7 @@ jobs:
       - name: Set up JSON API
         run: |
           awk 'NR>1{print prev} {prev=$0} END{}' bin/start_data_api.sh > temp && mv temp bin/start_data_api.sh
-          echo "docker compose -f $SCRIPTS_HOME/docker-compose.yml up -d" >> bin/start_data_api.sh
+          echo "docker compose -f bin/docker-compose.yml up -d" >> bin/start_data_api.sh
           cat bin/start_data_api.sh
           chmod +x bin/start_data_api.sh
           bin/start_data_api.sh
@@ -167,7 +167,7 @@ jobs:
       - name: Set up JSON API
         run: |
           awk 'NR>1{print prev} {prev=$0} END{}' bin/start_data_api.sh > temp && mv temp bin/start_data_api.sh
-          echo "docker compose -f $SCRIPTS_HOME/docker-compose.yml up -d" >> bin/start_data_api.sh
+          echo "docker compose -f bin/docker-compose.yml up -d" >> bin/start_data_api.sh
           cat bin/start_data_api.sh
           chmod +x bin/start_data_api.sh
           bin/start_data_api.sh
