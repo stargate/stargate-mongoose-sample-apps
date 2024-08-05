@@ -14,7 +14,8 @@ seed().catch(err => {
 async function seed() {
   await connect();
   
-  const existingCollections = await mongoose.connection.listCollections();
+  const existingCollections = await mongoose.connection.listCollections()
+    .then(collections => collections.map(c => c.name));;
   if (!existingCollections.includes(Bot.collection.collectionName)) {
     await Bot.createCollection();
   }
