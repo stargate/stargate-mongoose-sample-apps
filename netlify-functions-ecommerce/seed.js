@@ -9,7 +9,8 @@ const mongoose = require('./mongoose');
 async function createProducts() {
   await connect();
   
-  const existingCollections = await mongoose.connection.listCollections();
+  const existingCollections = await mongoose.connection.listCollections()
+    .then(collections => collections.map(c => c.name));
   for (const Model of Object.values(models)) {
     if (existingCollections.includes(Model.collection.collectionName)) {
       continue;
