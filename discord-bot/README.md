@@ -56,5 +56,8 @@ Create table:
 CREATE TABLE bots (
    id           text, 
    name         text,
+   deleted      int,
    PRIMARY KEY (id));
+
+CREATE INDEX isDeleted ON bots (deleted);
 ```

@@ -15,9 +15,11 @@ const jsonApiConnectOptions = {
 before(async function() {
   this.timeout(30000);
   await mongoose.connect(uri, jsonApiConnectOptions);
-  // dropCollection() can be slower
-  // await Bot.db.dropCollection('bots').catch(() => {});
-  // await Bot.createCollection();
+
+  const docs = await Bot.find({ deleted: 0 });
+  for (const doc of docs) {
+    await Bot.updateOne({ id: doc.id }, { deleted: 1 });
+  }
 });
 
 after(async function() {

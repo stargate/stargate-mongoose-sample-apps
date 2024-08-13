@@ -11,12 +11,12 @@ const handler = async(event) => {
     event.body = JSON.parse(event.body || {});
     await connect();
     const cart = await Cart.
-      findOne({ _id: event.body.cartId }).
+      findOne({ id: event.body.cartId }).
       setOptions({ sanitizeFilter: true }).
       orFail();
     
     if (cart.orderId) {
-      const order = await Order.findOne({ _id: cart.orderId }).orFail();
+      const order = await Order.findOne({ id: cart.orderId }).orFail();
 
       return {
         statusCode: 200,
@@ -24,7 +24,7 @@ const handler = async(event) => {
       };
     }
     if (process.env.STRIPE_SECRET_KEY === 'test') {
-      const order = await Order.create({
+      const [order] = await Order.insertMany({
         items: cart.items,
         name: 'Stripe Test',
         total: cart.total,
@@ -35,8 +35,8 @@ const handler = async(event) => {
         }
       });
   
-      cart.orderId = order._id;
-      await cart.save();
+      cart.orderId = order.id;
+      await Cart.updateOne({ id: cart.id }, cart.getChanges());
 
       return {
         statusCode: 200,
@@ -55,7 +55,7 @@ const handler = async(event) => {
       const intent = await stripe.paymentIntents.retrieve(session.payment_intent);
       const paymentMethod = await stripe.paymentMethods.retrieve(intent['payment_method']);
 
-      const order = await Order.create({
+      const [order] = await Order.insertMany({
         items: cart.items,
         name: session['customer_details'].name,
         total: +(session['amount_total'] / 100).toFixed(2),
@@ -64,8 +64,8 @@ const handler = async(event) => {
           null
       });
   
-      cart.orderId = order._id;
-      await cart.save();
+      cart.orderId = order.id;
+      await Cart.updateOne({ id: cart.id }, cart.getChanges());
 
       return {
         statusCode: 200,
