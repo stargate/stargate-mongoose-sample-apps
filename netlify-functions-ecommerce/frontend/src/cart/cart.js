@@ -16,7 +16,7 @@ module.exports = app => app.component('cart', {
   },
   methods: {
     product(item) {
-      const product = this.state.products.find(product => product._id === item.productId);
+      const product = this.state.products.find(product => product.id === item.productId);
       return product;
     },
     formatTotal(item, product) {

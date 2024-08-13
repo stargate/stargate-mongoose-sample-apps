@@ -10,8 +10,8 @@ before(async function() {
   this.timeout(30000);
   await connect();
 
-  await Promise.all(Object.values(mongoose.connection.models).map(Model => Model.createCollection()));
-  await Promise.all(Object.values(mongoose.connection.models).map(Model => Model.deleteMany({})));
+  // await Promise.all(Object.values(mongoose.connection.models).map(Model => Model.createCollection()));
+  // await Promise.all(Object.values(mongoose.connection.models).map(Model => Model.deleteMany({})));
 });
 
 after(async function() {

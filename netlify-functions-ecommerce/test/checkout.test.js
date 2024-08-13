@@ -22,8 +22,8 @@ describe('Checkout', function() {
       body: {
         cartId: null,
         items: [
-          { productId: products[0]._id, quantity: 2 },
-          { productId: products[1]._id, quantity: 1 }
+          { productId: products[0].id, quantity: 2 },
+          { productId: products[1].id, quantity: 1 }
         ]
       }
     };
@@ -33,7 +33,7 @@ describe('Checkout', function() {
     assert(result.body);
     assert(result.body.items.length);
 
-    params.body.cartId = result.body._id;
+    params.body.cartId = result.body.id;
     sinon.stub(stripe.paymentIntents, 'retrieve').returns({ status: 'succeeded', id: '123', brand: 'visa', last4: '1234' });
     sinon.stub(stripe.paymentMethods, 'retrieve').returns({ status: 'succeeded', id: '123', brand: 'visa', last4: '1234' });
     sinon.stub(stripe.checkout.sessions, 'create').returns({

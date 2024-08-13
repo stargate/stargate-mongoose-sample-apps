@@ -14,10 +14,10 @@ module.exports = app => app.component('products', {
     async addToCart(product) {
       this.submitting = product;
       const body = {
-        items: [{ productId: product._id, quantity: 1 }]
+        items: [{ productId: product.id, quantity: 1 }]
       };
       if (this.state.cart) {
-        body.cartId = this.state.cart._id;
+        body.cartId = this.state.cart.id;
       }
       const res = await fetch('/.netlify/functions/addToCart', {
         method: 'PUT',
@@ -27,9 +27,9 @@ module.exports = app => app.component('products', {
         body: JSON.stringify(body)
       }).then(res => res.json());
       this.state.cart = res;
-      if (!this.state.cartId || this.state.cartId !== res._id) {
-        this.state.cartId = res._id;
-        window.localStorage.setItem('__cartKey', res._id);
+      if (!this.state.cartId || this.state.cartId !== res.id) {
+        this.state.cartId = res.id;
+        window.localStorage.setItem('__cartKey', res.id);
       }
       this.submitting = null;
     }

@@ -11,12 +11,12 @@ describe('Get the cart given an id', function() {
 
     const params = {
       queryStringParameters: {
-        cartId: cart._id
+        cartId: cart.id
       }
     };
     const findCart = await getCart(params);
     assert.equal(findCart.statusCode, 200);
     findCart.body = JSON.parse(findCart.body);
-    assert.equal(findCart.body.cart._id, cart._id.toString());
+    assert.equal(findCart.body.cart.id, cart.id.toString());
   });
 });

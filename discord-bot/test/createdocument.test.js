@@ -8,7 +8,7 @@ const sinon = require('sinon');
 
 describe('createdocument', function() {
   it('inserts a new document', async function() {
-    await Bot.deleteMany({});
+    //await Bot.deleteMany({});
 
     const interaction = {
       reply: sinon.stub()

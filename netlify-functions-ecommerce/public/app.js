@@ -63,7 +63,7 @@ module.exports = app => app.component('cart', {
   },
   methods: {
     product(item) {
-      const product = this.state.products.find(product => product._id === item.productId);
+      const product = this.state.products.find(product => product.id === item.productId);
       return product;
     },
     formatTotal(item, product) {
@@ -118,10 +118,10 @@ module.exports = app => app.component('home', {
     async addToCart(product) {
       this.submitting = product;
       const body = {
-        items: [{ productId: product._id, quantity: 1 }]
+        items: [{ productId: product.id, quantity: 1 }]
       };
       if (this.state.cart) {
-        body.cartId = this.state.cart._id;
+        body.cartId = this.state.cart.id;
       }
       const res = await fetch('/.netlify/functions/addToCart', {
         method: 'PUT',
@@ -131,9 +131,9 @@ module.exports = app => app.component('home', {
         body: JSON.stringify(body)
       }).then(res => res.json());
       this.state.cart = res;
-      if (!this.state.cartId || this.state.cartId !== res._id) {
-        this.state.cartId = res._id;
-        window.localStorage.setItem('__cartKey', res._id);
+      if (!this.state.cartId || this.state.cartId !== res.id) {
+        this.state.cartId = res.id;
+        window.localStorage.setItem('__cartKey', res.id);
       }
       this.submitting = null;
     }
@@ -218,7 +218,7 @@ module.exports = app => app.component('product', {
   }),
   computed: {
     product() {
-      return this.state.products.find(p => p._id === this.productId);
+      return this.state.products.find(p => p.id === this.productId);
     }
   },
   methods: {
@@ -228,10 +228,10 @@ module.exports = app => app.component('product', {
     async addToCart(product) {
       this.submitting = product;
       const body = {
-        items: [{ productId: product._id, quantity: 1 }]
+        items: [{ productId: product.id, quantity: 1 }]
       };
       if (this.state.cart) {
-        body.cartId = this.state.cart._id;
+        body.cartId = this.state.cart.id;
       }
       const res = await fetch('/.netlify/functions/addToCart', {
         method: 'PUT',
@@ -242,8 +242,8 @@ module.exports = app => app.component('product', {
       }).then(res => res.json());
       this.state.cart = res;
       if (!this.state.cartId) {
-        this.state.cartId = res._id;
-        window.localStorage.setItem('__cartKey', res._id);
+        this.state.cartId = res.id;
+        window.localStorage.setItem('__cartKey', res.id);
       }
       this.submitting = null;
     }
@@ -275,10 +275,10 @@ module.exports = app => app.component('products', {
     async addToCart(product) {
       this.submitting = product;
       const body = {
-        items: [{ productId: product._id, quantity: 1 }]
+        items: [{ productId: product.id, quantity: 1 }]
       };
       if (this.state.cart) {
-        body.cartId = this.state.cart._id;
+        body.cartId = this.state.cart.id;
       }
       const res = await fetch('/.netlify/functions/addToCart', {
         method: 'PUT',
@@ -288,9 +288,9 @@ module.exports = app => app.component('products', {
         body: JSON.stringify(body)
       }).then(res => res.json());
       this.state.cart = res;
-      if (!this.state.cartId || this.state.cartId !== res._id) {
-        this.state.cartId = res._id;
-        window.localStorage.setItem('__cartKey', res._id);
+      if (!this.state.cartId || this.state.cartId !== res.id) {
+        this.state.cartId = res.id;
+        window.localStorage.setItem('__cartKey', res.id);
       }
       this.submitting = null;
     }
@@ -480,9 +480,6 @@ module.exports = "<div class=\"products\">\n  <h1>All Products</h1>\n  <div clas
 /******/ 	}
 /******/ 	
 /************************************************************************/
-var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
-(() => {
 /*!*******************************!*\
   !*** ./frontend/src/index.js ***!
   \*******************************/
@@ -556,7 +553,5 @@ router.replace(window.location.pathname);
 app.use(router);
 
 app.mount('#content');
-})();
-
 /******/ })()
 ;

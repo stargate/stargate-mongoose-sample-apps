@@ -71,3 +71,32 @@ Using test
 
   8 passing (112ms)
 ```
+
+
+## With tables
+
+```
+CREATE TABLE products (
+   id           text, 
+   name         text,
+   price        decimal,
+   image        text,
+   description  text,
+   PRIMARY KEY (id));
+
+CREATE TABLE orders (
+   id             text, 
+   total          decimal,
+   name           text,
+   paymentMethod  text,
+   items          text,
+   PRIMARY KEY (id));
+
+CREATE TABLE carts (
+   id               text, 
+   items            text,
+   orderId          text,
+   total            decimal,
+   stripeSessionId  text,
+   PRIMARY KEY (id));
+```
