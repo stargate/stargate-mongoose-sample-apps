@@ -31,3 +31,45 @@ Make sure you have Node.js 14 or higher and a local Stargate instance running as
   ]
 }
 ```
+
+## With tables
+
+```
+CREATE TABLE authentications (
+   id           text, 
+   type         text,
+   userId       text,
+   secret       text,
+   PRIMARY KEY (id));
+
+CREATE TABLE reviews (
+   id             text, 
+   rating         int,
+   text           text,
+   userId         text,
+   vehicleId      text,
+   createdAt      decimal,
+   updatedAt      decimal,
+   PRIMARY KEY (id));
+
+CREATE TABLE users (
+   id             text, 
+   email          text,
+   firstName      text,
+   lastName       text,
+   PRIMARY KEY (id));
+
+CREATE TABLE vehicles (
+   id               text, 
+   make             text,
+   model            text,
+   year             int,
+   images           text,
+   numReviews       int,
+   averageReview    decimal,
+   PRIMARY KEY (id));
+
+CREATE INDEX ON reviews (vehicleId);
+CREATE INDEX ON users (email);
+CREATE INDEX ON authentications (userId);
+```

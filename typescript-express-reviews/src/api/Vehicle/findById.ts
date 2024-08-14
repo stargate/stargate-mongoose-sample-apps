@@ -14,7 +14,7 @@ async function last5(request: Request, response: Response): Promise<void> {
   }
 
   const vehicle = await Vehicle.
-    findById({ _id: request.query?._id }).
+    findOne({ id: request.query?._id }).
     setOptions({ sanitizeFilter: true });
   const reviews = await Review.
     find({ vehicleId }).

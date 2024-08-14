@@ -7,6 +7,9 @@ import { after, before } from 'mocha';
 import connect from '../src/models/connect';
 import mongoose from 'mongoose';
 
+import util from 'util';
+util.inspect.defaultOptions.depth = 6;
+
 before(async function() {
   this.timeout(30000);
 
@@ -15,9 +18,9 @@ before(async function() {
   // Make sure all collections are created in Stargate, _after_ calling
   // `connect()`. stargate-mongoose doesn't currently support buffering on
   // connection helpers.
-  await Promise.all(Object.values(mongoose.models).map(Model => {
+  /*await Promise.all(Object.values(mongoose.models).map(Model => {
     return Model.createCollection();
-  }));
+  }));*/
 });
 
 // `deleteMany()` currently does nothing

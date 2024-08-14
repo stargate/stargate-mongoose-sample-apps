@@ -64,11 +64,7 @@ const cartSchema = new mongoose.Schema({
       }
       return typeof v === 'string' ? v : JSON.stringify(v);
     },
-  }, /*[{
-    _id: false,
-    productId: { type: mongoose.ObjectId, required: true, ref: 'Product' },
-    quantity: { type: Number, required: true }
-  }],*/
+  },
   orderId: { type: mongoose.ObjectId, ref: 'Order' },
   total: Number,
   stripeSessionId: { type: String }

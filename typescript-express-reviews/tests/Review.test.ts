@@ -25,12 +25,12 @@ describe('Review', function() {
       };
       return res;
     };
-    const user = await User.create({
+    const [user] = await User.insertMany([{
       email: 'test@localhost.com',
       firstName: 'Test',
       lastName: 'Testerson'
-    });
-    const vehicle = await Vehicle.create(
+    }]);
+    const [vehicle] = await Vehicle.insertMany([
       {
         make: 'Tesla',
         model: 'Model S',
@@ -42,10 +42,10 @@ describe('Review', function() {
         numReviews: 0,
         averageReview: 0
       }
-    );
+    ]);
     const req = mockRequest({
-      vehicleId: vehicle._id.toString(),
-      userId: user._id,
+      vehicleId: vehicle.id.toString(),
+      userId: user.id,
       rating: 4,
       text: 'The length of this text must be greater than 30 to pass validation.'
     });
@@ -65,12 +65,12 @@ describe('Review', function() {
       };
       return res;
     };
-    const user = await User.create({
+    const [user] = await User.insertMany([{
       email: 'test@localhost.com',
       firstName: 'Test',
       lastName: 'Testerson'
-    });
-    const vehicle = await Vehicle.create(
+    }]);
+    const [vehicle] = await Vehicle.insertMany([
       {
         make: 'Tesla',
         model: 'Model S',
@@ -82,19 +82,19 @@ describe('Review', function() {
         numReviews: 0,
         averageReview: 0
       },
-    );
+    ]);
     for (let i = 0; i < 6; i++) {
-      await Review.create({
+      await Review.insertMany([{
         rating: i > 5 ? 5 : i, 
         text: 'This is a review that must have length greater than 30. ' + i, 
-        vehicleId: vehicle._id,
-        userId: user._id
-      });
+        vehicleId: vehicle.id,
+        userId: user.id
+      }]);
     }
     vehicle.numReviews = 6;
     vehicle.averageReview = 3;
-    await vehicle.save();
-    const req = mockRequest({ vehicleId: vehicle._id.toString(), limit: 3, skip: 1 });
+    await Vehicle.updateOne({ id: vehicle.id }, vehicle.getChanges());
+    const req = mockRequest({ vehicleId: vehicle.id.toString(), limit: 3, skip: 1 });
     const res = mockResponse();
     await findByVehicle(req, res);
 

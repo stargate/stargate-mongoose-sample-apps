@@ -10,6 +10,9 @@ import User from '../models/user';
 import Vehicle from '../models/vehicle';
 import bcrypt from 'bcryptjs';
 
+import util from 'util';
+util.inspect.defaultOptions.depth = 6;
+
 run().catch(err => {
   console.error(err);
   process.exit(-1);
@@ -18,7 +21,7 @@ run().catch(err => {
 async function run() {
   await connect();
 
-  const existingCollections = await mongoose.connection.listCollections()
+  /*const existingCollections = await mongoose.connection.listCollections()
     .then(collections => collections.map(c => c.name));
 
   for (const Model of Object.values(mongoose.connection.models)) {
@@ -32,9 +35,9 @@ async function run() {
     }
     // Then make sure the collection is empty
     await Model.deleteMany({});
-  }
+  }*/
 
-  const users = await User.create([
+  const users = await User.insertMany([
     {
       firstName: 'Dominic',
       lastName: 'Toretto',
@@ -47,15 +50,15 @@ async function run() {
     }
   ]);
   for (let i = 0; i < users.length; i++) {
-    await Authentication.create({
+    await Authentication.insertMany([{
       type: 'password',
-      userId: users[i]._id,
+      userId: users[i].id,
       secret: await bcrypt.hash(users[i].firstName.toLowerCase(), 10)
-    });
+    }]);
   }
-  const vehicles = await Vehicle.create([
+  const vehicles = await Vehicle.insertMany([
     {
-      _id: '0'.repeat(24),
+      id: '0'.repeat(24),
       make: 'Tesla',
       model: 'Model S',
       year: 2022,
@@ -67,7 +70,7 @@ async function run() {
       averageReviews: 0
     },
     {
-      _id: '1'.repeat(24),
+      id: '1'.repeat(24),
       make: 'Porsche',
       model: 'Taycan',
       year: 2022,
@@ -80,16 +83,16 @@ async function run() {
     }
   ]);
 
-  await Review.create([
+  await Review.insertMany([
     {
-      vehicleId: vehicles[1]._id,
-      userId: users[0]._id,
+      vehicleId: vehicles[1].id,
+      userId: users[0].id,
       text: 'When you live your life a quarter of a mile at a time, it ain\'t just about being fast. I needed a 10 second car, and this car delivers.',
       rating: 4
     },
     {
-      vehicleId: vehicles[0]._id,
-      userId: users[1]._id,
+      vehicleId: vehicles[0].id,
+      userId: users[1].id,
       text: 'I need NOS. My car topped out at 140 miles per hour this morning.',
       rating: 3
     }
