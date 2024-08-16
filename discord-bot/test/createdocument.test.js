@@ -8,9 +8,8 @@ const sinon = require('sinon');
 
 describe('createdocument', function() {
   it('inserts a new document', async function() {
-    let docs = await Bot.find({});
-    for (const doc of docs) {
-      await Bot.deleteOne({ id: doc.id });
+    for (const doc of await Bot.find({ deleted: 0 })) {
+      await Bot.updateOne({ id: doc.id }, { deleted: 1 });
     }
 
     const interaction = {
@@ -20,7 +19,7 @@ describe('createdocument', function() {
     assert.ok(interaction.reply.calledOnce);
     assert.deepEqual(interaction.reply.getCalls()[0].args, ['done!']);
 
-    docs = await Bot.find({});
+    const docs = await Bot.find({ deleted: 0 });
     assert.equal(docs.length, 1);
     assert.equal(docs[0].name, 'I am a document');
   });
