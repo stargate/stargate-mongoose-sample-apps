@@ -16,9 +16,9 @@ before(async function() {
   this.timeout(30000);
   await mongoose.connect(uri, jsonApiConnectOptions);
 
-  const docs = await Bot.find({ deleted: 0 });
+  const docs = await Bot.find({});
   for (const doc of docs) {
-    await Bot.updateOne({ id: doc.id }, { deleted: 1 });
+    await Bot.deleteOne({ id: doc.id });
   }
 });
 

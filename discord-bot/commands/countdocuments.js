@@ -8,7 +8,7 @@ module.exports = {
   async execute(interaction) {
     // `countDocuments()` currently not implemented, see:
     // https://github.com/stargate/stargate-mongoose/pull/48
-    const num = await Bot.find({ deleted: 0 }).then(res => res.length);
+    const num = await Bot.find({}).then(res => res.length);
     console.log(new Date(), 'count', num);
     await interaction.reply(num.toString());
   }
