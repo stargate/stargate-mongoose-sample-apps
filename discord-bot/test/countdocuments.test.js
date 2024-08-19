@@ -8,8 +8,9 @@ const sinon = require('sinon');
 
 describe('countdocuments', function() {
   it('returns the number of bot documents', async function() {
-    for (const doc of await Bot.find({ deleted: 0 })) {
-      await Bot.updateOne({ id: doc.id }, { deleted: 1 });
+    const docs = await Bot.find({});
+    for (const doc of docs) {
+      await Bot.deleteOne({ id: doc.id });
     }
     await Bot.insertMany({ name: 'test' });
 

@@ -8,11 +8,7 @@ const botSchema = new mongoose.Schema({
     required: true,
     default: () => new mongoose.Types.ObjectId()
   },
-  name: String,
-  deleted: {
-    type: Number,
-    default: 0
-  }
+  name: String
 }, { _id: false, versionKey: false });
 
 const Bot = mongoose.model('Bot', botSchema);
