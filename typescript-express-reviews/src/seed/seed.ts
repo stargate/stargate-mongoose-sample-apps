@@ -39,21 +39,21 @@ async function run() {
 
   const users = await User.insertMany([
     {
-      firstName: 'Dominic',
-      lastName: 'Toretto',
+      first_name: 'Dominic',
+      last_name: 'Toretto',
       email: 'dom@fastandfurious.com'
     },
     {
-      firstName: 'Brian',
-      lastName: 'O\'Connor',
+      first_name: 'Brian',
+      last_name: 'O\'Connor',
       email: 'brian@fastandfurious.com'
     }
   ]);
   for (let i = 0; i < users.length; i++) {
     await Authentication.insertMany([{
       type: 'password',
-      userId: users[i].id,
-      secret: await bcrypt.hash(users[i].firstName.toLowerCase(), 10)
+      user_id: users[i].id,
+      secret: await bcrypt.hash(users[i].first_name.toLowerCase(), 10)
     }]);
   }
   const vehicles = await Vehicle.insertMany([
@@ -66,8 +66,8 @@ async function run() {
         'https://tesla-cdn.thron.com/delivery/public/image/tesla/6139697c-9d6a-4579-837e-a9fc5df4a773/bvlatuR/std/1200x628/Model-3-Homepage-Social-LHD',
         'https://www.tesla.com/sites/default/files/images/blogs/models_blog_post.jpg'
       ],
-      numReviews: 0,
-      averageReviews: 0
+      num_reviews: 0,
+      average_reviews: 0
     },
     {
       id: '1'.repeat(24),
@@ -78,21 +78,21 @@ async function run() {
         'https://www.motortrend.com/uploads/sites/5/2020/02/2020-Porsche-Taycan-Turbo-S-Track-Ride-5.gif?fit=around%7C875:492',
         'https://newsroom.porsche.com/.imaging/mte/porsche-templating-theme/image_1290x726/dam/pnr/2021/Products/Free-Software-Update-Taycan/Free-Software-Update-for-early-Porsche-Taycan_2.jpeg/jcr:content/Free%20Software-Update%20for%20early%20Porsche%20Taycan_2.jpeg'
       ],
-      numReviews: 0,
-      averageReviews: 0
+      num_reviews: 0,
+      average_reviews: 0
     }
   ]);
 
   await Review.insertMany([
     {
-      vehicleId: vehicles[1].id,
-      userId: users[0].id,
+      vehicle_id: vehicles[1].id,
+      user_id: users[0].id,
       text: 'When you live your life a quarter of a mile at a time, it ain\'t just about being fast. I needed a 10 second car, and this car delivers.',
       rating: 4
     },
     {
-      vehicleId: vehicles[0].id,
-      userId: users[1].id,
+      vehicle_id: vehicles[0].id,
+      user_id: users[1].id,
       text: 'I need NOS. My car topped out at 140 miles per hour this morning.',
       rating: 3
     }

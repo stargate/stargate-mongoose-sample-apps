@@ -6,8 +6,8 @@ async function create(request: Request, response: Response): Promise<void> {
   const [review] = await Review.insertMany({
     text: request.body.text,
     rating: request.body.rating,
-    userId: request.body.userId,
-    vehicleId: request.body.vehicleId
+    user_id: request.body.userId,
+    vehicle_id: request.body.vehicleId
   });
 
   const vehicle = await Vehicle.findOne({ id: request.body.vehicleId }).orFail();

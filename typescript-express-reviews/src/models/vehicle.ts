@@ -1,5 +1,7 @@
 import mongoose from './mongoose';
 
+const imagesSchemaType = new mongoose.Schema.Types.Array('images', { type: [String] });
+
 const schema = new mongoose.Schema({
   id: {
     type: mongoose.Types.ObjectId,
@@ -24,19 +26,19 @@ const schema = new mongoose.Schema({
     get(v?: string | null) {
       return v == null ? v : JSON.parse(v);
     },
-    set(v: unknown) {
+    set(this: mongoose.Document, v: unknown) {
       if (v == null) {
         return v;
       }
-      return typeof v === 'string' ? v : JSON.stringify(v);
-    },
+      return typeof v === 'string' ? v : JSON.stringify(imagesSchemaType.cast(v, this));
+    }
   },
-  numReviews: {
+  num_reviews: {
     type: Number,
     required: true,
     default: 0
   },
-  averageReview: {
+  average_review: {
     type: Number,
     required: true,
     default: 0

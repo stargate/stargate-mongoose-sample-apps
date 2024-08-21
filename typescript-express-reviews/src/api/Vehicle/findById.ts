@@ -17,11 +17,11 @@ async function last5(request: Request, response: Response): Promise<void> {
     findOne({ id: request.query?._id }).
     setOptions({ sanitizeFilter: true });
   const reviews = await Review.
-    find({ vehicleId }).
-    sort({ createdAt: -1 }).
+    find({ vehicle_id: vehicleId }).
+    sort({ created_at: -1 }).
     limit(limit).
-    populate('user').
-    populate('vehicle').
+    //populate('user').
+    //populate('vehicle').
     setOptions({ sanitizeFilter: true });
 
   response.status(200).json({

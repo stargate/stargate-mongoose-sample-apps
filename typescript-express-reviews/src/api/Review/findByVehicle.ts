@@ -17,12 +17,12 @@ async function findByVehicle (request: Request, response: Response): Promise<voi
   }
 
   const reviews = await Review.
-    find({ vehicleId }).
-    sort({ createdAt: -1 }).
+    find({ vehicle_id: vehicleId }).
+    sort({ created_at: -1 }).
     skip(skip).
     limit(limit).
-    populate('user').
-    populate('vehicle').
+    //populate('user').
+    //populate('vehicle').
     setOptions({ sanitizeFilter: true });
   response.status(200).json({ reviews: reviews });
   return;
