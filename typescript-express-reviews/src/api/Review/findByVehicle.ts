@@ -17,7 +17,7 @@ async function findByVehicle (request: Request, response: Response): Promise<voi
   }
 
   const reviews = await Review.
-    find({ vehicle_id: vehicleId }).
+    find({ vehicleId }).
     sort({ created_at: -1 }).
     skip(skip).
     limit(limit).

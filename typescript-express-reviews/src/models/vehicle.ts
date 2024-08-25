@@ -33,12 +33,12 @@ const schema = new mongoose.Schema({
       return typeof v === 'string' ? v : JSON.stringify(imagesSchemaType.cast(v, this));
     }
   },
-  num_reviews: {
+  numReviews: {
     type: Number,
     required: true,
     default: 0
   },
-  average_review: {
+  averageReview: {
     type: Number,
     required: true,
     default: 0

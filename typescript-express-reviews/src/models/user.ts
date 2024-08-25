@@ -11,18 +11,18 @@ const schema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  first_name: {
+  firstName: {
     type: String,
     required: true
   },
-  last_name: {
+  lastName: {
     type: String,
     required: true
   }
 }, { _id: false, versionKey: false });
 
 schema.virtual('displayName').get(function() {
-  return this.first_name + ' ' + this.last_name.slice(0, 1) + '.';
+  return this.firstName + ' ' + this.lastName.slice(0, 1) + '.';
 });
 
 const User = mongoose.model('User', schema);

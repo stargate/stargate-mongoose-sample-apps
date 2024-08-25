@@ -16,23 +16,23 @@ const schema = new mongoose.Schema({
     required: true,
     validate: (v: string) => v.length >= 30
   },
-  user_id: {
+  userId: {
     type: 'ObjectId',
     required: true
   },
-  vehicle_id: {
+  vehicleId: {
     type: 'ObjectId',
     required: true
   },
-  created_at: {
+  createdAt: {
     type: Number,
     default: () => Date.now()
   },
-  updated_at: {
+  updatedAt: {
     type: Number,
     default: () => Date.now()
   }
-}, { _id: false, versionKey: false, timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } });
+}, { _id: false, versionKey: false, timestamps: true });
 
 schema.virtual('user', {
   ref: 'User',
@@ -43,7 +43,7 @@ schema.virtual('user', {
 
 schema.virtual('vehicle', {
   ref: 'Vehicle',
-  localField: 'vehicle_id',
+  localField: 'vehicleId',
   foreignField: 'id',
   justOne: true
 });
@@ -52,9 +52,9 @@ schema.pre('save', async function updateVehicleRating() {
   if (!this.isNew) {
     return;
   }
-  const vehicle = await mongoose.model('Vehicle').findOne({ id: this.vehicle_id }).orFail();
+  const vehicle = await mongoose.model('Vehicle').findOne({ id: this.vehicleId }).orFail();
   vehicle.numReviews += 1;
-  const vehicleReviews = await mongoose.model('Review').find({ vehicle_id: this.vehicle_id });
+  const vehicleReviews = await mongoose.model('Review').find({ vehicle_id: this.vehicleId });
   const reviewRatings = vehicleReviews.map((entry) => entry.rating);
   reviewRatings.push(this.rating);
   const average = calculateAverage(reviewRatings);
