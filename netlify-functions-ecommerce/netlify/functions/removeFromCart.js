@@ -9,7 +9,7 @@ const handler = async(event) => {
   try {
     event.body = JSON.parse(event.body || {});
     await connect();
-    const cart = await Cart.findOne({ id: event.body.cartId });
+    const cart = await Cart.findOne({ _id: event.body.cartId });
     const index = cart.items.findIndex((item) =>
       item.productId.toString() == event.body.item.productId.toString()
     );
@@ -32,7 +32,7 @@ const handler = async(event) => {
         ...cart.items.slice(index + 1)
       ];
     }
-    await Cart.updateOne({ id: cart.id }, cart.getChanges());
+    await cart.save();
     return { statusCode: 200, body: JSON.stringify(cart) };
   } catch (error) {
     console.log(error);

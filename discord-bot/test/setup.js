@@ -18,7 +18,7 @@ before(async function() {
 
   const docs = await Bot.find({});
   for (const doc of docs) {
-    await Bot.deleteOne({ id: doc.id });
+    await Bot.deleteOne({ _id: doc._id });
   }
 });
 

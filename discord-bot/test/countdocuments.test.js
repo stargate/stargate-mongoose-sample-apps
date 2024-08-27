@@ -10,7 +10,7 @@ describe('countdocuments', function() {
   it('returns the number of bot documents', async function() {
     const docs = await Bot.find({});
     for (const doc of docs) {
-      await Bot.deleteOne({ id: doc.id });
+      await Bot.deleteOne({ _id: doc._id });
     }
     await Bot.insertMany({ name: 'test' });
 

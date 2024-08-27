@@ -54,7 +54,7 @@ Create table:
 
 ```
 CREATE TABLE bots (
-   id           text, 
+   "_id"        text, 
    name         text,
-   PRIMARY KEY (id));
+   PRIMARY KEY ("_id"));
 ```

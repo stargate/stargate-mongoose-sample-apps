@@ -20,8 +20,8 @@ describe('Remove From Cart', function() {
       body: {
         cartId: null,
         items: [
-          { productId: products[0].id, quantity: 2 },
-          { productId: products[1].id, quantity: 1 }
+          { productId: products[0]._id, quantity: 2 },
+          { productId: products[1]._id, quantity: 1 }
         ]
       }
     };
@@ -32,9 +32,9 @@ describe('Remove From Cart', function() {
     assert.equal(result.body.items.length, 2);
     const newParams = {
       body: {
-        cartId: result.body.id,
+        cartId: result.body._id,
         item: {
-          productId: products[0].id
+          productId: products[0]._id
         }
       }
     };
@@ -51,8 +51,8 @@ describe('Remove From Cart', function() {
       body: {
         cartId: null,
         items: [
-          { productId: products[0].id, quantity: 2 },
-          { productId: products[1].id, quantity: 1 }
+          { productId: products[0]._id, quantity: 2 },
+          { productId: products[1]._id, quantity: 1 }
         ]
       }
     };
@@ -63,9 +63,9 @@ describe('Remove From Cart', function() {
     assert(result.body.items.length);
     const newParams = {
       body: {
-        cartId: result.body.id,
+        cartId: result.body._id,
         item: {
-          productId: products[0].id,
+          productId: products[0]._id,
           quantity: 1
         }
       }

@@ -1,11 +1,6 @@
 import mongoose from './mongoose';
 
 const schema = new mongoose.Schema({
-  id: {
-    type: mongoose.Types.ObjectId,
-    required: true,
-    default: () => new mongoose.Types.ObjectId()
-  },
   email: {
     type: String,
     required: true,
@@ -19,7 +14,7 @@ const schema = new mongoose.Schema({
     type: String,
     required: true
   }
-}, { _id: false, versionKey: false });
+}, { versionKey: false });
 
 schema.virtual('displayName').get(function() {
   return this.firstName + ' ' + this.lastName.slice(0, 1) + '.';

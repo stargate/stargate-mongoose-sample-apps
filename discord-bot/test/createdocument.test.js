@@ -10,7 +10,7 @@ describe('createdocument', function() {
   it('inserts a new document', async function() {
     let docs = await Bot.find({});
     for (const doc of docs) {
-      await Bot.deleteOne({ id: doc.id });
+      await Bot.deleteOne({ _id: doc._id });
     }
 
     const interaction = {

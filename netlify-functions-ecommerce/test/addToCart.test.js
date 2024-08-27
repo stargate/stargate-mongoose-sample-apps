@@ -40,8 +40,8 @@ describe('Add to Cart', function() {
       body: {
         cartId: cart.id,
         items: [
-          { productId: products[0].id, quantity: 2 },
-          { productId: products[1].id, quantity: 1 }
+          { productId: products[0]._id, quantity: 2 },
+          { productId: products[1]._id, quantity: 1 }
         ]
       }
     };
@@ -58,10 +58,10 @@ describe('Add to Cart', function() {
     const { cart } = await fixtures.createCart({ products: [] });
     const params = {
       body: {
-        cartId: cart.id,
+        cartId: cart._id,
         items: [
-          { productId: products[0].id, quantity: 2 },
-          { productId: products[1].id, quantity: 1 }
+          { productId: products[0]._id, quantity: 2 },
+          { productId: products[1]._id, quantity: 1 }
         ]
       }
     };

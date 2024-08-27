@@ -10,7 +10,7 @@ const handler = async(event) => {
     await connect();
     // get the document containing the specified cartId
     const cart = await Cart.
-      findOne({ id: event.queryStringParameters.cartId }).
+      findOne({ _id: event.queryStringParameters.cartId }).
       setOptions({ sanitizeFilter: true });
     return { statusCode: 200, body: JSON.stringify({ cart }) };
   } catch (error) {

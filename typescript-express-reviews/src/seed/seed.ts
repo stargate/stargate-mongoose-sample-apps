@@ -58,7 +58,7 @@ async function run() {
   }
   const vehicles = await Vehicle.insertMany([
     {
-      id: '0'.repeat(24),
+      _id: '0'.repeat(24),
       make: 'Tesla',
       model: 'Model S',
       year: 2022,
@@ -70,7 +70,7 @@ async function run() {
       averageReviews: 0
     },
     {
-      id: '1'.repeat(24),
+      _id: '1'.repeat(24),
       make: 'Porsche',
       model: 'Taycan',
       year: 2022,

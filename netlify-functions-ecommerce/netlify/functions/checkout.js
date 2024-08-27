@@ -11,14 +11,14 @@ const handler = async(event) => {
     event.body = JSON.parse(event.body || {});
     await connect();
     const cart = await Cart.
-      findOne({ id: event.body.cartId }).
+      findOne({ _id: event.body.cartId }).
       setOptions({ sanitizeFilter: true }).
       orFail();
 
     const stripeProducts = { line_items: [] };
     let total = 0;
     for (let i = 0; i < cart.items.length; i++) {
-      const product = await Product.findOne({ id: cart.items[i].productId });
+      const product = await Product.findOne({ _id: cart.items[i].productId });
       stripeProducts.line_items.push({
         price_data: {
           currency: 'usd',
@@ -35,7 +35,7 @@ const handler = async(event) => {
     cart.total = total;
 
     if (process.env.STRIPE_SECRET_KEY === 'test') {
-      await Cart.updateOne({ id: cart.id }, cart.getChanges());
+      await cart.save();
       return {
         statusCode: 200,
         body: JSON.stringify({ cart: cart, url: '/order-confirmation' })
@@ -50,7 +50,7 @@ const handler = async(event) => {
     });
 
     cart.stripeSessionId = session.id;
-    await Cart.updateOne({ id: cart.id }, cart.getChanges());
+    await cart.save();
 
     return {
       statusCode: 200,

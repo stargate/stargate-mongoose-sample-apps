@@ -3,11 +3,6 @@ import mongoose from './mongoose';
 const imagesSchemaType = new mongoose.Schema.Types.Array('images', { type: [String] });
 
 const schema = new mongoose.Schema({
-  id: {
-    type: mongoose.Types.ObjectId,
-    required: true,
-    default: () => new mongoose.Types.ObjectId()
-  },
   make: {
     type: String,
     required: true
@@ -43,7 +38,7 @@ const schema = new mongoose.Schema({
     required: true,
     default: 0
   }
-}, { _id: false, versionKey: false });
+}, { versionKey: false });
 
 const Vehicle = mongoose.model('Vehicle', schema);
 

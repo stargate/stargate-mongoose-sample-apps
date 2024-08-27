@@ -3,13 +3,8 @@
 const mongoose = require('../mongoose');
 
 const botSchema = new mongoose.Schema({
-  id: {
-    type: mongoose.Types.ObjectId,
-    required: true,
-    default: () => new mongoose.Types.ObjectId()
-  },
   name: String
-}, { _id: false, versionKey: false });
+}, { versionKey: false });
 
 const Bot = mongoose.model('Bot', botSchema);
 
