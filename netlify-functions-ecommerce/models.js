@@ -24,7 +24,7 @@ const orderSchema = new mongoose.Schema({
         return v;
       }
       return typeof v === 'string' ? v : JSON.stringify(v);
-    },
+    }
   },
   total: {
     type: Number,
@@ -43,7 +43,7 @@ const orderSchema = new mongoose.Schema({
         return v;
       }
       return typeof v === 'string' ? v : JSON.stringify(v);
-    },
+    }
   }
 }, { versionKey: false });
 
@@ -62,7 +62,7 @@ const cartSchema = new mongoose.Schema({
         return v;
       }
       return typeof v === 'string' ? v : JSON.stringify(v);
-    },
+    }
   },
   orderId: { type: mongoose.ObjectId, ref: 'Order' },
   total: Number,

@@ -24,7 +24,7 @@ const handler = async(event) => {
       };
     }
     if (process.env.STRIPE_SECRET_KEY === 'test') {
-      const [order] = await Order.insertMany({
+      const order = await Order.create({
         items: cart.items,
         name: 'Stripe Test',
         total: cart.total,

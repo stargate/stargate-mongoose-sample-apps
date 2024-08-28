@@ -7,9 +7,6 @@ import { after, before } from 'mocha';
 import connect from '../src/models/connect';
 import mongoose from 'mongoose';
 
-import util from 'util';
-util.inspect.defaultOptions.depth = 6;
-
 before(async function() {
   this.timeout(30000);
 

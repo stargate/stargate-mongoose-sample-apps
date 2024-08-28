@@ -13,19 +13,19 @@ async function register(request: Request, response: Response): Promise<void> {
     return;
   }
 
-  const [user] = await User.insertMany([{
+  const user = await User.create({
     firstName: request.body.firstName,
     lastName: request.body.lastName,
     email: request.body.email
-  }]);
+  });
 
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(request.body.password, salt);
-  await Authentication.insertMany([{
+  await Authentication.create({
     type: 'password',
     userId: user.id,
     secret: hash
-  }]);
+  });
   response.status(200).json({ user: user });
 }
 

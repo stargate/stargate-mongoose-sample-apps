@@ -47,7 +47,7 @@ schema.pre('save', async function updateVehicleRating() {
   if (!this.isNew) {
     return;
   }
-  const vehicle = await mongoose.model('Vehicle').findOne({ id: this.vehicleId }).orFail();
+  const vehicle = await mongoose.model('Vehicle').findById(this.vehicleId).orFail();
   vehicle.numReviews += 1;
   const vehicleReviews = await mongoose.model('Review').find({ vehicleId: this.vehicleId });
   const reviewRatings = vehicleReviews.map((entry) => entry.rating);

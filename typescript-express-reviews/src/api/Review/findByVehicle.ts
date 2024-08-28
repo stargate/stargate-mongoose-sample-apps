@@ -18,7 +18,7 @@ async function findByVehicle (request: Request, response: Response): Promise<voi
 
   const reviews = await Review.
     find({ vehicleId }).
-    sort({ created_at: -1 }).
+    sort({ createdAt: -1 }).
     skip(skip).
     limit(limit).
     //populate('user').

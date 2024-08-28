@@ -38,7 +38,7 @@ describe('Add to Cart', function() {
     const { cart } = await fixtures.createCart({ products: [] });
     const params = {
       body: {
-        cartId: cart.id,
+        cartId: cart._id,
         items: [
           { productId: products[0]._id, quantity: 2 },
           { productId: products[1]._id, quantity: 1 }
