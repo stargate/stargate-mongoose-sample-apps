@@ -9,18 +9,67 @@ const mongoose = require('./mongoose');
 async function createProducts() {
   await connect();
   
-  /*const existingCollections = await mongoose.connection.listCollections()
-    .then(collections => collections.map(c => c.name));
-  for (const Model of Object.values(models)) {
-    if (existingCollections.includes(Model.collection.collectionName)) {
-      continue;
+  if (process.env.DATA_API_TABLES) {
+    await mongoose.connection.runCommand({
+      createTable: {
+        name: 'products',
+        definition: {
+          primaryKey: '_id',
+          columns: {
+            _id: { type: 'text' },
+            name: { type: 'text' },
+            price: { type: 'decimal' },
+            image: { type: 'text' },
+            description: { type: 'text' }
+          }
+        }
+      }
+    });
+    await mongoose.connection.runCommand({
+      createTable: {
+        name: 'orders',
+        definition: {
+          primaryKey: '_id',
+          columns: {
+            _id: { type: 'text' },
+            total: { type: 'decimal' },
+            name: { type: 'text' },
+            paymentMethod: { type: 'text' },
+            items: { type: 'text' }
+          }
+        }
+      }
+    });
+    await mongoose.connection.runCommand({
+      createTable: {
+        name: 'carts',
+        definition: {
+          primaryKey: '_id',
+          columns: {
+            _id: { type: 'text' },
+            items: { type: 'text' },
+            orderId: { type: 'text' },
+            total: { type: 'decimal' },
+            stripeSessionId: { type: 'text' }
+          }
+        }
+      }
+    });
+  } else {
+    const existingCollections = await mongoose.connection.listCollections()
+      .then(collections => collections.map(c => c.name));
+    for (const Model of Object.values(models)) {
+      if (existingCollections.includes(Model.collection.collectionName)) {
+        continue;
+      }
+      console.log('Creating', Model.collection.collectionName);
+      await Model.createCollection();
     }
-    console.log('Creating', Model.collection.collectionName);
-    await Model.createCollection();
-  }*/
-  /*await Promise.all(
-    Object.values(models).map(Model => Model.deleteMany({}))
-  );*/
+    await Promise.all(
+      Object.values(models).map(Model => Model.deleteMany({}))
+    );
+  }
+  
   const { Product } = models;
 
   await Product.insertMany([

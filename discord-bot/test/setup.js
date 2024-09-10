@@ -16,6 +16,25 @@ before(async function() {
   this.timeout(30000);
   await mongoose.connect(uri, jsonApiConnectOptions);
 
+  if (process.env.DATA_API_TABLES) {
+    await mongoose.connection.runCommand({
+      createTable: {
+        name: 'bots',
+        definition: {
+          primaryKey: '_id',
+          columns: {
+            _id: {
+              type: 'text'
+            },
+            name: {
+              type: 'text'
+            }
+          }
+        }
+      }
+    });
+  }
+
   const docs = await Bot.find({});
   for (const doc of docs) {
     await Bot.deleteOne({ _id: doc._id });

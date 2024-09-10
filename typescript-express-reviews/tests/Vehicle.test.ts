@@ -48,13 +48,13 @@ describe('Vehicle', function() {
       await Review.insertMany([{
         rating: i > 5 ? 5 : i,
         text: 'This is a review that must have length greater than 30. ' + i,
-        vehicleId: vehicle.id,
-        userId: user.id
+        vehicleId: vehicle._id,
+        userId: user._id
       }]);
     }
     vehicle.numReviews = 5;
     vehicle.averageReview = 3;
-    await Vehicle.updateOne({ id: vehicle.id }, vehicle.getChanges());
+    await Vehicle.updateOne({ _id: vehicle.id }, vehicle.getChanges());
     const req = mockRequest({ _id: vehicle.id.toString(), limit: 5 });
     const res = mockResponse();
     await findById(req, res);

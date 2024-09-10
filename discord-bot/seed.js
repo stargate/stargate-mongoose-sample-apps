@@ -13,11 +13,30 @@ seed().catch(err => {
 
 async function seed() {
   await connect();
-  
-  const existingCollections = await mongoose.connection.listCollections()
-    .then(collections => collections.map(c => c.name));
-  if (!existingCollections.includes(Bot.collection.collectionName)) {
-    await Bot.createCollection();
+
+  if (process.env.DATA_API_TABLES) {
+    await mongoose.connection.runCommand({
+      createTable: {
+        name: 'bots',
+        definition: {
+          primaryKey: '_id',
+          columns: {
+            _id: {
+              type: 'text'
+            },
+            name: {
+              type: 'text'
+            }
+          }
+        }
+      }
+    });
+  } else {
+    const existingCollections = await mongoose.connection.listCollections()
+      .then(collections => collections.map(c => c.name));
+    if (!existingCollections.includes(Bot.collection.collectionName)) {
+      await Bot.createCollection();
+    }
   }
 
   console.log('Done');

@@ -21,21 +21,112 @@ run().catch(err => {
 async function run() {
   await connect();
 
-  /*const existingCollections = await mongoose.connection.listCollections()
-    .then(collections => collections.map(c => c.name));
+  if (process.env.DATA_API_TABLES) {
+    // @ts-ignore
+    await mongoose.connection.runCommand({
+      createTable: {
+        name: 'authentications',
+        definition: {
+          primaryKey: '_id',
+          columns: {
+            _id: { type: 'text' },
+            type: { type: 'text' },
+            userId: { type: 'text' },
+            secret: { type: 'text' }
+          }
+        }
+      }
+    });
+    // @ts-ignore
+    await mongoose.connection.runCommand({
+      createTable: {
+        name: 'reviews',
+        definition: {
+          primaryKey: '_id',
+          columns: {
+            _id: { type: 'text' },
+            rating: { type: 'int' },
+            text: { type: 'text' },
+            userId: { type: 'text' },
+            vehicleId: { type: 'text' },
+            createdAt: { type: 'decimal' },
+            updatedAt: { type: 'decimal' }
+          }
+        }
+      }
+    });
+    // @ts-ignore
+    await mongoose.connection.runCommand({
+      "createTable": {
+        "name": "users",
+        "definition": {
+          "primaryKey": "_id",
+          "columns": {
+            "_id": { "type": "text" },
+            "email": { "type": "text" },
+            "firstName": { "type": "text" },
+            "lastName": { "type": "text" }
+          }
+        }
+      }
+    });
+    // @ts-ignore
+    await mongoose.connection.runCommand({
+      createTable: {
+        name: 'vehicles',
+        definition: {
+          primaryKey: '_id',
+          columns: {
+            _id: { type: 'text' },
+            make: { type: 'text' },
+            model: { type: 'text' },
+            year: { type: 'int' },
+            images: { type: 'text' },
+            numReviews: { type: 'int' },
+            averageReview: { type: 'decimal' }
+          }
+        }
+      }
+    });
 
-  for (const Model of Object.values(mongoose.connection.models)) {
-    
-    // First ensure the collection exists
-    if (!existingCollections.includes(Model.collection.collectionName)) {
-      console.log('Creating collection', Model.collection.collectionName);
-      await mongoose.connection.createCollection(Model.collection.collectionName);
-    } else {
-      console.log('Resetting collection', Model.collection.collectionName);
+    // @ts-ignore
+    await Review.collection.runCommand({
+      addIndex: {
+        column: 'vehicleId',
+        indexName: 'vehicleId'
+      }
+    });
+    // @ts-ignore
+    await User.collection.runCommand({
+      addIndex: {
+        column: 'email',
+        indexName: 'email'
+      }
+    });
+    // @ts-ignore
+    await Authentication.collection.runCommand({
+      addIndex: {
+        column: 'userId',
+        indexName: 'userId'
+      }
+    });
+  } else {
+    const existingCollections = await mongoose.connection.listCollections()
+      .then(collections => collections.map(c => c.name));
+
+    for (const Model of Object.values(mongoose.connection.models)) {
+      
+      // First ensure the collection exists
+      if (!existingCollections.includes(Model.collection.collectionName)) {
+        console.log('Creating collection', Model.collection.collectionName);
+        await mongoose.connection.createCollection(Model.collection.collectionName);
+      } else {
+        console.log('Resetting collection', Model.collection.collectionName);
+      }
+      // Then make sure the collection is empty
+      await Model.deleteMany({});
     }
-    // Then make sure the collection is empty
-    await Model.deleteMany({});
-  }*/
+  }
 
   const users = await User.insertMany([
     {
