@@ -18,7 +18,7 @@
   "dependencies": {
     "@discordjs/rest": "2.4.0",
     "@masteringjs/eslint-config": "0.0.1",
-    "discord.js": "14.16.1",
+    "discord.js": "14.16.2",
     "dotenv": "16.4.5",
     "eslint": "8.57.0",
     "mongoose": "^8.1",
@@ -26,6 +26,6 @@
   },
   "devDependencies": {
     "mocha": "10.7.3",
-    "sinon": "18.0.0"
+    "sinon": "19.0.2"
   }
 }
