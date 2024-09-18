@@ -27,10 +27,12 @@ module.exports = async function connect() {
     };
   } else {
     uri = process.env.DATA_API_URI;
+    const featureFlags = process.env.DATA_API_TABLES ? ['Feature-Flag-tables'] : [];
     jsonApiConnectOptions = {
       username: process.env.DATA_API_AUTH_USERNAME,
       password: process.env.DATA_API_AUTH_PASSWORD,
-      authUrl: process.env.DATA_API_AUTH_URL
+      authUrl: process.env.DATA_API_AUTH_URL,
+      featureFlags
     };
   }
   await mongoose.connect(uri, jsonApiConnectOptions);
