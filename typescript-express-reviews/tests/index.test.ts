@@ -12,6 +12,10 @@ import Review from '../src/models/review';
 import User from '../src/models/user';
 import Vehicle from '../src/models/vehicle';
 
+if (process.env.DATA_API_TABLES) {
+  console.log('Testing Data API tables');
+}
+
 before(async function() {
   this.timeout(30000);
 
