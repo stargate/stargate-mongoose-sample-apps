@@ -13,6 +13,9 @@ const jsonApiConnectOptions = {
   password: process.env.DATA_API_AUTH_PASSWORD,
   featureFlags
 };
+if (process.env.DATA_API_TABLES) {
+  console.log('Testing Data API tables');
+}
 
 before(async function() {
   this.timeout(30000);

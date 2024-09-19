@@ -6,6 +6,10 @@ const { after, before } = require('mocha');
 const connect = require('../connect');
 const mongoose = require('../mongoose');
 
+if (process.env.DATA_API_TABLES) {
+  console.log('Testing Data API tables');
+}
+
 before(async function() {
   this.timeout(30000);
   await connect();
