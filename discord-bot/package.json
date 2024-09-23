@@ -20,7 +20,7 @@
     "@masteringjs/eslint-config": "0.0.1",
     "discord.js": "14.16.2",
     "dotenv": "16.4.5",
-    "eslint": "8.57.0",
+    "eslint": "8.57.1",
     "mongoose": "^8.1",
     "stargate-mongoose": "0.6.4"
   },
