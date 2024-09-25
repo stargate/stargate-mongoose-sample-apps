@@ -24,6 +24,31 @@ before(async function() {
   if (process.env.DATA_API_TABLES) {
     // @ts-ignore
     await mongoose.connection.runCommand({
+      dropTable: {
+        name: 'authentications'
+      }
+    });
+    // @ts-ignore
+    await mongoose.connection.runCommand({
+      dropTable: {
+        name: 'reviews'
+      }
+    });
+    // @ts-ignore
+    await mongoose.connection.runCommand({
+      dropTable: {
+        name: 'users'
+      }
+    });
+    // @ts-ignore
+    await mongoose.connection.runCommand({
+      dropTable: {
+        name: 'vehicles'
+      }
+    });
+    
+    // @ts-ignore
+    await mongoose.connection.runCommand({
       createTable: {
         name: 'authentications',
         definition: {
@@ -31,7 +56,7 @@ before(async function() {
           columns: {
             _id: { type: 'text' },
             type: { type: 'text' },
-            userId: { type: 'text' },
+            user_id: { type: 'text' },
             secret: { type: 'text' }
           }
         }
@@ -48,7 +73,7 @@ before(async function() {
             rating: { type: 'int' },
             text: { type: 'text' },
             userId: { type: 'text' },
-            vehicleId: { type: 'text' },
+            vehicle_id: { type: 'text' },
             createdAt: { type: 'decimal' },
             updatedAt: { type: 'decimal' }
           }
@@ -88,17 +113,11 @@ before(async function() {
         }
       }
     });
-    console.log(JSON.stringify({
-      addIndex: {
-        column: 'vehicleId',
-        indexName: 'vehicleId'
-      }
-    }, null, '  '))
     // @ts-ignore
     await Review.collection.runCommand({
       addIndex: {
-        column: 'vehicleId',
-        indexName: 'vehicleId'
+        column: 'vehicle_id',
+        indexName: 'vehicle_id'
       }
     });
     // @ts-ignore
@@ -111,8 +130,8 @@ before(async function() {
     // @ts-ignore
     await Authentication.collection.runCommand({
       addIndex: {
-        column: 'userId',
-        indexName: 'userId'
+        column: 'user_id',
+        indexName: 'user_id'
       }
     });
   } else {

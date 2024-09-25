@@ -31,7 +31,7 @@ async function run() {
           columns: {
             _id: { type: 'text' },
             type: { type: 'text' },
-            userId: { type: 'text' },
+            user_id: { type: 'text' },
             secret: { type: 'text' }
           }
         }
@@ -48,7 +48,7 @@ async function run() {
             rating: { type: 'int' },
             text: { type: 'text' },
             userId: { type: 'text' },
-            vehicleId: { type: 'text' },
+            vehicle_id: { type: 'text' },
             createdAt: { type: 'decimal' },
             updatedAt: { type: 'decimal' }
           }
@@ -92,8 +92,8 @@ async function run() {
     // @ts-ignore
     await Review.collection.runCommand({
       addIndex: {
-        column: 'vehicleId',
-        indexName: 'vehicleId'
+        column: 'vehicle_id',
+        indexName: 'vehicle_id'
       }
     });
     // @ts-ignore
@@ -106,8 +106,8 @@ async function run() {
     // @ts-ignore
     await Authentication.collection.runCommand({
       addIndex: {
-        column: 'userId',
-        indexName: 'userId'
+        column: 'user_id',
+        indexName: 'user_id'
       }
     });
   } else {
@@ -176,13 +176,13 @@ async function run() {
 
   await Review.insertMany([
     {
-      vehicleId: vehicles[1].id,
+      vehicle_id: vehicles[1].id,
       userId: users[0].id,
       text: 'When you live your life a quarter of a mile at a time, it ain\'t just about being fast. I needed a 10 second car, and this car delivers.',
       rating: 4
     },
     {
-      vehicleId: vehicles[0].id,
+      vehicle_id: vehicles[0].id,
       userId: users[1].id,
       text: 'I need NOS. My car topped out at 140 miles per hour this morning.',
       rating: 3

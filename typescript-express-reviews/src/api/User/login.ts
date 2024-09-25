@@ -17,7 +17,7 @@ async function login(request: Request, response: Response): Promise<void> {
   }
 
   const authentication = await Authentication.find({
-    userId: user.id
+    user_id: user.id
   }).then(authentications => authentications.find(auth => auth.type === 'password'));
   if (authentication == null) {
     response.status(404).json({
