@@ -143,7 +143,7 @@ async function run() {
   for (let i = 0; i < users.length; i++) {
     await Authentication.insertMany([{
       type: 'password',
-      userId: users[i].id,
+      user_id: users[i].id,
       secret: await bcrypt.hash(users[i].firstName.toLowerCase(), 10)
     }]);
   }
