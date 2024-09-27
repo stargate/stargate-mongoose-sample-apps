@@ -10,6 +10,9 @@ import User from '../models/user';
 import Vehicle from '../models/vehicle';
 import bcrypt from 'bcryptjs';
 
+import util from 'util';
+util.inspect.defaultOptions.depth = 6;
+
 run().catch(err => {
   console.error(err);
   process.exit(-1);
@@ -18,23 +21,114 @@ run().catch(err => {
 async function run() {
   await connect();
 
-  const existingCollections = await mongoose.connection.listCollections()
-    .then(collections => collections.map(c => c.name));
+  if (process.env.DATA_API_TABLES) {
+    // @ts-ignore
+    await mongoose.connection.runCommand({
+      createTable: {
+        name: 'authentications',
+        definition: {
+          primaryKey: '_id',
+          columns: {
+            _id: { type: 'text' },
+            type: { type: 'text' },
+            user_id: { type: 'text' },
+            secret: { type: 'text' }
+          }
+        }
+      }
+    });
+    // @ts-ignore
+    await mongoose.connection.runCommand({
+      createTable: {
+        name: 'reviews',
+        definition: {
+          primaryKey: '_id',
+          columns: {
+            _id: { type: 'text' },
+            rating: { type: 'int' },
+            text: { type: 'text' },
+            userId: { type: 'text' },
+            vehicle_id: { type: 'text' },
+            createdAt: { type: 'decimal' },
+            updatedAt: { type: 'decimal' }
+          }
+        }
+      }
+    });
+    // @ts-ignore
+    await mongoose.connection.runCommand({
+      "createTable": {
+        "name": "users",
+        "definition": {
+          "primaryKey": "_id",
+          "columns": {
+            "_id": { "type": "text" },
+            "email": { "type": "text" },
+            "firstName": { "type": "text" },
+            "lastName": { "type": "text" }
+          }
+        }
+      }
+    });
+    // @ts-ignore
+    await mongoose.connection.runCommand({
+      createTable: {
+        name: 'vehicles',
+        definition: {
+          primaryKey: '_id',
+          columns: {
+            _id: { type: 'text' },
+            make: { type: 'text' },
+            model: { type: 'text' },
+            year: { type: 'int' },
+            images: { type: 'text' },
+            numReviews: { type: 'int' },
+            averageReview: { type: 'decimal' }
+          }
+        }
+      }
+    });
 
-  for (const Model of Object.values(mongoose.connection.models)) {
-    
-    // First ensure the collection exists
-    if (!existingCollections.includes(Model.collection.collectionName)) {
-      console.log('Creating collection', Model.collection.collectionName);
-      await mongoose.connection.createCollection(Model.collection.collectionName);
-    } else {
-      console.log('Resetting collection', Model.collection.collectionName);
+    // @ts-ignore
+    await Review.collection.runCommand({
+      addIndex: {
+        column: 'vehicle_id',
+        indexName: 'vehicle_id'
+      }
+    });
+    // @ts-ignore
+    await User.collection.runCommand({
+      addIndex: {
+        column: 'email',
+        indexName: 'email'
+      }
+    });
+    // @ts-ignore
+    await Authentication.collection.runCommand({
+      addIndex: {
+        column: 'user_id',
+        indexName: 'user_id'
+      }
+    });
+  } else {
+    const existingCollections = await mongoose.connection.listCollections()
+      .then(collections => collections.map(c => c.name));
+
+    for (const Model of Object.values(mongoose.connection.models)) {
+      
+      // First ensure the collection exists
+      if (!existingCollections.includes(Model.collection.collectionName)) {
+        console.log('Creating collection', Model.collection.collectionName);
+        await mongoose.connection.createCollection(Model.collection.collectionName);
+      } else {
+        console.log('Resetting collection', Model.collection.collectionName);
+      }
+      // Then make sure the collection is empty
+      await Model.deleteMany({});
     }
-    // Then make sure the collection is empty
-    await Model.deleteMany({});
   }
 
-  const users = await User.create([
+  const users = await User.insertMany([
     {
       firstName: 'Dominic',
       lastName: 'Toretto',
@@ -47,13 +141,13 @@ async function run() {
     }
   ]);
   for (let i = 0; i < users.length; i++) {
-    await Authentication.create({
+    await Authentication.insertMany([{
       type: 'password',
-      userId: users[i]._id,
+      user_id: users[i].id,
       secret: await bcrypt.hash(users[i].firstName.toLowerCase(), 10)
-    });
+    }]);
   }
-  const vehicles = await Vehicle.create([
+  const vehicles = await Vehicle.insertMany([
     {
       _id: '0'.repeat(24),
       make: 'Tesla',
@@ -80,16 +174,16 @@ async function run() {
     }
   ]);
 
-  await Review.create([
+  await Review.insertMany([
     {
-      vehicleId: vehicles[1]._id,
-      userId: users[0]._id,
+      vehicle_id: vehicles[1].id,
+      userId: users[0].id,
       text: 'When you live your life a quarter of a mile at a time, it ain\'t just about being fast. I needed a 10 second car, and this car delivers.',
       rating: 4
     },
     {
-      vehicleId: vehicles[0]._id,
-      userId: users[1]._id,
+      vehicle_id: vehicles[0].id,
+      userId: users[1].id,
       text: 'I need NOS. My car topped out at 140 miles per hour this morning.',
       rating: 3
     }

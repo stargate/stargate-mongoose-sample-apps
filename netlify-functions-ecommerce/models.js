@@ -7,18 +7,25 @@ const productSchema = new mongoose.Schema({
   price: Number,
   image: String,
   description: String
-});
+}, { versionKey: false });
 
 const Product = mongoose.model('Product', productSchema);
 
 module.exports.Product = Product;
 
 const orderSchema = new mongoose.Schema({
-  items: [{
-    _id: false,
-    productId: { type: mongoose.ObjectId, required: true, ref: 'Product' },
-    quantity: { type: Number, required: true, validate: v => v > 0 }
-  }],
+  items: {
+    type: String,
+    get(v) {
+      return v == null ? v : JSON.parse(v);
+    },
+    set(v) {
+      if (v == null) {
+        return v;
+      }
+      return typeof v === 'string' ? v : JSON.stringify(v);
+    }
+  },
   total: {
     type: Number,
     default: 0
@@ -27,29 +34,47 @@ const orderSchema = new mongoose.Schema({
     type: String
   },
   paymentMethod: {
-    id: String,
-    brand: String,
-    last4: String
+    type: String,
+    get(v) {
+      return v == null ? v : JSON.parse(v);
+    },
+    set(v) {
+      if (v == null) {
+        return v;
+      }
+      return typeof v === 'string' ? v : JSON.stringify(v);
+    }
   }
-}, { optimisticConcurrency: true });
+}, { versionKey: false });
 
 const Order = mongoose.model('Order', orderSchema);
 
 module.exports.Order = Order;
 
 const cartSchema = new mongoose.Schema({
-  items: [{
-    _id: false,
-    productId: { type: mongoose.ObjectId, required: true, ref: 'Product' },
-    quantity: { type: Number, required: true }
-  }],
+  items: {
+    type: String,
+    get(v) {
+      return v == null ? v : JSON.parse(v);
+    },
+    set(v) {
+      if (v == null) {
+        return v;
+      }
+      return typeof v === 'string' ? v : JSON.stringify(v);
+    }
+  },
   orderId: { type: mongoose.ObjectId, ref: 'Order' },
   total: Number,
   stripeSessionId: { type: String }
-}, { timestamps: true });
+}, { versionKey: false, timestamps: false, toObject: { getters: true }, toJSON: { getters: true } });
 
 cartSchema.virtual('numItems').get(function numItems() {
-  return this.items.reduce((sum, item) => sum + item.quantity, 0);
+  if (this.items == null) {
+    return 0;
+  }
+  const items = typeof this.items === 'string' ? JSON.parse(this.items) : this.items;
+  return items.reduce((sum, item) => sum + item.quantity, 0);
 });
 
 const Cart = mongoose.model('Cart', cartSchema);

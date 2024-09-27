@@ -26,9 +26,10 @@ export default async function connect() {
     );
   } else {
     console.log('Connecting to', dataAPIURI);
+    const featureFlags = process.env.DATA_API_TABLES ? ['Feature-Flag-tables'] : [];
     await mongoose.connect(
       dataAPIURI,
-      { username, password, authUrl } as mongoose.ConnectOptions
+      { username, password, authUrl, featureFlags } as mongoose.ConnectOptions
     );
   }
 }
