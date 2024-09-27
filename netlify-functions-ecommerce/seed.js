@@ -10,6 +10,25 @@ async function createProducts() {
   await connect();
   
   if (process.env.DATA_API_TABLES) {
+    // @ts-ignore
+    await mongoose.connection.runCommand({
+      dropTable: {
+        name: 'products'
+      }
+    });
+    // @ts-ignore
+    await mongoose.connection.runCommand({
+      dropTable: {
+        name: 'orders'
+      }
+    });
+    // @ts-ignore
+    await mongoose.connection.runCommand({
+      dropTable: {
+        name: 'carts'
+      }
+    });
+
     await mongoose.connection.runCommand({
       createTable: {
         name: 'products',
