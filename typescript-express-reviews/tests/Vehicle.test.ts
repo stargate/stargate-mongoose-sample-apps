@@ -48,7 +48,7 @@ describe('Vehicle', function() {
       await Review.insertMany([{
         rating: i > 5 ? 5 : i,
         text: 'This is a review that must have length greater than 30. ' + i,
-        vehicle_id: vehicle._id,
+        vehicleId: vehicle._id,
         userId: user._id
       }]);
     }

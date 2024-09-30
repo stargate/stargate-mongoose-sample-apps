@@ -7,7 +7,7 @@ async function create(request: Request, response: Response): Promise<void> {
     text: request.body.text,
     rating: request.body.rating,
     userId: request.body.userId,
-    vehicle_id: request.body.vehicleId
+    vehicleId: request.body.vehicleId
   });
 
   const vehicle = await Vehicle.findById({ _id: request.body.vehicleId }).orFail();

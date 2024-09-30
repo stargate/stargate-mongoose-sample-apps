@@ -73,7 +73,7 @@ before(async function() {
             rating: { type: 'int' },
             text: { type: 'text' },
             userId: { type: 'text' },
-            vehicle_id: { type: 'text' },
+            vehicleId: { type: 'text' },
             createdAt: { type: 'decimal' },
             updatedAt: { type: 'decimal' }
           }
@@ -116,8 +116,8 @@ before(async function() {
     // @ts-ignore
     await Review.collection.runCommand({
       addIndex: {
-        column: 'vehicle_id',
-        indexName: 'vehicle_id'
+        column: 'vehicleId',
+        indexName: 'vehicleId'
       }
     });
     // @ts-ignore

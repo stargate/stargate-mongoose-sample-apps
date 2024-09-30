@@ -15,7 +15,7 @@ const schema = new mongoose.Schema({
     type: 'ObjectId',
     required: true
   },
-  vehicle_id: {
+  vehicleId: {
     type: 'ObjectId',
     required: true
   },
@@ -38,7 +38,7 @@ schema.virtual('user', {
 
 schema.virtual('vehicle', {
   ref: 'Vehicle',
-  localField: 'vehicle_id',
+  localField: 'vehicleId',
   foreignField: '_id',
   justOne: true
 });
@@ -47,9 +47,9 @@ schema.pre('save', async function updateVehicleRating() {
   if (!this.isNew) {
     return;
   }
-  const vehicle = await mongoose.model('Vehicle').findById(this.vehicle_id).orFail();
+  const vehicle = await mongoose.model('Vehicle').findById(this.vehicleId).orFail();
   vehicle.numReviews += 1;
-  const vehicleReviews = await mongoose.model('Review').find({ vehicle_id: this.vehicle_id });
+  const vehicleReviews = await mongoose.model('Review').find({ vehicleId: this.vehicleId });
   const reviewRatings = vehicleReviews.map((entry) => entry.rating);
   reviewRatings.push(this.rating);
   const average = calculateAverage(reviewRatings);

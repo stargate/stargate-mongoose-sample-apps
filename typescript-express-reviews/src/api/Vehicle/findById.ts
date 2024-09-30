@@ -22,7 +22,7 @@ async function last5(request: Request, response: Response): Promise<void> {
     findById({ _id: request.query?._id }).
     setOptions({ sanitizeFilter: true });
   const reviews = await Review.
-    find<ReviewDocument & { user?: UserDocument, vehicle?: VehicleDocument }>({ vehicle_id: vehicleId }).
+    find<ReviewDocument & { user?: UserDocument, vehicle?: VehicleDocument }>({ vehicleId: vehicleId }).
     sort({ createdAt: -1 }).
     limit(limit).
     //populate('user').
@@ -32,7 +32,7 @@ async function last5(request: Request, response: Response): Promise<void> {
   // TODO: populate doesn't work against tables because lack of $in (see stargate/data-api#1446)
   for (const review of reviews) {
     review.user = await User.findOne({ _id: review.userId }).orFail();
-    review.vehicle = await Vehicle.findOne({ _id: review.vehicle_id }).orFail();
+    review.vehicle = await Vehicle.findOne({ _id: review.vehicleId }).orFail();
   }
 
   response.status(200).json({

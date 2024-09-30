@@ -23,7 +23,7 @@ async function findByVehicle (request: Request, response: Response): Promise<voi
   }
 
   const reviews = await Review.
-    find<ReviewDocument & { user?: UserDocument, vehicle?: VehicleDocument }>({ vehicle_id: vehicleId }).
+    find<ReviewDocument & { user?: UserDocument, vehicle?: VehicleDocument }>({ vehicleId: vehicleId }).
     sort({ createdAt: -1 }).
     skip(skip).
     limit(limit).
@@ -34,7 +34,7 @@ async function findByVehicle (request: Request, response: Response): Promise<voi
   // TODO: populate doesn't work against tables because lack of $in (see stargate/data-api#1446)
   for (const review of reviews) {
     review.user = await User.findOne({ _id: review.userId }).orFail();
-    review.vehicle = await Vehicle.findOne({ _id: review.vehicle_id }).orFail();
+    review.vehicle = await Vehicle.findOne({ _id: review.vehicleId }).orFail();
   }
 
   response.status(200).json({ reviews: reviews });

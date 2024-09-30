@@ -48,7 +48,7 @@ async function run() {
             rating: { type: 'int' },
             text: { type: 'text' },
             userId: { type: 'text' },
-            vehicle_id: { type: 'text' },
+            vehicleId: { type: 'text' },
             createdAt: { type: 'decimal' },
             updatedAt: { type: 'decimal' }
           }
@@ -92,8 +92,8 @@ async function run() {
     // @ts-ignore
     await Review.collection.runCommand({
       addIndex: {
-        column: 'vehicle_id',
-        indexName: 'vehicle_id'
+        column: 'vehicleId',
+        indexName: 'vehicleId'
       }
     });
     // @ts-ignore
@@ -176,13 +176,13 @@ async function run() {
 
   await Review.insertMany([
     {
-      vehicle_id: vehicles[1].id,
+      vehicleId: vehicles[1].id,
       userId: users[0].id,
       text: 'When you live your life a quarter of a mile at a time, it ain\'t just about being fast. I needed a 10 second car, and this car delivers.',
       rating: 4
     },
     {
-      vehicle_id: vehicles[0].id,
+      vehicleId: vehicles[0].id,
       userId: users[1].id,
       text: 'I need NOS. My car topped out at 140 miles per hour this morning.',
       rating: 3
