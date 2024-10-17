@@ -56,7 +56,7 @@ before(async function() {
           columns: {
             _id: { type: 'text' },
             type: { type: 'text' },
-            user_id: { type: 'text' },
+            userId: { type: 'text' },
             secret: { type: 'text' }
           }
         }
@@ -111,27 +111,6 @@ before(async function() {
             averageReview: { type: 'decimal' }
           }
         }
-      }
-    });
-    // @ts-ignore
-    await Review.collection.runCommand({
-      addIndex: {
-        column: 'vehicleId',
-        indexName: 'vehicleId'
-      }
-    });
-    // @ts-ignore
-    await User.collection.runCommand({
-      addIndex: {
-        column: 'email',
-        indexName: 'email'
-      }
-    });
-    // @ts-ignore
-    await Authentication.collection.runCommand({
-      addIndex: {
-        column: 'user_id',
-        indexName: 'user_id'
       }
     });
   } else {

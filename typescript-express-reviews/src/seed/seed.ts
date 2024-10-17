@@ -31,7 +31,7 @@ async function run() {
           columns: {
             _id: { type: 'text' },
             type: { type: 'text' },
-            user_id: { type: 'text' },
+            userId: { type: 'text' },
             secret: { type: 'text' }
           }
         }
@@ -88,28 +88,6 @@ async function run() {
         }
       }
     });
-
-    // @ts-ignore
-    await Review.collection.runCommand({
-      addIndex: {
-        column: 'vehicleId',
-        indexName: 'vehicleId'
-      }
-    });
-    // @ts-ignore
-    await User.collection.runCommand({
-      addIndex: {
-        column: 'email',
-        indexName: 'email'
-      }
-    });
-    // @ts-ignore
-    await Authentication.collection.runCommand({
-      addIndex: {
-        column: 'user_id',
-        indexName: 'user_id'
-      }
-    });
   } else {
     const existingCollections = await mongoose.connection.listCollections()
       .then(collections => collections.map(c => c.name));
@@ -143,7 +121,7 @@ async function run() {
   for (let i = 0; i < users.length; i++) {
     await Authentication.insertMany([{
       type: 'password',
-      user_id: users[i].id,
+      userId: users[i].id,
       secret: await bcrypt.hash(users[i].firstName.toLowerCase(), 10)
     }]);
   }

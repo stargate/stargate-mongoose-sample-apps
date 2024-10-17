@@ -44,7 +44,7 @@ describe('User', function() {
     const hash = bcrypt.hashSync('password', salt);
     await Authentication.insertMany([{
       type: 'password',
-      user_id: user.id,
+      userId: user.id,
       secret: hash
     }]);
 
