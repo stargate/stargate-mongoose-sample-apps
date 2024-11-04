@@ -29,7 +29,7 @@
     "@types/mocha": "10.0.9",
     "@types/node": "22.8.1",
     "axios": "1.7.7",
-    "mocha": "10.7.3",
+    "mocha": "10.8.2",
     "sinon": "^19.0.2",
     "ts-mocha": "^10.0.0",
     "ts-node": "10.9.2",
