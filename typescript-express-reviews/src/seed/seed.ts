@@ -81,7 +81,7 @@ async function run() {
             make: { type: 'text' },
             model: { type: 'text' },
             year: { type: 'int' },
-            images: { type: 'text' },
+            images: { type: 'list', valueType: 'text' },
             numReviews: { type: 'int' },
             averageReview: { type: 'decimal' }
           }

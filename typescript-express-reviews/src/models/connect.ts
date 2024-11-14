@@ -22,7 +22,7 @@ export default async function connect() {
     console.log('Connecting to', uri);
     await mongoose.connect(
       uri,
-      { isAstra: true } as mongoose.ConnectOptions
+      { isAstra: true, level: 'fatal' } as mongoose.ConnectOptions
     );
   } else {
     console.log('Connecting to', dataAPIURI);

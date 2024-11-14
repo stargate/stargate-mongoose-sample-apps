@@ -16,18 +16,7 @@ const schema = new mongoose.Schema({
     required: true,
     validate: (v: number) => Number.isInteger(v) && v >= 1950
   },
-  images: {
-    type: String,
-    get(v?: string | null) {
-      return v == null ? v : JSON.parse(v);
-    },
-    set(this: mongoose.Document, v: unknown) {
-      if (v == null) {
-        return v;
-      }
-      return typeof v === 'string' ? v : JSON.stringify(imagesSchemaType.cast(v, this));
-    }
-  },
+  images: [String],
   numReviews: {
     type: Number,
     required: true,

@@ -27,24 +27,44 @@ before(async function() {
       dropTable: {
         name: 'authentications'
       }
+    }).catch(err => {
+      if (err.errors && err.errors.length === 1 && err.errors[0].errorCode === 'CANNOT_DROP_UNKNOWN_TABLE') {
+        return;
+      }
+      throw err;
     });
     // @ts-ignore
     await mongoose.connection.runCommand({
       dropTable: {
         name: 'reviews'
       }
-    });
+    }).catch(err => {
+      if (err.errors && err.errors.length === 1 && err.errors[0].errorCode === 'CANNOT_DROP_UNKNOWN_TABLE') {
+        return;
+      }
+      throw err;
+    });;
     // @ts-ignore
     await mongoose.connection.runCommand({
       dropTable: {
         name: 'users'
       }
+    }).catch(err => {
+      if (err.errors && err.errors.length === 1 && err.errors[0].errorCode === 'CANNOT_DROP_UNKNOWN_TABLE') {
+        return;
+      }
+      throw err;
     });
     // @ts-ignore
     await mongoose.connection.runCommand({
       dropTable: {
         name: 'vehicles'
       }
+    }).catch(err => {
+      if (err.errors && err.errors.length === 1 && err.errors[0].errorCode === 'CANNOT_DROP_UNKNOWN_TABLE') {
+        return;
+      }
+      throw err;
     });
     
     // @ts-ignore
@@ -106,7 +126,7 @@ before(async function() {
             make: { type: 'text' },
             model: { type: 'text' },
             year: { type: 'int' },
-            images: { type: 'text' },
+            images: { type: 'list', valueType: 'text' },
             numReviews: { type: 'int' },
             averageReview: { type: 'decimal' }
           }

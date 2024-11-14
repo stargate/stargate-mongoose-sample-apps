@@ -23,7 +23,8 @@ module.exports = async function connect() {
       process.env.ASTRA_NAMESPACE
     );
     jsonApiConnectOptions = {
-      isAstra: true
+      isAstra: true,
+      level: 'fatal'
     };
   } else {
     uri = process.env.DATA_API_URI;
@@ -32,7 +33,8 @@ module.exports = async function connect() {
       username: process.env.DATA_API_AUTH_USERNAME,
       password: process.env.DATA_API_AUTH_PASSWORD,
       authUrl: process.env.DATA_API_AUTH_URL,
-      featureFlags
+      featureFlags,
+      level: 'fatal'
     };
   }
   await mongoose.connect(uri, jsonApiConnectOptions);
