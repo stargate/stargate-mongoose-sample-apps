@@ -47,14 +47,3 @@ Below is a screenshot demonstrating executing each of the commands.
 ![image](https://user-images.githubusercontent.com/1620265/213293087-53505a73-3038-4db8-b21b-d9149a5396ed.png)
 
 Anytime you add or update commands in the command folder, run step 3 again.
-
-## With tables
-
-Create table:
-
-```
-CREATE TABLE bots (
-   "_id"        text, 
-   name         text,
-   PRIMARY KEY ("_id"));
-```
