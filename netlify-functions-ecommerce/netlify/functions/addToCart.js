@@ -30,13 +30,22 @@ const handler = async(event) => {
       }
       for (const product of event.body.items) {
         const exists = cart.items?.find(item => item?.productId?.toString() === product?.productId?.toString());
-        if (!exists) {
-          if (products.find(p => product?.productId?.toString() === p?._id?.toString())) {
-            cart.items = [...(cart.items || []), product];
-          }
-        } else {
+        if (!exists && products.find(p => product?.productId?.toString() === p?._id?.toString())) {
           cart.items = [
-            ...cart.items.filter(item => item?.productId?.toString() !== product?.productId?.toString()),
+            ...cart.items,
+            product
+          ];
+        } else {
+          const items = [];
+          for (let i = 0; i < cart.items.length; ++i) {
+            const item = cart.items[i];
+            if (item?.productId?.toString() === product?.productId?.toString()) {
+              continue;
+            }
+            items.push(item);
+          }
+          cart.items = [
+            ...items,
             { productId: product.productId, quantity: exists.quantity + product.quantity }
           ];
         }

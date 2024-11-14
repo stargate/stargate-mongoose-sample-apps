@@ -10,23 +10,35 @@ async function createProducts() {
   await connect();
   
   if (process.env.DATA_API_TABLES) {
-    // @ts-ignore
     await mongoose.connection.runCommand({
       dropTable: {
         name: 'products'
       }
+    }).catch(err => {
+      if (err.errors && err.errors.length === 1 && err.errors[0].errorCode === 'CANNOT_DROP_UNKNOWN_TABLE') {
+        return;
+      }
+      throw err;
     });
-    // @ts-ignore
     await mongoose.connection.runCommand({
       dropTable: {
         name: 'orders'
       }
+    }).catch(err => {
+      if (err.errors && err.errors.length === 1 && err.errors[0].errorCode === 'CANNOT_DROP_UNKNOWN_TABLE') {
+        return;
+      }
+      throw err;
     });
-    // @ts-ignore
     await mongoose.connection.runCommand({
       dropTable: {
         name: 'carts'
       }
+    }).catch(err => {
+      if (err.errors && err.errors.length === 1 && err.errors[0].errorCode === 'CANNOT_DROP_UNKNOWN_TABLE') {
+        return;
+      }
+      throw err;
     });
 
     await mongoose.connection.runCommand({
@@ -53,8 +65,8 @@ async function createProducts() {
             _id: { type: 'text' },
             total: { type: 'decimal' },
             name: { type: 'text' },
-            paymentMethod: { type: 'text' },
-            items: { type: 'text' }
+            paymentMethod: { type: 'map', keyType: 'text', valueType: 'text' },
+            items: { type: 'list', valueType: 'text' }
           }
         }
       }
@@ -66,7 +78,7 @@ async function createProducts() {
           primaryKey: '_id',
           columns: {
             _id: { type: 'text' },
-            items: { type: 'text' },
+            items: { type: 'list', valueType: 'text' },
             orderId: { type: 'text' },
             total: { type: 'decimal' },
             stripeSessionId: { type: 'text' }
