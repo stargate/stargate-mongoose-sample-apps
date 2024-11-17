@@ -84,12 +84,12 @@ describe('Review', function() {
       },
     ]);
     for (let i = 0; i < 6; i++) {
-      await Review.insertMany([{
+      await Review.create({
         rating: i > 5 ? 5 : i, 
         text: 'This is a review that must have length greater than 30. ' + i, 
         vehicleId: vehicle.id,
         userId: user.id
-      }]);
+      });
     }
     vehicle.numReviews = 6;
     vehicle.averageReview = 3;
@@ -101,11 +101,10 @@ describe('Review', function() {
 
     const reviews = res.json.getCall(0).args[0].reviews;
     assert.equal(reviews.length, 3);
-    // TODO: sort doesn't work against tables yet
-    /*assert.deepEqual(
+    assert.deepEqual(
       reviews.map((r: typeof Review) => r.rating),
-      [3, 2, 1]
-    );*/
+      [5, 4, 3]
+    );
 
     // Test that populate worked
     assert.equal(reviews[0].vehicle.make, 'Tesla');
