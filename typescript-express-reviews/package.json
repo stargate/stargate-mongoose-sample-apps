@@ -27,12 +27,12 @@
     "@types/body-parser": "^1.19.2",
     "@types/express": "4.17.21",
     "@types/mocha": "10.0.10",
-    "@types/node": "22.9.0",
+    "@types/node": "22.9.3",
     "axios": "1.7.7",
     "mocha": "10.8.2",
     "sinon": "^19.0.2",
     "ts-mocha": "^10.0.0",
     "ts-node": "10.9.2",
-    "typescript": "5.6.3"
+    "typescript": "5.7.2"
   }
 }
