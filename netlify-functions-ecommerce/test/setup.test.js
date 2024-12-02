@@ -7,7 +7,7 @@ const connect = require('../connect');
 const mongoose = require('../mongoose');
 
 before(async function() {
-  this.timeout(30000);
+  this.timeout(60000);
   await connect();
 
   if (!process.env.IS_ASTRA) {
