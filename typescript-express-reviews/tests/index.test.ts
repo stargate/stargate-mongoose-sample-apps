@@ -14,7 +14,7 @@ before(async function() {
 
   if (!process.env.IS_ASTRA) {
     // @ts-ignore
-    await mongoose.connection.admin.createNamespace(mongoose.connection.db.name);
+    await mongoose.connection.createNamespace(mongoose.connection.db.name);
   }
 
   // Make sure all collections are created in Stargate, _after_ calling

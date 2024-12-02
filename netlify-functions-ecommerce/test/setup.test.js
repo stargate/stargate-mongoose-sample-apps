@@ -11,7 +11,7 @@ before(async function() {
   await connect();
 
   if (!process.env.IS_ASTRA) {
-    await mongoose.connection.admin.createNamespace(mongoose.connection.db.name);
+    await mongoose.connection.createNamespace(mongoose.connection.db.name);
   }
 
   await Promise.all(Object.values(mongoose.connection.models).map(Model => Model.createCollection()));

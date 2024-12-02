@@ -20,7 +20,7 @@ async function run() {
 
   if (!process.env.IS_ASTRA) {
     // @ts-ignore
-    await mongoose.connection.admin.createNamespace(mongoose.connection.db.name);
+    await mongoose.connection.createNamespace(mongoose.connection.db.name);
   }
 
   const existingCollections = await mongoose.connection.listCollections()
