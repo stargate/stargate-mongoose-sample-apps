@@ -18,6 +18,11 @@ run().catch(err => {
 async function run() {
   await connect();
 
+  if (!process.env.IS_ASTRA) {
+    // @ts-ignore
+    await mongoose.connection.admin.createNamespace(mongoose.connection.db.name);
+  }
+
   const existingCollections = await mongoose.connection.listCollections()
     .then(collections => collections.map(c => c.name));
 

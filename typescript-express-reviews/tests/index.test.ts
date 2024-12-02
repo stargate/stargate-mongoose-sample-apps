@@ -12,6 +12,11 @@ before(async function() {
 
   await connect();
 
+  if (!process.env.IS_ASTRA) {
+    // @ts-ignore
+    await mongoose.connection.admin.createNamespace(mongoose.connection.db.name);
+  }
+
   // Make sure all collections are created in Stargate, _after_ calling
   // `connect()`. stargate-mongoose doesn't currently support buffering on
   // connection helpers.
