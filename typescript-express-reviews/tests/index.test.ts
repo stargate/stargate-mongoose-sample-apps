@@ -8,7 +8,7 @@ import connect from '../src/models/connect';
 import mongoose from 'mongoose';
 
 before(async function() {
-  this.timeout(30000);
+  this.timeout(60000);
 
   await connect();
 
