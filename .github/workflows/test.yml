@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node: [18]
+        node: [20]
         os: [ubuntu-20.04]
     name: Discord Bot Sample App
     steps:
@@ -61,7 +61,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node: [16]
+        node: [20]
         os: [ubuntu-20.04]
     name: Ecommerce Sample App
     steps:
@@ -104,7 +104,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node: [16]
+        node: [20]
         os: [ubuntu-20.04]
     name: Reviews Sample App
     steps:
@@ -148,7 +148,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node: [16]
+        node: [20]
         os: [ubuntu-20.04]
     name: Photography Sample App
     steps:
