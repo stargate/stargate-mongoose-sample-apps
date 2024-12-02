@@ -52,7 +52,7 @@ describe('Add to Cart', function() {
     params.body = JSON.stringify(params.body);
     const findCart = await addToCart(params);
     try {
-      findCart.body = JSON.parse(result.body);
+      findCart.body = JSON.parse(findCart.body);
     } catch (error) {
       throw new Error(`Error parsing response as JSON: ${findCart.body}`);
     }
@@ -76,7 +76,7 @@ describe('Add to Cart', function() {
     params.body = JSON.stringify(params.body);
     const findCart = await addToCart(params);
     try {
-      findCart.body = JSON.parse(result.body);
+      findCart.body = JSON.parse(findCart.body);
     } catch (error) {
       throw new Error(`Error parsing response as JSON: ${findCart.body}`);
     }
