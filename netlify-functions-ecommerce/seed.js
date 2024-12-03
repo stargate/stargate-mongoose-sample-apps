@@ -8,7 +8,11 @@ const mongoose = require('./mongoose');
 
 async function createProducts() {
   await connect();
-  
+
+  if (!process.env.IS_ASTRA) {
+    await mongoose.connection.createNamespace(mongoose.connection.namespace);
+  }
+
   const existingCollections = await mongoose.connection.listCollections()
     .then(collections => collections.map(c => c.name));
   for (const Model of Object.values(models)) {

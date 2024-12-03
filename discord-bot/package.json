@@ -22,7 +22,7 @@
     "dotenv": "16.4.5",
     "eslint": "8.57.1",
     "mongoose": "^8.1",
-    "stargate-mongoose": "0.6.7"
+    "stargate-mongoose": "git@github.com:stargate/stargate-mongoose#vkarpov15/astra-stargate-example"
   },
   "devDependencies": {
     "mocha": "10.8.2",
