@@ -21,7 +21,7 @@ async function run() {
 
   if (!process.env.IS_ASTRA) {
     const connection: driver.Connection = mongoose.connection as unknown as driver.Connection;
-    await connection.createNamespace(connection.namespace);
+    await connection.createNamespace(connection.namespace as string);
   }
 
   const existingCollections = await mongoose.connection.listCollections()
