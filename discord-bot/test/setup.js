@@ -18,7 +18,7 @@ before(async function() {
   await mongoose.connect(uri, jsonApiConnectOptions);
 
   if (!process.env.IS_ASTRA) {
-    await mongoose.connection.createNamespace(mongoose.connection.db.name);
+    await mongoose.connection.createNamespace(mongoose.connection.namespace);
   }
 
   // dropCollection() can be slower

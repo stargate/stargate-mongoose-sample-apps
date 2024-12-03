@@ -6,6 +6,7 @@ dotenv.config({
 import { after, before } from 'mocha';
 import connect from '../src/models/connect';
 import mongoose from 'mongoose';
+import { driver } from 'stargate-mongoose';
 
 before(async function() {
   this.timeout(60000);
@@ -13,8 +14,8 @@ before(async function() {
   await connect();
 
   if (!process.env.IS_ASTRA) {
-    // @ts-ignore
-    await mongoose.connection.createNamespace(mongoose.connection.db.name);
+    const connection: driver.Connection = mongoose.connection as unknown as driver.Connection;
+    await connection.createNamespace(connection.namespace);
   }
 
   // Make sure all collections are created in Stargate, _after_ calling
