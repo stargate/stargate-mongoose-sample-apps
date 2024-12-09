@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {
-    "dotenv": "16.4.5",
+    "dotenv": "16.4.7",
     "mongoose": "^8.1",
     "sinon": "19.0.2",
     "stargate-mongoose": "0.6.7",
