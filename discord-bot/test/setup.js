@@ -16,6 +16,11 @@ const jsonApiConnectOptions = {
 before(async function() {
   this.timeout(30000);
   await mongoose.connect(uri, jsonApiConnectOptions);
+
+  if (!process.env.IS_ASTRA) {
+    await mongoose.connection.createNamespace(mongoose.connection.namespace);
+  }
+
   // dropCollection() can be slower
   await Bot.db.dropCollection('bots').catch(() => {});
   await Bot.createCollection();

@@ -9,6 +9,7 @@ import Review from '../models/review';
 import User from '../models/user';
 import Vehicle from '../models/vehicle';
 import bcrypt from 'bcryptjs';
+import { driver } from 'stargate-mongoose';
 
 run().catch(err => {
   console.error(err);
@@ -17,6 +18,11 @@ run().catch(err => {
 
 async function run() {
   await connect();
+
+  if (!process.env.IS_ASTRA) {
+    const connection: driver.Connection = mongoose.connection as unknown as driver.Connection;
+    await connection.createNamespace(connection.namespace as string);
+  }
 
   const existingCollections = await mongoose.connection.listCollections()
     .then(collections => collections.map(c => c.name));

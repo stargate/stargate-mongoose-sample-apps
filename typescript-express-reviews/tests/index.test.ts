@@ -6,11 +6,17 @@ dotenv.config({
 import { after, before } from 'mocha';
 import connect from '../src/models/connect';
 import mongoose from 'mongoose';
+import { driver } from 'stargate-mongoose';
 
 before(async function() {
-  this.timeout(30000);
+  this.timeout(60000);
 
   await connect();
+
+  if (!process.env.IS_ASTRA) {
+    const connection: driver.Connection = mongoose.connection as unknown as driver.Connection;
+    await connection.createNamespace(connection.namespace);
+  }
 
   // Make sure all collections are created in Stargate, _after_ calling
   // `connect()`. stargate-mongoose doesn't currently support buffering on

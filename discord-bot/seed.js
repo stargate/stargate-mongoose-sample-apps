@@ -13,6 +13,10 @@ seed().catch(err => {
 
 async function seed() {
   await connect();
+
+  if (!process.env.IS_ASTRA) {
+    await mongoose.connection.createNamespace(mongoose.connection.namespace);
+  }
   
   const existingCollections = await mongoose.connection.listCollections()
     .then(collections => collections.map(c => c.name));
