@@ -3,20 +3,20 @@
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {
-    "dotenv": "16.4.5",
+    "dotenv": "16.4.7",
     "mongoose": "^8.1",
     "sinon": "19.0.2",
     "stargate-mongoose": "git@github.com:stargate/stargate-mongoose#vkarpov15/astra-stargate-example",
-    "stripe": "17.4.0",
+    "stripe": "17.5.0",
     "vanillatoasts": "1.6.0",
     "webpack": "5.x"
   },
   "devDependencies": {
     "@masteringjs/eslint-config": "0.0.1",
-    "axios": "1.7.7",
+    "axios": "1.7.9",
     "eslint": "8.57.1",
-    "mocha": "10.8.2",
-    "netlify-cli": "17.37.2"
+    "mocha": "11.0.1",
+    "netlify-cli": "17.38.1"
   },
   "engines": {
     "node": ">=18.0.0"

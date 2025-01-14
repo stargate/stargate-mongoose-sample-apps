@@ -19,13 +19,13 @@
     "@discordjs/rest": "2.4.0",
     "@masteringjs/eslint-config": "0.0.1",
     "discord.js": "14.16.3",
-    "dotenv": "16.4.5",
+    "dotenv": "16.4.7",
     "eslint": "8.57.1",
     "mongoose": "^8.1",
     "stargate-mongoose": "git@github.com:stargate/stargate-mongoose#vkarpov15/astra-stargate-example"
   },
   "devDependencies": {
-    "mocha": "10.8.2",
+    "mocha": "11.0.1",
     "sinon": "19.0.2"
   }
 }
