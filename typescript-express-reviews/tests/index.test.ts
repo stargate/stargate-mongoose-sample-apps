@@ -5,7 +5,7 @@ dotenv.config({
 
 import { after, before } from 'mocha';
 import connect from '../src/models/connect';
-import mongoose from 'mongoose';
+import mongoose from '../src/models/mongoose';
 import { driver, tableDefinitionFromSchema } from 'stargate-mongoose';
 
 import Authentication from '../src/models/authentication';
@@ -22,21 +22,20 @@ before(async function() {
 
   await connect();
 
-  const connection: driver.Connection = mongoose.connection as unknown as driver.Connection;
   if (!process.env.IS_ASTRA) {
-    await connection.createNamespace(connection.namespace as string);
+    await mongoose.connection.createNamespace(mongoose.connection.namespace as string);
   }
 
   if (process.env.DATA_API_TABLES) {
-    await connection.dropTable('authentications');
-    await connection.dropTable('reviews');
-    await connection.dropTable('users');
-    await connection.dropTable('vehicles');
+    await mongoose.connection.dropTable('authentications');
+    await mongoose.connection.dropTable('reviews');
+    await mongoose.connection.dropTable('users');
+    await mongoose.connection.dropTable('vehicles');
 
-    await connection.createTable('authentications', tableDefinitionFromSchema(Authentication.schema));
-    await connection.createTable('reviews', tableDefinitionFromSchema(Review.schema));
-    await connection.createTable('users', tableDefinitionFromSchema(User.schema));
-    await connection.createTable('vehicles', tableDefinitionFromSchema(Vehicle.schema));
+    await mongoose.connection.createTable('authentications', tableDefinitionFromSchema(Authentication.schema));
+    await mongoose.connection.createTable('reviews', tableDefinitionFromSchema(Review.schema));
+    await mongoose.connection.createTable('users', tableDefinitionFromSchema(User.schema));
+    await mongoose.connection.createTable('vehicles', tableDefinitionFromSchema(Vehicle.schema));
   } else {
     // Make sure all collections are created in Stargate, _after_ calling
     // `connect()`. stargate-mongoose doesn't currently support buffering on

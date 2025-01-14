@@ -43,7 +43,6 @@ async function run() {
       .then(collections => collections.map(c => c.name));
 
     for (const Model of Object.values(mongoose.connection.models)) {
-
       // First ensure the collection exists
       if (!existingCollections.includes(Model.collection.collectionName)) {
         console.log('Creating collection', Model.collection.collectionName);
