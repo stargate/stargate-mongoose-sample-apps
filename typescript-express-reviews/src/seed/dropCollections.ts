@@ -13,18 +13,16 @@ dropCollections().catch(err => {
 async function dropCollections() {
   await connect();
 
-  const connection: driver.Connection = mongoose.connection as unknown as driver.Connection;
-
-  const collections = await connection.listCollections();
+  const collections = await mongoose.connection.listCollections();
   for (const collection of collections) {
     console.log('Dropping collection', collection.name);
-    await connection.dropCollection(collection.name);
+    await mongoose.connection.dropCollection(collection.name);
   }
 
-  const tables = await connection.listTables();
+  const tables = await mongoose.connection.listTables();
   for (const table of tables) {
     console.log('Dropping table', table.name);
-    await connection.dropTable(table.name);
+    await mongoose.connection.dropTable(table.name);
   }
 
   console.log('Done');
