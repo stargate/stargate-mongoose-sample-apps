@@ -7,7 +7,7 @@
     "mongoose": "^8.1",
     "sinon": "19.0.2",
     "stargate-mongoose": "0.6.8",
-    "stripe": "17.5.0",
+    "stripe": "17.6.0",
     "vanillatoasts": "1.6.0",
     "webpack": "5.x"
   },
@@ -15,7 +15,7 @@
     "@masteringjs/eslint-config": "0.0.1",
     "axios": "1.7.9",
     "eslint": "8.57.1",
-    "mocha": "11.0.1",
+    "mocha": "11.1.0",
     "netlify-cli": "18.0.3"
   },
   "engines": {
