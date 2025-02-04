@@ -17,14 +17,14 @@
   },
   "dependencies": {
     "@discordjs/rest": "2.4.2",
-    "@masteringjs/eslint-config": "0.0.1",
+    "@masteringjs/eslint-config": "0.1.1",
     "discord.js": "14.17.3",
     "dotenv": "16.4.7",
-    "eslint": "8.57.1",
     "mongoose": "^8.1",
     "stargate-mongoose": "0.6.8"
   },
   "devDependencies": {
+    "eslint": "9.19.0",
     "mocha": "11.1.0",
     "sinon": "19.0.2"
   }
