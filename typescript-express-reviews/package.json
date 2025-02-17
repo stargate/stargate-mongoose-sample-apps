@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@awaitjs/express": "0.9.0",
-    "bcryptjs": "^2.4.3",
+    "bcryptjs": "^3.0.0",
     "dotenv": "16.4.7",
     "express": "4.x",
     "mongoose": "^8.1",
