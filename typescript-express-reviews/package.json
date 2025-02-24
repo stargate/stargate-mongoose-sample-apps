@@ -20,7 +20,7 @@
     "dotenv": "16.4.7",
     "express": "4.x",
     "mongoose": "^8.1",
-    "stargate-mongoose": "0.6.10"
+    "stargate-mongoose": "git@github.com:stargate/stargate-mongoose#vkarpov15/astra-stargate-example"
   },
   "devDependencies": {
     "@mongoosejs/studio": "0.0.41",
