@@ -16,16 +16,16 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
-    "@discordjs/rest": "2.4.2",
-    "@masteringjs/eslint-config": "0.0.1",
-    "discord.js": "14.17.3",
+    "@discordjs/rest": "2.4.3",
+    "@masteringjs/eslint-config": "0.1.1",
+    "discord.js": "14.18.0",
     "dotenv": "16.4.7",
-    "eslint": "8.57.1",
     "mongoose": "^8.1",
-    "stargate-mongoose": "git@github.com:stargate/stargate-mongoose#vkarpov15/astra-stargate-example"
+    "stargate-mongoose": "0.6.10"
   },
   "devDependencies": {
-    "mocha": "11.0.1",
+    "eslint": "9.21.0",
+    "mocha": "11.1.0",
     "sinon": "19.0.2"
   }
 }

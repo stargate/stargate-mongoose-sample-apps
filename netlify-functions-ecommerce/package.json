@@ -6,17 +6,17 @@
     "dotenv": "16.4.7",
     "mongoose": "^8.1",
     "sinon": "19.0.2",
-    "stargate-mongoose": "git@github.com:stargate/stargate-mongoose#vkarpov15/astra-stargate-example",
-    "stripe": "17.5.0",
+    "stargate-mongoose": "0.6.10",
+    "stripe": "17.6.0",
     "vanillatoasts": "1.6.0",
     "webpack": "5.x"
   },
   "devDependencies": {
-    "@masteringjs/eslint-config": "0.0.1",
+    "@masteringjs/eslint-config": "0.1.1",
     "axios": "1.7.9",
-    "eslint": "8.57.1",
-    "mocha": "11.0.1",
-    "netlify-cli": "17.38.1"
+    "eslint": "9.21.0",
+    "mocha": "11.1.0",
+    "netlify-cli": "18.1.0"
   },
   "engines": {
     "node": ">=18.0.0"
