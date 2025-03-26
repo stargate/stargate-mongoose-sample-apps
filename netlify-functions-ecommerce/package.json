@@ -5,7 +5,7 @@
   "dependencies": {
     "dotenv": "16.4.7",
     "mongoose": "^8.1",
-    "sinon": "19.0.2",
+    "sinon": "19.0.4",
     "stargate-mongoose": "0.6.10",
     "stripe": "17.7.0",
     "vanillatoasts": "1.6.0",
