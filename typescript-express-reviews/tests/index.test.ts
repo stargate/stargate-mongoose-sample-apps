@@ -1,8 +1,3 @@
-import dotenv from 'dotenv';
-dotenv.config({
-  path: '.env.test'
-});
-
 import { after, before } from 'mocha';
 import connect from '../src/models/connect';
 import mongoose from 'mongoose';

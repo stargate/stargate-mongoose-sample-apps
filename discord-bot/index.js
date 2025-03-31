@@ -1,7 +1,5 @@
 'use strict';
 
-require('dotenv').config();
-
 // Require the necessary discord.js classes
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const assert = require('assert');

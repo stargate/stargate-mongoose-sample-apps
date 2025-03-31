@@ -4,22 +4,22 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "clean-db": "node ./dropCollections",
+    "clean-db": "node --env-file=.env ./dropCollections",
     "lint": "eslint .",
-    "test": "mocha test/*.js",
-    "seed": "node ./seed",
-    "start": "node ./index.js"
+    "postinstall": "touch .env",
+    "test": "node --env-file=.env.test ./node_modules/mocha/bin/mocha test/*.js",
+    "seed": "node --env-file=.env ./seed",
+    "start": "node --env-file=.env ./index.js"
   },
   "author": "",
   "license": "ISC",
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.6.0"
   },
   "dependencies": {
     "@discordjs/rest": "2.4.3",
     "@masteringjs/eslint-config": "0.1.1",
     "discord.js": "14.18.0",
-    "dotenv": "16.4.7",
     "mongoose": "^8.1",
     "stargate-mongoose": "0.6.10"
   },
