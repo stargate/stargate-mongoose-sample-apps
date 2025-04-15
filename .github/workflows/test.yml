@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         node: [20]
-        os: [ubuntu-20.04]
+        os: [ubuntu-22.04]
     name: Discord Bot Sample App
     steps:
       ## Set up Stargate
@@ -47,7 +47,7 @@ jobs:
         uses: actions/setup-node@eeb10cff27034e7acf239c5d29f62154018672fd # v3.1.1
         with:
           node-version: ${{ matrix.node }}
-      
+
       - run: npm install
         working-directory: discord-bot
       - run: npm run lint
@@ -62,7 +62,7 @@ jobs:
       fail-fast: false
       matrix:
         node: [20]
-        os: [ubuntu-20.04]
+        os: [ubuntu-22.04]
     name: Ecommerce Sample App
     steps:
       ## Set up Stargate
@@ -90,7 +90,7 @@ jobs:
         uses: actions/setup-node@eeb10cff27034e7acf239c5d29f62154018672fd # v3.1.1
         with:
           node-version: ${{ matrix.node }}
-      
+
       - run: npm install
         working-directory: netlify-functions-ecommerce
       - run: npm run lint
@@ -105,7 +105,7 @@ jobs:
       fail-fast: false
       matrix:
         node: [20]
-        os: [ubuntu-20.04]
+        os: [ubuntu-22.04]
     name: Reviews Sample App
     steps:
       ## Set up Stargate
@@ -133,7 +133,7 @@ jobs:
         uses: actions/setup-node@eeb10cff27034e7acf239c5d29f62154018672fd # v3.1.1
         with:
           node-version: ${{ matrix.node }}
-      
+
       - run: npm install
         working-directory: typescript-express-reviews
       - run: npm run build
@@ -149,7 +149,7 @@ jobs:
       fail-fast: false
       matrix:
         node: [20]
-        os: [ubuntu-20.04]
+        os: [ubuntu-22.04]
     name: Photography Sample App
     steps:
       ## Set up Stargate

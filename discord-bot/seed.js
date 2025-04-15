@@ -1,7 +1,5 @@
 'use strict';
 
-require('dotenv').config();
-
 const Bot = require('./models/bot');
 const connect = require('./connect');
 const mongoose = require('./mongoose');

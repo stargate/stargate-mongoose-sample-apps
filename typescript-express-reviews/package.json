@@ -6,18 +6,17 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "clean-db": "ts-node src/seed/dropCollections",
-    "seed": "ts-node src/seed/seed",
-    "start": "ts-node src/api",
-    "test": "ts-mocha tests/*.test.ts"
+    "clean-db": "node --env-file=.env ./node_modules/.bin/ts-node src/seed/dropCollections",
+    "seed": "node --env-file=.env ./node_modules/.bin/ts-node src/seed/seed",
+    "start": "node --env-file=.env ./node_modules/.bin/ts-node src/api",
+    "test": "node --env-file=.env.test ./node_modules/.bin/ts-mocha tests/*.test.ts"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=20.6.0"
   },
   "dependencies": {
     "@awaitjs/express": "0.9.0",
     "bcryptjs": "^3.0.0",
-    "dotenv": "16.5.0",
     "express": "4.x",
     "mongoose": "^8.1",
     "stargate-mongoose": "git@github.com:stargate/stargate-mongoose#vkarpov15/astra-stargate-example"

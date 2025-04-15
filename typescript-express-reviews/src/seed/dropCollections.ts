@@ -1,6 +1,3 @@
-import dotenv from 'dotenv';
-dotenv.config();
-
 import connect from '../models/connect';
 import mongoose from '../models/mongoose';
 import type { driver } from 'stargate-mongoose';
