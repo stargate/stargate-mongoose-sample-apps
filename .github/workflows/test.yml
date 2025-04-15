@@ -24,7 +24,7 @@ jobs:
         with:
           repository: stargate/stargate-mongoose
           path: stargate-mongoose
-          ref: vkarpov15/astra-stargate-example
+          ref: 5bdaa836fae44185e6eefccb03634f5f58263578
       - name: Build stargate-mongoose
         run: |
           npm install
@@ -73,7 +73,7 @@ jobs:
         with:
           repository: stargate/stargate-mongoose
           path: stargate-mongoose
-          ref: vkarpov15/astra-stargate-example
+          ref: 5bdaa836fae44185e6eefccb03634f5f58263578
       - name: Set up JSON API
         run: |
           chmod +x bin/start_data_api.sh
@@ -116,7 +116,7 @@ jobs:
         with:
           repository: stargate/stargate-mongoose
           path: stargate-mongoose
-          ref: main
+          ref: 5bdaa836fae44185e6eefccb03634f5f58263578
       - name: Set up JSON API
         run: |
           chmod +x bin/start_data_api.sh
@@ -160,7 +160,7 @@ jobs:
         with:
           repository: stargate/stargate-mongoose
           path: stargate-mongoose
-          ref: main
+          ref: 5bdaa836fae44185e6eefccb03634f5f58263578
       - name: Set up JSON API
         run: |
           chmod +x bin/start_data_api.sh
