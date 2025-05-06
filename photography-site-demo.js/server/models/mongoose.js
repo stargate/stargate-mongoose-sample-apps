@@ -7,7 +7,7 @@ mongoose.set('autoIndex', false);
 mongoose.set('toJSON', { virtuals: true });
 mongoose.set('toObject', { virtuals: true });
 
-const { driver } = require('stargate-mongoose');
+const { driver } = require('@datastax/astra-mongoose');
 mongoose.setDriver(driver);
 
 module.exports = mongoose;

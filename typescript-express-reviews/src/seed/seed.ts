@@ -5,6 +5,7 @@ import Authentication from '../models/authentication';
 import Review from '../models/review';
 import User from '../models/user';
 import Vehicle from '../models/vehicle';
+import assert from 'assert';
 import bcrypt from 'bcryptjs';
 
 run().catch(err => {
@@ -15,18 +16,15 @@ run().catch(err => {
 async function run() {
   await connect();
 
+  assert.ok(mongoose.connection.keyspaceName);
+  await mongoose.connection.createKeyspace(mongoose.connection.keyspaceName);
+
   const existingCollections = await mongoose.connection.listCollections()
     .then(collections => collections.map(c => c.name));
 
   for (const Model of Object.values(mongoose.connection.models)) {
-    
     // First ensure the collection exists
-    if (!existingCollections.includes(Model.collection.collectionName)) {
-      console.log('Creating collection', Model.collection.collectionName);
-      await mongoose.connection.createCollection(Model.collection.collectionName);
-    } else {
-      console.log('Resetting collection', Model.collection.collectionName);
-    }
+    await mongoose.connection.createCollection(Model.collection.collectionName);
     // Then make sure the collection is empty
     await Model.deleteMany({});
   }

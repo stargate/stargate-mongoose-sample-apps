@@ -1,7 +1,7 @@
 {
   "name": "photography-site",
   "version": "1.0.0",
-  "description": "demo app for stargate-mongoose",
+  "description": "demo app for astra-mongoose",
   "main": "index.js",
   "scripts": {
     "test": "mocha tests/*.test.js",
@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@datastax/astra-mongoose": "1.0.0-rc.2",
     "axios": "^1.4.0",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.5",
@@ -22,12 +23,14 @@
     "express-ejs-layouts": "^2.5.1",
     "express-fileupload": "^1.2.1",
     "express-session": "^1.17.2",
-    "mongoose": "^8.0.3",
+    "mongoose": "^8.14.0",
     "python-shell": "^5.0.0",
-    "mocha": "11.1.0",
-    "stargate-mongoose": "0.6.10"
+    "mocha": "11.1.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=20.6.0"
   }
 }

@@ -35,4 +35,9 @@ app.use('/', routes);
 const cors = require('cors');
 app.use(cors());
 
-app.listen(port, () => console.log(`Listening to port ${port}`));
+app.listen(port, (err) => {
+  if (err) {
+    throw err;
+  }
+  console.log(`Listening to port ${port}`);
+});

@@ -4,7 +4,7 @@ This sample demonstrates integrating Mongoose with [`express`](https://www.npmjs
 
 ## Setup
 
-Make sure you have Node.js 14 or higher and a local Stargate instance running as described on the [main page](../README.md) of this repo.
+Make sure you have Node.js 20.6.0 or higher and a local Stargate instance running as described on the [main page](../README.md) of this repo.
 
 ## Running This Example
 

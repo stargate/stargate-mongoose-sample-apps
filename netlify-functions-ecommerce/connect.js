@@ -5,7 +5,7 @@ require('./config');
 const mongoose = require('./mongoose');
 
 require('./models');
-const { createAstraUri } = require('stargate-mongoose');
+const { createAstraUri } = require('@datastax/astra-mongoose');
 
 let conn = null;
 
@@ -34,7 +34,7 @@ module.exports = async function connect() {
     };
   }
   await mongoose.connect(uri, jsonApiConnectOptions);
-  
+
   await Promise.all(Object.values(mongoose.connection.models).map(Model => Model.init()));
   return conn;
 };

@@ -12,8 +12,9 @@ const jsonApiConnectOptions = {
 };
 
 before(async function() {
-  this.timeout(30000);
+  this.timeout(120000);
   await mongoose.connect(uri, jsonApiConnectOptions);
+  await mongoose.connection.createKeyspace(mongoose.connection.keyspaceName);
   // dropCollection() can be slower
   await Bot.db.dropCollection('bots').catch(() => {});
   await Bot.createCollection();

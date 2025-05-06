@@ -1,6 +1,6 @@
 'use strict';
 
-const { createAstraUri } = require('stargate-mongoose');
+const { createAstraUri } = require('@datastax/astra-mongoose');
 const mongoose = require('./mongoose');
 
 module.exports = async function connect() {

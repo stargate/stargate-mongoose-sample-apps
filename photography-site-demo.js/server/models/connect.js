@@ -2,7 +2,7 @@
 
 require('dotenv').config();
 const mongoose = require('./mongoose');
-const { createAstraUri } = require('stargate-mongoose');
+const { createAstraUri } = require('@datastax/astra-mongoose');
 let conn = null;
 
 module.exports = async function connect() {
