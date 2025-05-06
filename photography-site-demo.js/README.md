@@ -2,7 +2,7 @@
 
 # photography-site
 
-This sample app demonstrates a photography site by using [`express`](https://www.npmjs.com/package/express), [`mongoose`](https://github.com/Automattic/mongoose) and [`stargate-mongoose`](https://github.com/stargate/stargate-mongoose).
+This sample app demonstrates a photography site by using [`express`](https://www.npmjs.com/package/express), [`mongoose`](https://www.npmjs.com/package/mongoose) and [`astra-mongoose`](https://www.npmjs.com/package/@datastax/astra-mongoose).
 
 ## Environment
 
@@ -15,7 +15,7 @@ Make sure you have Cassandra support
 
 
 ### node
-Make sure you have Node.js 17 or higher
+Make sure you have Node.js 20.6.0 or higher
 
 
 

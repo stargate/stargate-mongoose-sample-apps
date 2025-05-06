@@ -1,4 +1,5 @@
-import { createAstraUri } from 'stargate-mongoose';
+import { createAstraUri } from '@datastax/astra-mongoose';
+import type { ConnectOptions } from 'mongoose';
 import mongoose from './mongoose';
 
 const isAstra = process.env.IS_ASTRA ?? '';
@@ -22,15 +23,13 @@ export default async function connect() {
     console.log('Connecting to', uri);
     await mongoose.connect(
       uri,
-      { isAstra: true } as mongoose.ConnectOptions
+      { isAstra: true } as ConnectOptions
     );
   } else {
     console.log('Connecting to', dataAPIURI);
     await mongoose.connect(
       dataAPIURI,
-      { username, password, authUrl } as mongoose.ConnectOptions
+      { username, password, authUrl } as ConnectOptions
     );
   }
 }
-
-

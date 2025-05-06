@@ -8,7 +8,9 @@ const mongoose = require('./mongoose');
 
 async function createProducts() {
   await connect();
-  
+
+  await mongoose.connection.createKeyspace(mongoose.connection.keyspaceName);
+
   const existingCollections = await mongoose.connection.listCollections()
     .then(collections => collections.map(c => c.name));
   for (const Model of Object.values(models)) {

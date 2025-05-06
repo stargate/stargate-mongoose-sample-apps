@@ -1,28 +1,27 @@
 import { after, before } from 'mocha';
+import assert from 'assert';
 import connect from '../src/models/connect';
-import mongoose from 'mongoose';
+import mongoose from '../src/models/mongoose';
 
 before(async function() {
-  this.timeout(30000);
+  this.timeout(120_000);
 
   await connect();
 
-  // Make sure all collections are created in Stargate, _after_ calling
-  // `connect()`. stargate-mongoose doesn't currently support buffering on
-  // connection helpers.
+  assert.ok(mongoose.connection.keyspaceName);
+  await mongoose.connection.createKeyspace(mongoose.connection.keyspaceName);
+
+  // Make sure all collections are created in Stargate
   await Promise.all(Object.values(mongoose.models).map(Model => {
     return Model.createCollection();
   }));
 });
 
-// `deleteMany()` currently does nothing
-/*beforeEach(async function clearDb() {
-  this.timeout(30000);
-
+beforeEach(async function clearDb() {
   await Promise.all(Object.values(mongoose.models).map(Model => {
     return Model.deleteMany({});
   }));
-});*/
+});
 
 after(async function() {
   await mongoose.disconnect();
