@@ -11,13 +11,7 @@ async function createProducts() {
 
   await mongoose.connection.createKeyspace(mongoose.connection.keyspaceName);
 
-  const existingCollections = await mongoose.connection.listCollections()
-    .then(collections => collections.map(c => c.name));
   for (const Model of Object.values(models)) {
-    if (existingCollections.includes(Model.collection.collectionName)) {
-      continue;
-    }
-    console.log('Creating', Model.collection.collectionName);
     await Model.createCollection();
   }
   await Promise.all(
