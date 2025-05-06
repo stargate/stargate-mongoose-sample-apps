@@ -19,7 +19,7 @@
     "@datastax/astra-mongoose": "1.0.0-rc.2",
     "bcryptjs": "^3.0.0",
     "express": "4.x",
-    "mongoose": "^8.14
+    "mongoose": "^8.14"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
