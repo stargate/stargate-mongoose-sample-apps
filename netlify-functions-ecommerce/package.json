@@ -14,7 +14,7 @@
   "devDependencies": {
     "@masteringjs/eslint-config": "0.1.1",
     "eslint": "9.25.1",
-    "mocha": "11.1.0",
+    "mocha": "11.2.2",
     "netlify-cli": "20.1.1"
   },
   "engines": {
