@@ -9,7 +9,6 @@ const getTextEmbedding = require('../utils/textEmbeddingGenerator');
 const mongoose = require('./mongoose');
 
 async function deleteAll() {
-  await connect();
   try {
     await Category.db.dropCollection('categories');
     await Category.db.dropCollection('photos');
@@ -136,6 +135,8 @@ async function createPhotoEmbeddings() {
 
 
 async function populate() {
+  await connect();
+  await mongoose.connection.createKeyspace(mongoose.connection.keyspaceName);
   await deleteAll();
   await createCategories();
   await createPhotos();
