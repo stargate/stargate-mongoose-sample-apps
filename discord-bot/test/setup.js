@@ -8,7 +8,7 @@ const uri = process.env.DATA_API_URI;
 const jsonApiConnectOptions = {
   username: process.env.DATA_API_AUTH_USERNAME,
   password: process.env.DATA_API_AUTH_PASSWORD,
-  authUrl: process.env.DATA_API_AUTH_URL
+  isAstra: false
 };
 
 before(async function() {
