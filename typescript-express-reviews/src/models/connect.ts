@@ -19,15 +19,12 @@ export default async function connect() {
       astraNamespace
     );
     console.log('Connecting to', uri);
-    await mongoose.connect(
-      uri,
-      { isAstra: true }
-    );
+    await mongoose.connect(uri);
   } else {
     console.log('Connecting to', dataAPIURI);
     await mongoose.connect(
       dataAPIURI,
-      { username, password }
+      { username, password, isAstra: false }
     );
   }
 }
