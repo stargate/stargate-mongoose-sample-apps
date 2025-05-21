@@ -7,6 +7,7 @@ import User from '../models/user';
 import Vehicle from '../models/vehicle';
 import assert from 'assert';
 import bcrypt from 'bcryptjs';
+import { tableDefinitionFromSchema } from '@datastax/astra-mongoose';
 
 run().catch(err => {
   console.error(err);
@@ -19,12 +20,17 @@ async function run() {
   assert.ok(mongoose.connection.keyspaceName);
   await mongoose.connection.createKeyspace(mongoose.connection.keyspaceName);
 
-  const existingCollections = await mongoose.connection.listCollections()
-    .then(collections => collections.map(c => c.name));
-
   for (const Model of Object.values(mongoose.connection.models)) {
-    // First ensure the collection exists
-    await mongoose.connection.createCollection(Model.collection.collectionName);
+    // First ensure the collection or table exists
+    if (process.env.DATA_API_TABLES) {
+      await mongoose.connection.createTable(
+        Model.collection.collectionName,
+        tableDefinitionFromSchema(Model.schema)
+      );
+    } else {
+      await mongoose.connection.createCollection(Model.collection.collectionName);
+    }
+
     // Then make sure the collection is empty
     await Model.deleteMany({});
   }

@@ -22,13 +22,16 @@ module.exports = async function connect() {
       process.env.ASTRA_APPLICATION_TOKEN,
       process.env.ASTRA_NAMESPACE
     );
-    jsonApiConnectOptions = {};
+    jsonApiConnectOptions = {
+      isTable: !!process.env.DATA_API_TABLES
+    };
   } else {
     uri = process.env.DATA_API_URI;
     jsonApiConnectOptions = {
       username: process.env.DATA_API_AUTH_USERNAME,
       password: process.env.DATA_API_AUTH_PASSWORD,
-      isAstra: false
+      isAstra: false,
+      isTable: !!process.env.DATA_API_TABLES
     };
   }
   await mongoose.connect(uri, jsonApiConnectOptions);
