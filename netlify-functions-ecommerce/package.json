@@ -7,14 +7,14 @@
     "dotenv": "16.5.0",
     "mongoose": "^8.14",
     "sinon": "20.0.0",
-    "stripe": "18.1.0",
+    "stripe": "18.1.1",
     "vanillatoasts": "1.6.0",
     "webpack": "5.x"
   },
   "devDependencies": {
     "@masteringjs/eslint-config": "0.1.1",
     "eslint": "9.27.0",
-    "mocha": "11.3.0",
+    "mocha": "11.5.0",
     "netlify-cli": "21.5.0"
   },
   "engines": {
