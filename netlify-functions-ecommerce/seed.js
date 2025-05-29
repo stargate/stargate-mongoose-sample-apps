@@ -5,6 +5,7 @@ require('./config');
 const models = require('./models');
 const connect = require('./connect');
 const mongoose = require('./mongoose');
+const { tableDefinitionFromSchema } = require('@datastax/astra-mongoose');
 
 async function createProducts() {
   await connect();
@@ -12,7 +13,14 @@ async function createProducts() {
   await mongoose.connection.createKeyspace(mongoose.connection.keyspaceName);
 
   for (const Model of Object.values(models)) {
-    await Model.createCollection();
+    if (process.env.DATA_API_TABLES) {
+      await mongoose.connection.createTable(
+        Model.collection.collectionName,
+        tableDefinitionFromSchema(Model.schema)
+      );
+    } else {
+      await Model.createCollection();
+    }
   }
   await Promise.all(
     Object.values(models).map(Model => Model.deleteMany({}))
