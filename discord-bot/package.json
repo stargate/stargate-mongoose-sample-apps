@@ -26,6 +26,6 @@
   "devDependencies": {
     "eslint": "9.29.0",
     "mocha": "11.6.0",
-    "sinon": "20.0.0"
+    "sinon": "21.0.0"
   }
 }
