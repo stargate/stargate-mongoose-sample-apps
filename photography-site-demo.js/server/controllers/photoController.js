@@ -156,7 +156,7 @@ exports.exploreCategories = async(req, res) => {
     const categories = await Category.find({}).limit(limitNumber);
     res.render('categories', { title: 'photography site - Categories', categories });
   } catch (error) {
-    res.status(500).send({ message: error.message || 'Error Occured' });
+    res.status(500).send({ message: error.message || 'Error Occurred' });
   }
 };
 
