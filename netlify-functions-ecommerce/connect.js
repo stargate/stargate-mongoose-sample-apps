@@ -1,7 +1,5 @@
 'use strict';
 
-require('./config');
-
 const mongoose = require('./mongoose');
 
 require('./models');
@@ -27,6 +25,7 @@ module.exports = async function connect() {
     };
   } else {
     uri = process.env.DATA_API_URI;
+    console.log('Connecting to Data API', uri);
     jsonApiConnectOptions = {
       username: process.env.DATA_API_AUTH_USERNAME,
       password: process.env.DATA_API_AUTH_PASSWORD,

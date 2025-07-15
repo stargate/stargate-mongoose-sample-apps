@@ -1,7 +1,5 @@
 'use strict';
 
-require('../config');
-
 const { after, before } = require('mocha');
 const connect = require('../connect');
 const mongoose = require('../mongoose');
