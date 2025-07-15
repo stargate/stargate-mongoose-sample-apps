@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {
-    "@datastax/astra-mongoose": "1.0.2",
+    "@datastax/astra-mongoose": "1.0.3",
     "dotenv": "17.2.0",
     "mongoose": "^8.14",
     "sinon": "21.0.0",
@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "@masteringjs/eslint-config": "0.1.1",
-    "eslint": "9.30.1",
+    "eslint": "9.31.0",
     "mocha": "11.7.1",
     "netlify-cli": "22.2.2"
   },
