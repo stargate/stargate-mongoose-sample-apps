@@ -21,12 +21,12 @@
     "node": ">=20.6.0"
   },
   "scripts": {
-    "build": "node ./frontend/build",
-    "clean-db": "node ./dropCollections",
+    "build": "node --env-file .env ./frontend/build",
+    "clean-db": "node --env-file .env ./dropCollections",
     "lint": "eslint .",
-    "seed": "node ./seed",
+    "seed": "node --env-file .env ./seed",
     "start": "netlify dev --dir public --functions netlify/functions",
-    "test": "env NODE_ENV=test mocha ./test/*.test.js",
-    "test:smoke": "node ./smoke-test"
+    "test": "env NODE_ENV=test node --env-file=.env.test ./node_modules/.bin/mocha ./test/*.test.js",
+    "test:smoke": "node --env-file .env ./smoke-test"
   }
 }

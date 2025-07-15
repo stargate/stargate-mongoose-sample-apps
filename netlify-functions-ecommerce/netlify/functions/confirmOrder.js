@@ -1,6 +1,6 @@
 'use strict';
 
-require('../../config');
+require('dotenv').config();
 
 const stripe = require('../../integrations/stripe');
 const { Cart, Order } = require('../../models');
@@ -14,7 +14,7 @@ const handler = async(event) => {
       findOne({ _id: event.body.cartId }).
       setOptions({ sanitizeFilter: true }).
       orFail();
-    
+
     if (cart.orderId) {
       const order = await Order.findOne({ _id: cart.orderId }).orFail();
 
@@ -34,7 +34,7 @@ const handler = async(event) => {
           last4: '0000'
         }
       });
-  
+
       cart.orderId = order._id;
       await cart.save();
 
@@ -47,7 +47,7 @@ const handler = async(event) => {
     if (!cart.stripeSessionId) {
       throw new Error('Cart needs stripe session id');
     }
-    
+
 
     const session = await stripe.checkout.sessions.retrieve(cart.stripeSessionId);
 
@@ -63,7 +63,7 @@ const handler = async(event) => {
           { id: paymentMethod.id, brand: paymentMethod.card.brand, last4: paymentMethod.card.last4 } :
           null
       });
-  
+
       cart.orderId = order._id;
       await cart.save();
 
