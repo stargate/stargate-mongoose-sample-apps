@@ -1,7 +1,5 @@
 'use strict';
 
-require('./config');
-
 const models = require('./models');
 const connect = require('./connect');
 const mongoose = require('./mongoose');
