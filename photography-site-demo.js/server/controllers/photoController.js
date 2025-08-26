@@ -48,7 +48,7 @@ exports.searchByPhotoByVSearch = async(req, res) => {
       newImageName = Date.now() + imageUploadFile.name; //avoid duplication
       uploadPath = require('path').resolve('./') + '/public/uploads/' + newImageName;
       imageUploadFile.mv(uploadPath, async function(err) {
-        const vector = await getPhotoEmbedding(newImageName); 
+        const vector = await getPhotoEmbedding(newImageName);
         const photo = await PhotoEmbedding.find({}).sort({ $vector: { $meta: vector } }).limit(3);
         fs.unlink(uploadPath, (err) => {
           if (err) {
@@ -86,7 +86,7 @@ exports.addPhotoOnPost = async(req, res) => {
       newImageName = Date.now() + imageUploadFile.name; //avoid duplication
       uploadPath = require('path').resolve('./') + '/public/uploads/' + newImageName;
       imageUploadFile.mv(uploadPath, function(err) {
-        if (err) return res.satus(500).send(err);
+        if (err) return res.status(500).send(err);
       });
     }
     const description_embedding1 = await getTextEmbedding(req.body.description);
@@ -117,7 +117,7 @@ exports.addPhotoOnPost = async(req, res) => {
 
 /**
  * GET /
- * Homepage 
+ * Homepage
 */
 exports.homepage = async(req, res) => {
   await connect();
@@ -136,7 +136,7 @@ exports.homepage = async(req, res) => {
 
 /**
  * GET /
- * contactPage 
+ * contactPage
 */
 exports.contactPage = async(req, res) => {
   try {
@@ -148,7 +148,7 @@ exports.contactPage = async(req, res) => {
 
 /**
  * GET /categories
- * Categories 
+ * Categories
 */
 exports.exploreCategories = async(req, res) => {
   try {
@@ -156,7 +156,7 @@ exports.exploreCategories = async(req, res) => {
     const categories = await Category.find({}).limit(limitNumber);
     res.render('categories', { title: 'photography site - Categories', categories });
   } catch (error) {
-    res.satus(500).send({ message: error.message || 'Error Occured' });
+    res.status(500).send({ message: error.message || 'Error Occurred' });
   }
 };
 
@@ -172,7 +172,7 @@ exports.exploreCategoriesByName = async(req, res) => {
     const photosOfCategory = await Photo.find({ category: categoryName }).limit(limitNumber);
     res.render('categories', { title: 'photography site  - photos in category', photosOfCategory, categoryName });
   } catch (error) {
-    res.satus(500).send({ message: error.message || 'Error Occured' });
+    res.status(500).send({ message: error.message || 'Error Occured' });
   }
 };
 
@@ -185,7 +185,7 @@ exports.explorePhoto = async(req, res) => {
     const photo = await Photo.findById(photoId);
     res.render('photo', { title: 'photography site - Photo', photo });
   } catch (error) {
-    res.satus(500).send({ message: error.message || 'Error Occured' });
+    res.status(500).send({ message: error.message || 'Error Occured' });
   }
 };
 
@@ -196,13 +196,13 @@ exports.explorePhotoEmbedding = async(req, res) => {
     const photo = await PhotoEmbedding.findById(photoEmbeddingId);
     res.render('photo', { title: 'photography site - Photo', photo });
   } catch (error) {
-    res.satus(500).send({ message: error.message || 'Error Occured' });
+    res.status(500).send({ message: error.message || 'Error Occured' });
   }
 };
 
 /**
  * POST /searchByPhotoNameExact
- * SearchByPhotoNameExact 
+ * SearchByPhotoNameExact
 */
 exports.searchPhotoByNameExact = async(req, res) => {
   try {
@@ -217,7 +217,7 @@ exports.searchPhotoByNameExact = async(req, res) => {
 
 /**
  * GET /explore-latest
- * Explplore Latest 
+ * Explplore Latest
 */
 exports.exploreLatest = async(req, res) => {
   try {
@@ -225,7 +225,7 @@ exports.exploreLatest = async(req, res) => {
     const photo = await Photo.find({}).sort({ _id: -1 }).limit(limitNumber);
     res.render('explore-latest', { title: 'photography site - Explore Latest', photo });
   } catch (error) {
-    res.satus(500).send({ message: error.message || 'Error Occured' });
+    res.status(500).send({ message: error.message || 'Error Occured' });
   }
 };
 
@@ -240,7 +240,7 @@ exports.exploreRandom = async(req, res) => {
     const photo = await Photo.findOne().skip(random).exec();
     res.render('explore-random', { title: 'photography site - Explore random', photo });
   } catch (error) {
-    res.satus(500).send({ message: error.message || 'Error Occured' });
+    res.status(500).send({ message: error.message || 'Error Occured' });
   }
 };
 
@@ -253,6 +253,3 @@ exports.addPhoto = async(req, res) => {
   const infoSubmitObj = req.flash('infoSubmit');
   res.render('add-photo', { title: 'photography site - Add Photo', infoErrorsObj, infoSubmitObj });
 };
-
-
-
