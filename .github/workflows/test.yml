@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node: [20]
+        node: [22]
         os: [ubuntu-22.04]
     name: Discord Bot Sample App
     steps:
@@ -33,7 +33,6 @@ jobs:
       - name: Wait for services
         run: |
           while ! nc -z localhost 8181; do sleep 1; done
-          while ! nc -z localhost 8081; do sleep 1; done
         working-directory: stargate-mongoose
       ## Set up and run discord bot sample app tests
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
@@ -55,7 +54,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node: [20]
+        node: [22]
         os: [ubuntu-22.04]
     name: Ecommerce Sample App
     steps:
@@ -76,7 +75,6 @@ jobs:
       - name: Wait for services
         run: |
           while ! nc -z localhost 8181; do sleep 1; done
-          while ! nc -z localhost 8081; do sleep 1; done
         working-directory: stargate-mongoose
       ## Set up and run ecommerce sample app tests
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
@@ -98,7 +96,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node: [20]
+        node: [22]
         os: [ubuntu-22.04]
     name: Reviews Sample App
     steps:
@@ -119,7 +117,6 @@ jobs:
       - name: Wait for services
         run: |
           while ! nc -z localhost 8181; do sleep 1; done
-          while ! nc -z localhost 8081; do sleep 1; done
         working-directory: stargate-mongoose
       ## Set up and run reviews sample app tests
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
@@ -142,7 +139,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node: [20]
+        node: [22]
         os: [ubuntu-22.04]
     name: Photography Sample App
     steps:
@@ -163,7 +160,6 @@ jobs:
       - name: Wait for services
         run: |
           while ! nc -z localhost 8181; do sleep 1; done
-          while ! nc -z localhost 8081; do sleep 1; done
         working-directory: stargate-mongoose
       ## Set up and run reviews sample app tests
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
