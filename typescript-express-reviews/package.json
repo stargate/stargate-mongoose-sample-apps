@@ -27,7 +27,7 @@
     "@types/express": "4.17.21",
     "@types/mocha": "10.0.10",
     "@types/node": "24.3.0",
-    "mocha": "11.7.1",
+    "mocha": "11.7.2",
     "sinon": "^21.0.0",
     "ts-mocha": "^11.1.0",
     "ts-node": "10.9.2",
