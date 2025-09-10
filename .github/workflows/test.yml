@@ -86,6 +86,16 @@ jobs:
         run: |
           while ! nc -z localhost 8181; do sleep 1; done
         working-directory: stargate-mongoose
+      - name: Create test keyspace with RF=1
+        working-directory: stargate-mongoose
+        run: |
+          docker compose -f bin/docker-compose.yml exec -T dse-1 \
+                cqlsh -u cassandra -p cassandra -e "CREATE KEYSPACE IF NOT EXISTS ecommerce_test WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};"
+      - name: Check keyspace replication
+        working-directory: stargate-mongoose
+        run: |
+          docker compose -f bin/docker-compose.yml exec -T dse-1 \
+            cqlsh -u cassandra -p cassandra -e "DESCRIBE KEYSPACE ecommerce_test;"
       ## Set up and run ecommerce sample app tests
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
       - name: Setup node
@@ -128,6 +138,16 @@ jobs:
         run: |
           while ! nc -z localhost 8181; do sleep 1; done
         working-directory: stargate-mongoose
+      - name: Create test keyspace with RF=1
+        working-directory: stargate-mongoose
+        run: |
+          docker compose -f bin/docker-compose.yml exec -T dse-1 \
+                cqlsh -u cassandra -p cassandra -e "CREATE KEYSPACE IF NOT EXISTS reviews_test WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};"
+      - name: Check keyspace replication
+        working-directory: stargate-mongoose
+        run: |
+          docker compose -f bin/docker-compose.yml exec -T dse-1 \
+            cqlsh -u cassandra -p cassandra -e "DESCRIBE KEYSPACE reviews_test;"
       ## Set up and run reviews sample app tests
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
       - name: Setup node
@@ -171,6 +191,16 @@ jobs:
         run: |
           while ! nc -z localhost 8181; do sleep 1; done
         working-directory: stargate-mongoose
+      - name: Create test keyspace with RF=1
+        working-directory: stargate-mongoose
+        run: |
+          docker compose -f bin/docker-compose.yml exec -T dse-1 \
+                cqlsh -u cassandra -p cassandra -e "CREATE KEYSPACE IF NOT EXISTS photography_test WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};"
+      - name: Check keyspace replication
+        working-directory: stargate-mongoose
+        run: |
+          docker compose -f bin/docker-compose.yml exec -T dse-1 \
+            cqlsh -u cassandra -p cassandra -e "DESCRIBE KEYSPACE photography_test;"
       ## Set up and run reviews sample app tests
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
       - name: Setup node
