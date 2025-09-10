@@ -11,12 +11,15 @@ const jsonApiConnectOptions = {
   isAstra: false
 };
 
+console.log('Connecting to', uri);
+
 before(async function() {
   this.timeout(120000);
   await mongoose.connect(uri, jsonApiConnectOptions);
   const { databases } = await mongoose.connection.listDatabases();
 
   if (!databases.find(db => db.name === mongoose.connection.keyspaceName)) {
+    console.log('Creating keyspace', mongoose.connection.keyspaceName);
     await mongoose.connection.createKeyspace(mongoose.connection.keyspaceName);
   }
   // dropCollection() can be slower
