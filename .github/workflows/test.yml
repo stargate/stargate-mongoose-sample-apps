@@ -44,14 +44,14 @@ jobs:
         run: |
           docker compose -f bin/docker-compose.yml exec -T dse-1 \
             cqlsh -u cassandra -p cassandra -e "DESCRIBE KEYSPACE discordbot_test;"
-      - name: Wait for Cassandra to be ready
+      - name: Wait for Cassandra system.local
         run: |
-          echo "Waiting for Cassandra to accept CQL queries..."
+          echo "Waiting for Cassandra system.local query to succeed..."
           until docker compose -f bin/docker-compose.yml exec -T dse-1 \
-            cqlsh -u cassandra -p cassandra -e "CONSISTENCY" >/dev/null 2>&1; do
+            cqlsh -u cassandra -p cassandra -e "SELECT key FROM system.local;" >/dev/null 2>&1; do
             sleep 5
           done
-          echo "Cassandra is ready."
+          echo "Cassandra is queryable."
       ## Set up and run discord bot sample app tests
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
       - name: Setup node
