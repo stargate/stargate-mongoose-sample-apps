@@ -18,6 +18,7 @@ before(async function() {
   await mongoose.connect(uri, jsonApiConnectOptions);
   const { databases } = await mongoose.connection.listDatabases();
 
+  console.log('Found databases', databases);
   if (!databases.find(db => db.name === mongoose.connection.keyspaceName)) {
     console.log('Creating keyspace', mongoose.connection.keyspaceName);
     await mongoose.connection.createKeyspace(mongoose.connection.keyspaceName);
