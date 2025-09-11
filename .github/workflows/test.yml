@@ -166,6 +166,7 @@ jobs:
           docker compose -f bin/docker-compose.yml exec -T dse-1 \
             cqlsh -u cassandra -p cassandra -e "SELECT * FROM system_schema.keyspaces;"
       - name: Warm up Cassandra LWT
+        working-directory: stargate-mongoose
         run: |
           docker compose -f bin/docker-compose.yml exec -T dse-1 \
             cqlsh -u cassandra -p cassandra -e "
@@ -235,6 +236,7 @@ jobs:
           docker compose -f bin/docker-compose.yml exec -T dse-1 \
             cqlsh -u cassandra -p cassandra -e "SELECT * FROM system_schema.keyspaces;"
       - name: Warm up Cassandra LWT
+        working-directory: stargate-mongoose
         run: |
           docker compose -f bin/docker-compose.yml exec -T dse-1 \
             cqlsh -u cassandra -p cassandra -e "
