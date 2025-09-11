@@ -37,7 +37,7 @@ jobs:
         working-directory: stargate-mongoose
         run: |
           docker compose -f bin/docker-compose.yml exec -T dse-1 \
-                cqlsh -u cassandra -p cassandra -e "CREATE KEYSPACE IF NOT EXISTS discordbot_test WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};"
+                cqlsh -u cassandra -p cassandra -e "CREATE KEYSPACE discordbot_test WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};"
       - name: Check keyspace replication
         working-directory: stargate-mongoose
         run: |
@@ -91,7 +91,7 @@ jobs:
         working-directory: stargate-mongoose
         run: |
           docker compose -f bin/docker-compose.yml exec -T dse-1 \
-                cqlsh -u cassandra -p cassandra -e "CREATE KEYSPACE IF NOT EXISTS ecommerce_test WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};"
+                cqlsh -u cassandra -p cassandra -e "CREATE KEYSPACE ecommerce_test WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};"
       - name: Check keyspace replication
         working-directory: stargate-mongoose
         run: |
@@ -144,7 +144,7 @@ jobs:
         working-directory: stargate-mongoose
         run: |
           docker compose -f bin/docker-compose.yml exec -T dse-1 \
-                cqlsh -u cassandra -p cassandra -e "CREATE KEYSPACE IF NOT EXISTS reviews_test WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};"
+                cqlsh -u cassandra -p cassandra -e "CREATE KEYSPACE reviews_test WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};"
       - name: Check keyspace replication
         working-directory: stargate-mongoose
         run: |
@@ -198,7 +198,7 @@ jobs:
         working-directory: stargate-mongoose
         run: |
           docker compose -f bin/docker-compose.yml exec -T dse-1 \
-                cqlsh -u cassandra -p cassandra -e "CREATE KEYSPACE IF NOT EXISTS photography_test WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};"
+                cqlsh -u cassandra -p cassandra -e "CREATE KEYSPACE photography_test WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};"
       - name: Check keyspace replication
         working-directory: stargate-mongoose
         run: |
