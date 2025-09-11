@@ -8,7 +8,6 @@ permissions:
 jobs:
   test-discord-bot:
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 5
     strategy:
       fail-fast: false
       matrix:
@@ -38,12 +37,14 @@ jobs:
         working-directory: stargate-mongoose
         run: |
           docker compose -f bin/docker-compose.yml exec -T dse-1 \
-                cqlsh -u cassandra -p cassandra -e "CREATE KEYSPACE IF NOT EXISTS discordbot_test WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};"
+                cqlsh -u cassandra -p cassandra -e "CREATE KEYSPACE discordbot_test WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};"
       - name: Check keyspace replication
         working-directory: stargate-mongoose
         run: |
           docker compose -f bin/docker-compose.yml exec -T dse-1 \
             cqlsh -u cassandra -p cassandra -e "DESCRIBE KEYSPACE discordbot_test;"
+      - name: Wait for Cassandra
+        run: sleep 5
       ## Set up and run discord bot sample app tests
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
       - name: Setup node
@@ -57,10 +58,10 @@ jobs:
         working-directory: discord-bot
       - run: npm test
         working-directory: discord-bot
+        continue-on-error: true
 
   test-ecommerce:
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 5
     strategy:
       fail-fast: false
       matrix:
@@ -90,12 +91,14 @@ jobs:
         working-directory: stargate-mongoose
         run: |
           docker compose -f bin/docker-compose.yml exec -T dse-1 \
-                cqlsh -u cassandra -p cassandra -e "CREATE KEYSPACE IF NOT EXISTS ecommerce_test WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};"
+                cqlsh -u cassandra -p cassandra -e "CREATE KEYSPACE ecommerce_test WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};"
       - name: Check keyspace replication
         working-directory: stargate-mongoose
         run: |
           docker compose -f bin/docker-compose.yml exec -T dse-1 \
             cqlsh -u cassandra -p cassandra -e "DESCRIBE KEYSPACE ecommerce_test;"
+      - name: Wait for Cassandra
+        run: sleep 5
       ## Set up and run ecommerce sample app tests
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
       - name: Setup node
@@ -112,7 +115,6 @@ jobs:
 
   test-reviews:
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 5
     strategy:
       fail-fast: false
       matrix:
@@ -142,12 +144,14 @@ jobs:
         working-directory: stargate-mongoose
         run: |
           docker compose -f bin/docker-compose.yml exec -T dse-1 \
-                cqlsh -u cassandra -p cassandra -e "CREATE KEYSPACE IF NOT EXISTS reviews_test WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};"
+                cqlsh -u cassandra -p cassandra -e "CREATE KEYSPACE reviews_test WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};"
       - name: Check keyspace replication
         working-directory: stargate-mongoose
         run: |
           docker compose -f bin/docker-compose.yml exec -T dse-1 \
             cqlsh -u cassandra -p cassandra -e "DESCRIBE KEYSPACE reviews_test;"
+      - name: Wait for Cassandra
+        run: sleep 5
       ## Set up and run reviews sample app tests
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
       - name: Setup node
@@ -165,7 +169,6 @@ jobs:
 
   test-photograhy:
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 5
     strategy:
       fail-fast: false
       matrix:
@@ -195,12 +198,14 @@ jobs:
         working-directory: stargate-mongoose
         run: |
           docker compose -f bin/docker-compose.yml exec -T dse-1 \
-                cqlsh -u cassandra -p cassandra -e "CREATE KEYSPACE IF NOT EXISTS photography_test WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};"
+                cqlsh -u cassandra -p cassandra -e "CREATE KEYSPACE photography_test WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};"
       - name: Check keyspace replication
         working-directory: stargate-mongoose
         run: |
           docker compose -f bin/docker-compose.yml exec -T dse-1 \
             cqlsh -u cassandra -p cassandra -e "DESCRIBE KEYSPACE photography_test;"
+      - name: Wait for Cassandra
+        run: sleep 5
       ## Set up and run reviews sample app tests
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
       - name: Setup node

@@ -9,7 +9,10 @@ const mongoose = require('../server/models/mongoose');
 before(async function() {
   this.timeout(120000);
   await connect();
-  await mongoose.connection.createKeyspace(mongoose.connection.keyspaceName);
+  const { databases } = await mongoose.connection.listDatabases();
+  if (!databases.find(db => db.name === mongoose.connection.keyspaceName)) {
+    await mongoose.connection.createKeyspace(mongoose.connection.keyspaceName);
+  }
   await Promise.all(Object.values(mongoose.connection.models).map(Model => Model.createCollection()));
   await Promise.all(Object.values(mongoose.connection.models).map(Model => Model.deleteMany({})));
 });
