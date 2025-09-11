@@ -44,7 +44,7 @@ jobs:
           docker compose -f bin/docker-compose.yml exec -T dse-1 \
             cqlsh -u cassandra -p cassandra -e "DESCRIBE KEYSPACE discordbot_test;"
       - name: Wait for Cassandra
-        run: sleep 5
+        run: sleep 10
       ## Set up and run discord bot sample app tests
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
       - name: Setup node
@@ -98,7 +98,7 @@ jobs:
           docker compose -f bin/docker-compose.yml exec -T dse-1 \
             cqlsh -u cassandra -p cassandra -e "DESCRIBE KEYSPACE ecommerce_test;"
       - name: Wait for Cassandra
-        run: sleep 5
+        run: sleep 10
       ## Set up and run ecommerce sample app tests
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
       - name: Setup node
@@ -151,7 +151,7 @@ jobs:
           docker compose -f bin/docker-compose.yml exec -T dse-1 \
             cqlsh -u cassandra -p cassandra -e "DESCRIBE KEYSPACE reviews_test;"
       - name: Wait for Cassandra
-        run: sleep 5
+        run: sleep 10
       ## Set up and run reviews sample app tests
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
       - name: Setup node
@@ -205,7 +205,7 @@ jobs:
           docker compose -f bin/docker-compose.yml exec -T dse-1 \
             cqlsh -u cassandra -p cassandra -e "DESCRIBE KEYSPACE photography_test;"
       - name: Wait for Cassandra
-        run: sleep 5
+        run: sleep 10
       ## Set up and run reviews sample app tests
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
       - name: Setup node
