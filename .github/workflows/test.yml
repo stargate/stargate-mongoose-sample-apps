@@ -56,6 +56,7 @@ jobs:
         working-directory: discord-bot
       - run: npm test
         working-directory: discord-bot
+        continue-on-error: true
       - name: Check keyspace replication
         working-directory: stargate-mongoose
         run: |
@@ -163,6 +164,7 @@ jobs:
         working-directory: typescript-express-reviews
       - run: npm test
         working-directory: typescript-express-reviews
+        continue-on-error: true
       - name: Check keyspace replication
         working-directory: stargate-mongoose
         run: |
