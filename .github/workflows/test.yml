@@ -56,6 +56,11 @@ jobs:
         working-directory: discord-bot
       - run: npm test
         working-directory: discord-bot
+      - name: Check keyspace replication
+        working-directory: stargate-mongoose
+        run: |
+          docker compose -f bin/docker-compose.yml exec -T dse-1 \
+            cqlsh -u cassandra -p cassandra -e "DESCRIBE KEYSPACE discordbot_test;"
 
   test-ecommerce:
     runs-on: ${{ matrix.os }}
@@ -158,6 +163,11 @@ jobs:
         working-directory: typescript-express-reviews
       - run: npm test
         working-directory: typescript-express-reviews
+      - name: Check keyspace replication
+        working-directory: stargate-mongoose
+        run: |
+          docker compose -f bin/docker-compose.yml exec -T dse-1 \
+            cqlsh -u cassandra -p cassandra -e "DESCRIBE KEYSPACE reviews_test;"
 
 
   test-photograhy:
