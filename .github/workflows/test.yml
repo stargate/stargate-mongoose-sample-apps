@@ -165,15 +165,6 @@ jobs:
         run: |
           docker compose -f bin/docker-compose.yml exec -T dse-1 \
             cqlsh -u cassandra -p cassandra -e "SELECT * FROM system_schema.keyspaces;"
-      - name: Warm up Cassandra LWT
-        working-directory: stargate-mongoose
-        run: |
-          docker compose -f bin/docker-compose.yml exec -T dse-1 \
-            cqlsh -u cassandra -p cassandra -e "
-              CREATE TABLE IF NOT EXISTS reviews_test.lwt_warmup (
-                id int PRIMARY KEY
-              );
-            "
       - name: Wait for Cassandra
         run: sleep 10
       ## Set up and run reviews sample app tests
@@ -233,15 +224,6 @@ jobs:
         run: |
           docker compose -f bin/docker-compose.yml exec -T dse-1 \
             cqlsh -u cassandra -p cassandra -e "SELECT * FROM system_schema.keyspaces;"
-      - name: Warm up Cassandra LWT
-        working-directory: stargate-mongoose
-        run: |
-          docker compose -f bin/docker-compose.yml exec -T dse-1 \
-            cqlsh -u cassandra -p cassandra -e "
-              CREATE TABLE IF NOT EXISTS photography_test.lwt_warmup (
-                id int PRIMARY KEY
-              );
-            "
       - name: Wait for Cassandra
         run: sleep 10
       ## Set up and run reviews sample app tests
