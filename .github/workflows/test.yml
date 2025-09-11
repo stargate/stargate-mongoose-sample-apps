@@ -43,6 +43,11 @@ jobs:
         run: |
           docker compose -f bin/docker-compose.yml exec -T dse-1 \
             cqlsh -u cassandra -p cassandra -e "DESCRIBE KEYSPACE discordbot_test;"
+      - name: Check schema agreement
+        working-directory: stargate-mongoose
+        run: |
+          docker compose -f bin/docker-compose.yml exec -T dse-1 \
+            cqlsh -u cassandra -p cassandra -e "SELECT * FROM system_schema.keyspaces;"
       - name: Wait for Cassandra
         run: sleep 10
       ## Set up and run discord bot sample app tests
@@ -97,6 +102,11 @@ jobs:
         run: |
           docker compose -f bin/docker-compose.yml exec -T dse-1 \
             cqlsh -u cassandra -p cassandra -e "DESCRIBE KEYSPACE ecommerce_test;"
+      - name: Check schema agreement
+        working-directory: stargate-mongoose
+        run: |
+          docker compose -f bin/docker-compose.yml exec -T dse-1 \
+            cqlsh -u cassandra -p cassandra -e "SELECT * FROM system_schema.keyspaces;"
       - name: Wait for Cassandra
         run: sleep 10
       ## Set up and run ecommerce sample app tests
@@ -150,6 +160,11 @@ jobs:
         run: |
           docker compose -f bin/docker-compose.yml exec -T dse-1 \
             cqlsh -u cassandra -p cassandra -e "DESCRIBE KEYSPACE reviews_test;"
+      - name: Check schema agreement
+        working-directory: stargate-mongoose
+        run: |
+          docker compose -f bin/docker-compose.yml exec -T dse-1 \
+            cqlsh -u cassandra -p cassandra -e "SELECT * FROM system_schema.keyspaces;"
       - name: Wait for Cassandra
         run: sleep 10
       ## Set up and run reviews sample app tests
