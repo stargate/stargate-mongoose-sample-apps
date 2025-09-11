@@ -173,8 +173,6 @@ jobs:
               CREATE TABLE IF NOT EXISTS reviews_test.lwt_warmup (
                 id int PRIMARY KEY
               );
-              -- Run a dummy LWT to initialize Paxos & system_traces
-              INSERT INTO reviews_test.lwt_warmup (id) VALUES (1) IF NOT EXISTS;
             "
       - name: Wait for Cassandra
         run: sleep 10
@@ -243,8 +241,6 @@ jobs:
               CREATE TABLE IF NOT EXISTS photography_test.lwt_warmup (
                 id int PRIMARY KEY
               );
-              -- Run a dummy LWT to initialize Paxos & system_traces
-              INSERT INTO photography_test.lwt_warmup (id) VALUES (1) IF NOT EXISTS;
             "
       - name: Wait for Cassandra
         run: sleep 10
