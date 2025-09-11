@@ -165,6 +165,16 @@ jobs:
         run: |
           docker compose -f bin/docker-compose.yml exec -T dse-1 \
             cqlsh -u cassandra -p cassandra -e "SELECT * FROM system_schema.keyspaces;"
+      - name: Warm up Cassandra LWT
+        run: |
+          docker compose -f bin/docker-compose.yml exec -T dse-1 \
+            cqlsh -u cassandra -p cassandra -e "
+              CREATE TABLE IF NOT EXISTS testks1.lwt_warmup (
+                id int PRIMARY KEY
+              );
+              -- Run a dummy LWT to initialize Paxos & system_traces
+              INSERT INTO testks1.lwt_warmup (id) VALUES (1) IF NOT EXISTS;
+            "
       - name: Wait for Cassandra
         run: sleep 10
       ## Set up and run reviews sample app tests
@@ -224,6 +234,16 @@ jobs:
         run: |
           docker compose -f bin/docker-compose.yml exec -T dse-1 \
             cqlsh -u cassandra -p cassandra -e "SELECT * FROM system_schema.keyspaces;"
+      - name: Warm up Cassandra LWT
+        run: |
+          docker compose -f bin/docker-compose.yml exec -T dse-1 \
+            cqlsh -u cassandra -p cassandra -e "
+              CREATE TABLE IF NOT EXISTS testks1.lwt_warmup (
+                id int PRIMARY KEY
+              );
+              -- Run a dummy LWT to initialize Paxos & system_traces
+              INSERT INTO testks1.lwt_warmup (id) VALUES (1) IF NOT EXISTS;
+            "
       - name: Wait for Cassandra
         run: sleep 10
       ## Set up and run reviews sample app tests
