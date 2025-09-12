@@ -27,7 +27,7 @@ describe('Vehicle', function() {
       return res;
     };
     const user = await User.create({
-      email: 'test@localhost.com',
+      email: 'vehiclereviews@localhost.com',
       firstName: 'Test',
       lastName: 'Testerson'
     });
@@ -66,7 +66,7 @@ describe('Vehicle', function() {
       reviews.map((r: typeof Review) => r.rating),
       [5, 5, 4, 3, 2]
     );
-    
+
     // Test that populate worked
     assert.equal(reviews[0].vehicle.make, 'Tesla');
     assert.equal(reviews[0].vehicle.model, 'Model S');
@@ -75,5 +75,5 @@ describe('Vehicle', function() {
     assert.equal(reviews[0].user.lastName, 'Testerson');
   });
 
-  
+
 });
