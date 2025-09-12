@@ -26,7 +26,7 @@ describe('Review', function() {
       return res;
     };
     const user = await User.create({
-      email: 'test@localhost.com',
+      email: 'createreview@localhost.com',
       firstName: 'Test',
       lastName: 'Testerson'
     });
@@ -66,7 +66,7 @@ describe('Review', function() {
       return res;
     };
     const user = await User.create({
-      email: 'test@localhost.com',
+      email: 'findreviews@localhost.com',
       firstName: 'Test',
       lastName: 'Testerson'
     });
@@ -85,8 +85,8 @@ describe('Review', function() {
     );
     for (let i = 0; i < 6; i++) {
       await Review.create({
-        rating: i > 5 ? 5 : i, 
-        text: 'This is a review that must have length greater than 30. ' + i, 
+        rating: i > 5 ? 5 : i,
+        text: 'This is a review that must have length greater than 30. ' + i,
         vehicleId: vehicle._id,
         userId: user._id
       });
