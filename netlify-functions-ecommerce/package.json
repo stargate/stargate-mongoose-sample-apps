@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {
-    "@datastax/astra-mongoose": "1.0.4",
+    "@datastax/astra-mongoose": "1.0.6",
     "dotenv": "17.2.2",
     "mongoose": "^8.14",
     "sinon": "21.0.0",
