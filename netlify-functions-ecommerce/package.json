@@ -15,7 +15,7 @@
     "@masteringjs/eslint-config": "0.1.1",
     "eslint": "9.36.0",
     "mocha": "11.7.2",
-    "netlify-cli": "23.5.1"
+    "netlify-cli": "23.8.1"
   },
   "engines": {
     "node": ">=20.6.0"
