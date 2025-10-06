@@ -4,17 +4,17 @@
   "license": "MIT",
   "dependencies": {
     "@datastax/astra-mongoose": "1.0.6",
-    "dotenv": "17.2.2",
+    "dotenv": "17.2.3",
     "mongoose": "^8.14",
     "sinon": "21.0.0",
-    "stripe": "18.5.0",
+    "stripe": "19.1.0",
     "vanillatoasts": "1.6.0",
     "webpack": "5.x"
   },
   "devDependencies": {
     "@masteringjs/eslint-config": "0.1.1",
     "eslint": "9.37.0",
-    "mocha": "11.7.2",
+    "mocha": "11.7.4",
     "netlify-cli": "23.9.1"
   },
   "engines": {
