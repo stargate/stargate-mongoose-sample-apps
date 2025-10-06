@@ -224,6 +224,6 @@ jobs:
         working-directory: photography-site-demo.js
       - name: Warm up Cassandra collections
         working-directory: photography-site-demo.js
-        run: node --env-file=.env.test ./warm-up-tests.js
+        run: node --env-file=.env.test ../warm-up-tests.js
       - run: npm test
         working-directory: photography-site-demo.js
