@@ -11,15 +11,14 @@ Other tools include:
 
 Make sure you have a local stargate instance running as described on the [main page](../README.md) of this repo.
 
-## Running This Example 
+## Running This Example
 ### Setting up .env file to run against JSON API
 1. Copy the `.env.example` file to `.env` and fill in the values for the environment variables.
 2. Set `IS_ASTRA` to `false`
-3. Set `DATA_API_URI` to `http://127.0.0.1:8181/v1/ecommerce_test`
-4. Set `DATA_API_AUTH_URI` to `http://127.0.0.1:8081/v1/auth`
-5. Set `DATA_API_AUTH_USERNAME` to `cassandra`
-6. Set `DATA_API_AUTH_PASSWORD` to `cassandra`
-7. Remove `ASTRA_DB_ID`, `ASTRA_DB_REGION`, `ASTRA_DB_KEYSPACE`, `ASTRA_DB_APPLICATION_TOKEN`
+3. Set `DATA_API_URL` to `http://127.0.0.1:8181/v1/ecommerce_test`
+4. Set `DATA_API_AUTH_USERNAME` to `cassandra`
+5. Set `DATA_API_AUTH_PASSWORD` to `cassandra`
+6. Remove `ASTRA_DB_ID`, `ASTRA_DB_REGION`, `ASTRA_DB_KEYSPACE`, `ASTRA_DB_APPLICATION_TOKEN`
 
 ### Setting up .env file to run against AstraDB
 1. Copy the `.env.example` file to `.env` and fill in the values for the environment variables.
