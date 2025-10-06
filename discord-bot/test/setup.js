@@ -4,7 +4,7 @@ const Bot = require('../models/bot');
 const { after, before } = require('mocha');
 const mongoose = require('../mongoose');
 
-const uri = process.env.DATA_API_URI;
+const uri = process.env.DATA_API_URL;
 const jsonApiConnectOptions = {
   username: process.env.DATA_API_AUTH_USERNAME,
   password: process.env.DATA_API_AUTH_PASSWORD,

@@ -40,7 +40,7 @@ assert.ok(password, 'DATA_API_PASSWORD environment variable is required');
   let success = false;
   let lastError;
 
-  while (attempt < 5 && !success) {
+  while (attempt < 10 && !success) {
     try {
       await coll.insertOne({ ping: true, ts: new Date() });
       await coll.deleteMany({});
@@ -64,11 +64,7 @@ assert.ok(password, 'DATA_API_PASSWORD environment variable is required');
   }
 
   // Drop the temporary collection
-  await coll.drop().catch(err => {
-    if (!/does not exist/i.test(err.message)) {
-      console.warn('Failed to drop warm-up collection:', err.message);
-    }
-  });
+  await coll.drop();
 
   console.log('Cleaned up temporary collection');
   await mongoose.disconnect();

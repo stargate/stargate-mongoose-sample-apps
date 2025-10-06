@@ -38,18 +38,6 @@ jobs:
         run: |
           docker compose -f bin/docker-compose.yml exec -T dse-1 \
                 cqlsh -u cassandra -p cassandra -e "CREATE KEYSPACE discordbot_test WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};"
-      - name: Check keyspace replication
-        working-directory: stargate-mongoose
-        run: |
-          docker compose -f bin/docker-compose.yml exec -T dse-1 \
-            cqlsh -u cassandra -p cassandra -e "DESCRIBE KEYSPACE discordbot_test;"
-      - name: Check schema agreement
-        working-directory: stargate-mongoose
-        run: |
-          docker compose -f bin/docker-compose.yml exec -T dse-1 \
-            cqlsh -u cassandra -p cassandra -e "SELECT * FROM system_schema.keyspaces;"
-      - name: Wait for Cassandra
-        run: sleep 10
       ## Set up and run discord bot sample app tests
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
       - name: Setup node
@@ -61,6 +49,11 @@ jobs:
         working-directory: discord-bot
       - run: npm run lint
         working-directory: discord-bot
+      - run: cp ../warm-up-tests.js .
+        working-directory: discord-bot
+      - name: Warm up Cassandra collections
+        working-directory: discord-bot
+        run: node --env-file=.env.test ./warm-up-tests.js
       - run: npm test
         working-directory: discord-bot
         continue-on-error: true
@@ -178,6 +171,11 @@ jobs:
         working-directory: typescript-express-reviews
       - run: npm run build
         working-directory: typescript-express-reviews
+      - run: cp ../warm-up-tests.js .
+        working-directory: typescript-express-reviews
+      - name: Warm up Cassandra collections
+        working-directory: typescript-express-reviews
+        run: node --env-file=.env.test ./warm-up-tests.js
       - run: npm test
         working-directory: typescript-express-reviews
 
@@ -221,6 +219,8 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - run: npm install
+        working-directory: photography-site-demo.js
+      - run: cp ../warm-up-tests.js .
         working-directory: photography-site-demo.js
       - name: Warm up Cassandra collections
         working-directory: photography-site-demo.js
