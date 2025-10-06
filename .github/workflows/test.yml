@@ -223,7 +223,7 @@ jobs:
       - run: npm install
         working-directory: photography-site-demo.js
       - name: Warm up Cassandra collections
-        working-directory: stargate-mongoose
+        working-directory: photography-site-demo.js
         run: node --env-file=.env.test ./warm-up-tests.js
       - run: npm test
         working-directory: photography-site-demo.js
