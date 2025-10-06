@@ -64,11 +64,7 @@ assert.ok(password, 'DATA_API_PASSWORD environment variable is required');
   }
 
   // Drop the temporary collection
-  await coll.drop().catch(err => {
-    if (!/does not exist/i.test(err.message)) {
-      console.warn('Failed to drop warm-up collection:', err.message);
-    }
-  });
+  await coll.drop();
 
   console.log('Cleaned up temporary collection');
   await mongoose.disconnect();

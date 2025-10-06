@@ -14,6 +14,14 @@ before(async function() {
     console.log('Creating keyspace', mongoose.connection.keyspaceName);
     await mongoose.connection.createKeyspace(mongoose.connection.keyspaceName as string);
   }
+
+  const collections = await mongoose.connection.db!.listCollections();
+  for (const Model of Object.values(mongoose.models)) {
+    const collectionName = Model.collection.collectionName;
+    if (!collections.find(c => c.name === collectionName)) {
+      await Model.createCollection();
+    }
+  }
 });
 
 beforeEach(async function clearDb() {
