@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 const assert = require('assert');
 const astraMongoose = require('@datastax/astra-mongoose');
 const mongoose = require('mongoose');
