@@ -3,7 +3,7 @@ import mongoose from './mongoose';
 
 const isAstra = process.env.IS_ASTRA ?? '';
 
-const dataAPIURI = process.env.DATA_API_URI ?? '';
+const dataAPIURL = process.env.DATA_API_URL ?? '';
 const username = process.env.DATA_API_AUTH_USERNAME ?? '';
 const password = process.env.DATA_API_AUTH_PASSWORD ?? '';
 
@@ -23,9 +23,9 @@ export default async function connect() {
       isTable: !!process.env.DATA_API_TABLES
     });
   } else {
-    console.log('Connecting to', dataAPIURI);
+    console.log('Connecting to', dataAPIURL);
     await mongoose.connect(
-      dataAPIURI,
+      dataAPIURL,
       {
         username,
         password,

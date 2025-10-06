@@ -16,7 +16,7 @@ module.exports = async function connect() {
       isTable: !!process.env.DATA_API_TABLES
     };
   } else {
-    uri = process.env.DATA_API_URI;
+    uri = process.env.DATA_API_URL;
     jsonApiConnectOptions = {
       username: process.env.DATA_API_AUTH_USERNAME,
       password: process.env.DATA_API_AUTH_PASSWORD,
