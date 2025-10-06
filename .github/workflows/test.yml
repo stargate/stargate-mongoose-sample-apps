@@ -178,6 +178,11 @@ jobs:
         working-directory: typescript-express-reviews
       - run: npm run build
         working-directory: typescript-express-reviews
+      - run: cp ../warm-up-tests.js .
+        working-directory: typescript-express-reviews
+      - name: Warm up Cassandra collections
+        working-directory: typescript-express-reviews
+        run: node --env-file=.env.test ./warm-up-tests.js
       - run: npm test
         working-directory: typescript-express-reviews
 

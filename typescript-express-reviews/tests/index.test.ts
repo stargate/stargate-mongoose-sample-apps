@@ -14,37 +14,6 @@ before(async function() {
     console.log('Creating keyspace', mongoose.connection.keyspaceName);
     await mongoose.connection.createKeyspace(mongoose.connection.keyspaceName as string);
   }
-
-  const collections = await mongoose.connection.db!.listCollections();
-  for (const Model of Object.values(mongoose.models)) {
-    const collectionName = Model.collection.collectionName;
-    if (!collections.find(c => c.name === collectionName)) {
-      await Model.createCollection();
-      // Prime collections to avoid UnavailableException errors in CI
-      console.log('Test insert for ', collectionName);
-      let attempt = 0;
-      let success = false;
-      let lastError: any;
-      while (attempt < 5 && !success) {
-        try {
-          await Model.collection.insertOne({});
-          await Model.collection.deleteMany({});
-          success = true;
-        } catch (err) {
-          if (!(err instanceof Error) || !err.message.includes('UnavailableException')) {
-            throw err;
-          }
-          lastError = err;
-          attempt++;
-          const delay = Math.pow(2, attempt) * 100; // exponential backoff: 200ms, 400ms, 800ms, etc.
-          await new Promise(res => setTimeout(res, delay));
-        }
-      }
-      if (!success) {
-        throw lastError;
-      }
-    }
-  }
 });
 
 beforeEach(async function clearDb() {
