@@ -3,20 +3,48 @@
 const models = require('./models');
 const connect = require('./connect');
 const mongoose = require('./mongoose');
-const { tableDefinitionFromSchema } = require('@datastax/astra-mongoose');
+const { tableDefinitionFromSchema, udtDefinitionsFromSchema } = require('@datastax/astra-mongoose');
 
 async function createProducts() {
   await connect();
 
   await mongoose.connection.createKeyspace(mongoose.connection.keyspaceName);
+  const tableNames = await mongoose.connection.listTables({ nameOnly: true });
+  console.log('Found tables:', tableNames);
+  const collectionNames = await mongoose.connection.listCollections({ nameOnly: true });
+  console.log('Found collections:', collectionNames);
+
+  if (process.env.DATA_API_TABLES) {
+    const udtNames = await mongoose.connection.db.listTypes({ nameOnly: true });
+    for (const Model of Object.values(models)) {
+      if (tableNames.includes(Model.collection.collectionName)) {
+        await mongoose.connection.dropTable(Model.collection.collectionName);
+      }
+    }
+    for (const Model of Object.values(models)) {
+      const udts = udtDefinitionsFromSchema(Model.schema);
+      for (const [name, fields] of Object.entries(udts)) {
+        console.log(`Creating UDT ${name}`);
+        if (udtNames.includes(name)) {
+          await mongoose.connection.db.dropType(name);
+        }
+        await mongoose.connection.db.createType(name, fields);
+      }
+    }
+  }
 
   for (const Model of Object.values(models)) {
     if (process.env.DATA_API_TABLES) {
+      console.log(`Creating table ${Model.collection.collectionName}`);
       await mongoose.connection.createTable(
         Model.collection.collectionName,
         tableDefinitionFromSchema(Model.schema)
       );
     } else {
+      if (tableNames.includes(Model.collection.collectionName)) {
+        await mongoose.connection.dropTable(Model.collection.collectionName);
+      }
+      console.log(`Creating collection ${Model.collection.collectionName}`);
       await Model.createCollection();
     }
   }
