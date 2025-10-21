@@ -35,6 +35,7 @@ const handler = async(event) => {
           await cart.save();
         } else {
           exists.quantity += product.quantity;
+          cart.markModified('items');
           await cart.save();
         }
       }
