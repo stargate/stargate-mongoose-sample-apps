@@ -24,7 +24,7 @@
     "mongoose": "^8.14"
   },
   "devDependencies": {
-    "eslint": "9.38.0",
+    "eslint": "9.39.0",
     "mocha": "11.7.4",
     "sinon": "21.0.0"
   }
