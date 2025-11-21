@@ -21,8 +21,24 @@ async function createProducts() {
         await mongoose.connection.dropTable(Model.collection.collectionName);
       }
     }
-    for (const Model of Object.values(models)) {
-      const udts = udtDefinitionsFromSchema(Model.schema);
+
+    const modelEntries = Object.values(models);
+    if (modelEntries.length > 0) {
+      // Dedupe UDTs by name, verifying that each definition is identical
+      const udts = udtDefinitionsFromSchema(modelEntries[0].schema);
+      for (const Model of modelEntries.slice(1)) {
+        const udtsToAdd = udtDefinitionsFromSchema(Model.schema);
+        for (const [name, fields] of Object.entries(udtsToAdd)) {
+          if (udts.hasOwnProperty(name)) {
+            if (JSON.stringify(fields) !== JSON.stringify(udts[name])) {
+              throw new Error('Conflicting UDTs found');
+            }
+          } else {
+            udts[name] = fields;
+          }
+        }
+      }
+
       for (const [name, fields] of Object.entries(udts)) {
         console.log(`Creating UDT ${name}`);
         if (udtNames.includes(name)) {
@@ -31,6 +47,7 @@ async function createProducts() {
         await mongoose.connection.db.createType(name, fields);
       }
     }
+
   }
 
   for (const Model of Object.values(models)) {
