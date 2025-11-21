@@ -65,7 +65,7 @@ async function run() {
         'https://www.tesla.com/sites/default/files/images/blogs/models_blog_post.jpg'
       ],
       numReviews: 0,
-      averageReviews: 0
+      averageReview: 0
     },
     {
       _id: '1'.repeat(24),
@@ -77,7 +77,7 @@ async function run() {
         'https://newsroom.porsche.com/.imaging/mte/porsche-templating-theme/image_1290x726/dam/pnr/2021/Products/Free-Software-Update-Taycan/Free-Software-Update-for-early-Porsche-Taycan_2.jpeg/jcr:content/Free%20Software-Update%20for%20early%20Porsche%20Taycan_2.jpeg'
       ],
       numReviews: 0,
-      averageReviews: 0
+      averageReview: 0
     }
   ]);
 
