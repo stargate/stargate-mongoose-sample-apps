@@ -20,11 +20,11 @@
     "@datastax/astra-mongoose": "1.1.0",
     "@discordjs/rest": "2.6.0",
     "@masteringjs/eslint-config": "0.1.1",
-    "discord.js": "14.24.0",
+    "discord.js": "14.24.2",
     "mongoose": "^8.14"
   },
   "devDependencies": {
-    "eslint": "9.38.0",
+    "eslint": "9.39.1",
     "mocha": "11.7.5",
     "sinon": "21.0.0"
   }
