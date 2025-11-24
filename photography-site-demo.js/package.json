@@ -23,7 +23,7 @@
     "express-ejs-layouts": "^2.5.1",
     "express-fileupload": "^1.2.1",
     "express-session": "^1.17.2",
-    "mongoose": "^8.14.0",
+    "mongoose": "^9.0.0",
     "python-shell": "^5.0.0",
     "mocha": "11.7.5"
   },
