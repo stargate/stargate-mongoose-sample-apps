@@ -21,7 +21,7 @@
     "@discordjs/rest": "2.6.0",
     "@masteringjs/eslint-config": "0.1.1",
     "discord.js": "14.25.1",
-    "mongoose": "^8.14"
+    "mongoose": "^9.0"
   },
   "devDependencies": {
     "eslint": "9.39.1",
