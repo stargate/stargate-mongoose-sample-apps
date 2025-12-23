@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {
-    "@datastax/astra-mongoose": "1.2.0",
+    "@datastax/astra-mongoose": "1.3.0",
     "dotenv": "17.2.3",
     "mongoose": "^9.0",
-    "sinon": "21.0.0",
+    "sinon": "21.0.1",
     "stripe": "20.1.0",
     "vanillatoasts": "1.6.0",
     "webpack": "5.x"
