@@ -15,6 +15,12 @@ async function dropCollections() {
     await mongoose.connection.dropCollection(collection.name);
   }
 
+  const tables = await mongoose.connection.listTables();
+  for (const table of tables) {
+    console.log('Dropping', table.name);
+    await mongoose.connection.dropTable(table.name);
+  }
+
   console.log('Done');
   process.exit(0);
 }
