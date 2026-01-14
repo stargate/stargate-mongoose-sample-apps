@@ -23,7 +23,7 @@ server.registerTool(
       out: z.array(
         z.object({
           modelName: z.string(),
-          statics: z.array(z.string())
+          availableStaticFunctions: z.array(z.string())
         })
       )
     }
@@ -34,7 +34,7 @@ server.registerTool(
       for (const model of models) {
         out.push({
           modelName: model.modelName,
-          statics: Object.entries(model.schema.statics).filter(([name, fn]) => fn.mcpConfig).map(([name]) => name)
+          availableStaticFunctions: Object.entries(model.schema.statics).filter(([name, fn]) => fn.mcpConfig).map(([name]) => name)
         });
       }
       return {
@@ -42,7 +42,7 @@ server.registerTool(
         structuredContent: { out }
       };
     } catch (err) {
-      console.log(err.stack);
+      console.error(err.stack);
       throw err;
     }
   }
