@@ -16,11 +16,6 @@ async function createProducts() {
 
   if (process.env.DATA_API_TABLES) {
     const udtNames = await mongoose.connection.db.listTypes({ nameOnly: true });
-    for (const Model of Object.values(models)) {
-      if (tableNames.includes(Model.collection.collectionName)) {
-        await mongoose.connection.dropTable(Model.collection.collectionName);
-      }
-    }
 
     const modelEntries = Object.values(models);
     if (modelEntries.length > 0) {
@@ -39,22 +34,15 @@ async function createProducts() {
         }
       }
 
-      for (const [name, fields] of Object.entries(udts)) {
-        console.log(`Creating UDT ${name}`);
-        if (udtNames.includes(name)) {
-          await mongoose.connection.db.dropType(name);
-        }
-        await mongoose.connection.db.createType(name, fields);
-      }
+      const udtsList = Object.entries(udts).map(([name, definition]) => ({ name, definition }));
+      await mongoose.connection.db.syncTypes(udtsList);
     }
-
   }
 
   for (const Model of Object.values(models)) {
     if (process.env.DATA_API_TABLES) {
       console.log(`Creating table ${Model.collection.collectionName}`);
-      await mongoose.connection.createTable(
-        Model.collection.collectionName,
+      await mongoose.connection.collection(Model.collection.collectionName).syncTable(
         tableDefinitionFromSchema(Model.schema)
       );
     } else {
