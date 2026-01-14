@@ -23,8 +23,7 @@ async function run() {
   for (const Model of Object.values(mongoose.connection.models)) {
     // First ensure the collection or table exists
     if (process.env.DATA_API_TABLES) {
-      await mongoose.connection.createTable(
-        Model.collection.collectionName,
+      await mongoose.connection.collection(Model.collection.collectionName).syncTable(
         tableDefinitionFromSchema(Model.schema)
       );
     } else {
