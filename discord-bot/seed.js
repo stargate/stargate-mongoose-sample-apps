@@ -15,10 +15,8 @@ async function seed() {
 
   await mongoose.connection.createKeyspace(mongoose.connection.keyspaceName);
   if (process.env.DATA_API_TABLES) {
-    await mongoose.connection.createTable(
-      Bot.collection.collectionName,
-      tableDefinitionFromSchema(Bot.schema)
-    );
+    await mongoose.connection.collection(Bot.collection.collectionName)
+      .syncTable(tableDefinitionFromSchema(Bot.schema));
   } else {
     await Bot.createCollection();
   }
