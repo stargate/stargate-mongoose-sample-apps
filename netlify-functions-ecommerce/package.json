@@ -4,7 +4,7 @@
   "license": "MIT",
   "dependencies": {
     "@datastax/astra-mongoose": "1.4.0",
-    "dotenv": "17.2.3",
+    "dotenv": "17.3.1",
     "mongoose": "^9.0",
     "sinon": "21.0.1",
     "stripe": "20.2.0",
