@@ -6,7 +6,7 @@
     "@datastax/astra-mongoose": "1.4.0",
     "dotenv": "17.2.3",
     "mongoose": "^9.0",
-    "sinon": "21.0.1",
+    "sinon": "21.0.2",
     "stripe": "20.2.0",
     "vanillatoasts": "1.6.0",
     "webpack": "5.x"
