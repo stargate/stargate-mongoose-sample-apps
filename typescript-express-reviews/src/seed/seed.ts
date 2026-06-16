@@ -17,8 +17,9 @@ run().catch(err => {
 async function run() {
   await connect();
 
-  assert.ok(mongoose.connection.keyspaceName);
-  await mongoose.connection.createKeyspace(mongoose.connection.keyspaceName);
+  const keyspaceName = mongoose.connection.keyspaceName;
+  assert.ok(keyspaceName);
+  await mongoose.connection.createKeyspace(keyspaceName);
 
   for (const Model of Object.values(mongoose.connection.models)) {
     // First ensure the collection or table exists
