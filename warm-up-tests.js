@@ -47,13 +47,13 @@ assert.ok(password, 'DATA_API_PASSWORD environment variable is required');
       success = true;
       console.log('Warm-up successful ✅');
     } catch (err) {
-      if (!(err instanceof Error) || !err.message.includes('UnavailableException')) {
+      if (!(err instanceof Error) || !err.message.includes('Not enough replicas available for query')) {
         throw err;
       }
       attempt++;
       lastError = err;
       const delay = Math.pow(2, attempt) * 100; // 200, 400, 800, ...
-      console.warn(`UnavailableException (attempt ${attempt}), retrying in ${delay}ms...`);
+      console.warn(`"Not enough replicas available for query" (attempt ${attempt}), retrying in ${delay}ms...`);
       await new Promise(res => setTimeout(res, delay));
     }
   }
