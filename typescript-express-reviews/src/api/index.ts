@@ -25,6 +25,8 @@ void async function main() {
 
   app.use(bodyParser.json());
   const opts = googleGeminiAPIKey ? { googleGeminiAPIKey } : {};
+
+  const studioConnection = mongoose.connection.useDb(mongoose.connection.keyspaceName as string, { isTable: true });
   app.use(
     '/studio',
     await studio.express(
@@ -33,12 +35,12 @@ void async function main() {
       mongoose.connection,
       {
         changeStream: false,
-        studioConnection: mongoose.connection.useDb(null, { isTable: true }),
+        studioConnection,
         ...opts
       }
     )
   );
-  await mongooseStudioSetup();
+  await mongooseStudioSetup(studioConnection);
   app.get('/status', function (req: express.Request, res: express.Response) {
     res.json({ ok: 1 });
   });

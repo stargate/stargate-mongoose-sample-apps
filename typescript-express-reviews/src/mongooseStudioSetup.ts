@@ -1,47 +1,65 @@
 import { convertSchemaToUDTColumns, tableDefinitionFromSchema } from "@datastax/astra-mongoose";
 import mongoose from "./models/mongoose";
+import { Schema } from 'mongoose';
 
 mongoose.set('debug', true);
 
-export default async function mongooseStudioSetup() {
-  let StudioDashboards = mongoose.model('__Studio_Dashboard');
-  const studioDashboardsSchema = StudioDashboards.schema.omit(['createdBy.name', 'createdBy.email']);
-  StudioDashboards = mongoose.model('__Studio_Dashboard', studioDashboardsSchema, 'studio__dashboards', { overwriteModels: true });
+function overwriteModel(connection: typeof mongoose.connection, name: string, schema: Schema, collection: string) {
+  connection.deleteModel(name);
+  return connection.model(name, schema, collection);
+}
 
-  let StudioDashboardResult = mongoose.model('__Studio_DashboardResult');
+function parseJSON(v: any) {
+  return v == null || typeof v !== 'string' ? v : JSON.parse(v);
+}
+
+function stringifyJSON(v: any) {
+  return v == null ? v : JSON.stringify(v);
+}
+
+export default async function mongooseStudioSetup(connection: typeof mongoose.connection) {
+  let StudioDashboards = connection.model('__Studio_Dashboard');
+  const studioDashboardsSchema = StudioDashboards.schema.omit(['createdBy.name', 'createdBy.email']);
+  studioDashboardsSchema.pre('updateOne', function (this: any) {
+    // $setOnInsert not supported in table mode
+    delete this.getUpdate().$setOnInsert;
+  });
+  StudioDashboards = overwriteModel(connection, '__Studio_Dashboard', studioDashboardsSchema, 'studio__dashboards');
+
+  let StudioDashboardResult = connection.model('__Studio_DashboardResult');
   const studioDashboardResultSchema = StudioDashboardResult.schema.omit(['result', 'error']).add({
     result: {
       type: String,
-      get: (v: any) => JSON.parse(v),
-      set: (v: any) => JSON.stringify(v)
+      get: parseJSON,
+      set: stringifyJSON
     },
     error: {
       type: String,
-      get: (v: any) => JSON.parse(v),
-      set: (v: any) => JSON.stringify(v)
+      get: parseJSON,
+      set: stringifyJSON
     }
   });
   studioDashboardResultSchema.pre('updateOne', function (this: any) {
     // $setOnInsert not supported in table mode
     delete this.getUpdate().$setOnInsert;
-  })
-  StudioDashboardResult = mongoose.model(
+  });
+  StudioDashboardResult = overwriteModel(
+    connection,
     '__Studio_DashboardResult',
     studioDashboardResultSchema,
-    'studio__dashboardResults',
-    { overwriteModels: true }
+    'studio__dashboardResults'
   );
 
-  let studioChatThread = mongoose.model('__Studio_ChatThread');
+  let studioChatThread = connection.model('__Studio_ChatThread');
   const studioChatThreadSchema = studioChatThread.schema.omit(['sharingOptions.sharedWithWorkspace']);
-  studioChatThread = mongoose.model('__Studio_ChatThread', studioChatThreadSchema, 'studio__chatThreads', { overwriteModels: true });
+  studioChatThread = overwriteModel(connection, '__Studio_ChatThread', studioChatThreadSchema, 'studio__chatThreads');
 
-  let studioChatMessage = mongoose.model('__Studio_ChatMessage');
+  let studioChatMessage = connection.model('__Studio_ChatMessage');
   const tollCallSchema = studioChatMessage.schema.path('toolCalls').schema.omit(['input']).add({
     input: {
       type: String,
-      get: (v: any) => JSON.parse(v),
-      set: (v: any) => JSON.stringify(v)
+      get: parseJSON,
+      set: stringifyJSON
     }
   });
   tollCallSchema.options.udtName = 'ToolCall';
@@ -57,17 +75,18 @@ export default async function mongooseStudioSetup() {
   studioChatMessageSchema.path('executionResult').schema = studioChatMessageSchema.path('executionResult').schema.omit(['output']).add({
     output: {
       type: String,
-      get: (v: any) => JSON.parse(v),
-      set: (v: any) => JSON.stringify(v)
+      get: parseJSON,
+      set: stringifyJSON
     }
   });
+  studioChatMessageSchema.options.versionKey = false;
   studioChatMessageSchema.path('executionResult').options.udtName = 'ExecutionResult';
   studioChatMessageSchema.pre('updateOne', function (this: any) {
     // $setOnInsert not supported in table mode
     delete this.getUpdate().$setOnInsert;
   })
-  studioChatMessage = mongoose.model('__Studio_ChatMessage', studioChatMessageSchema, 'studio__chatMessages', { overwriteModels: true });
-  await mongoose.connection.syncTypes([
+  studioChatMessage = overwriteModel(connection, '__Studio_ChatMessage', studioChatMessageSchema, 'studio__chatMessages');
+  await connection.syncTypes([
     {
       name: 'ToolCall',
       definition: {
@@ -82,16 +101,16 @@ export default async function mongooseStudioSetup() {
     }
   ]);
 
-  await mongoose.connection.collection('studio__dashboards').syncTable(
+  await connection.collection('studio__dashboards').syncTable(
     tableDefinitionFromSchema(StudioDashboards.schema)
   );
-  await mongoose.connection.collection('studio__dashboardResults').syncTable(
+  await connection.collection('studio__dashboardResults').syncTable(
     tableDefinitionFromSchema(studioDashboardResultSchema)
   );
-  await mongoose.connection.collection('studio__chatThreads').syncTable(
+  await connection.collection('studio__chatThreads').syncTable(
     tableDefinitionFromSchema(studioChatThreadSchema)
   );
-  await mongoose.connection.collection('studio__chatMessages').syncTable(
+  await connection.collection('studio__chatMessages').syncTable(
     tableDefinitionFromSchema(studioChatMessageSchema)
   );
 }
