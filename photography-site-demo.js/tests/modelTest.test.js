@@ -7,12 +7,6 @@ const createImageEmbedding = require('../server/utils/imageEmbeddingGenerator');
 
 
 describe('Category test', function() {
-  before(async function() {
-    this.timeout(30000);
-
-    await Category.createCollection();
-  });
-
   it('Create landscape category, then find it', async function() {
     await Category.create({
       name: 'landscape',

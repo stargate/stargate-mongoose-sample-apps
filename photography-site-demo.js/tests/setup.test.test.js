@@ -23,11 +23,12 @@ before(async function() {
       let attempt = 0;
       let success = false;
       let lastError;
-      while (attempt < 5 && !success) {
+      while (attempt < 10 && !success) {
         try {
           await Model.collection.insertOne({});
           await Model.collection.deleteMany({});
           success = true;
+          console.log('Successfully primed collection', collectionName);
         } catch (err) {
           if (!(err instanceof Error) || !err.message.includes('UnavailableException')) {
             throw err;

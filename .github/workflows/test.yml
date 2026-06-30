@@ -27,7 +27,17 @@ jobs:
       - name: Set up JSON API
         run: |
           chmod +x bin/start_data_api.sh
-          bin/start_data_api.sh
+          for i in 1 2; do
+            echo "Starting Data API, attempt $i..."
+            if bin/start_data_api.sh; then
+              exit 0
+            fi
+            echo "Data API startup failed."
+            if [ "$i" -lt 2 ]; then
+              echo "Retrying in 3 seconds..."
+              sleep 3
+            fi
+          done
         working-directory: stargate-mongoose
       - name: Wait for services
         run: |
@@ -79,7 +89,17 @@ jobs:
       - name: Set up JSON API
         run: |
           chmod +x bin/start_data_api.sh
-          bin/start_data_api.sh
+          for i in 1 2; do
+            echo "Starting Data API, attempt $i..."
+            if bin/start_data_api.sh; then
+              exit 0
+            fi
+            echo "Data API startup failed."
+            if [ "$i" -lt 2 ]; then
+              echo "Retrying in 3 seconds..."
+              sleep 3
+            fi
+          done
         working-directory: stargate-mongoose
       - name: Wait for services
         run: |
@@ -130,7 +150,17 @@ jobs:
       - name: Set up JSON API
         run: |
           chmod +x bin/start_data_api.sh
-          bin/start_data_api.sh
+          for i in 1 2; do
+            echo "Starting Data API, attempt $i..."
+            if bin/start_data_api.sh; then
+              exit 0
+            fi
+            echo "Data API startup failed."
+            if [ "$i" -lt 2 ]; then
+              echo "Retrying in 3 seconds..."
+              sleep 3
+            fi
+          done
         working-directory: stargate-mongoose
       - name: Wait for services
         run: |
@@ -194,7 +224,17 @@ jobs:
       - name: Set up JSON API
         run: |
           chmod +x bin/start_data_api.sh
-          bin/start_data_api.sh
+          for i in 1 2; do
+            echo "Starting Data API, attempt $i..."
+            if bin/start_data_api.sh; then
+              exit 0
+            fi
+            echo "Data API startup failed."
+            if [ "$i" -lt 2 ]; then
+              echo "Retrying in 3 seconds..."
+              sleep 3
+            fi
+          done
         working-directory: stargate-mongoose
       - name: Wait for services
         run: |
