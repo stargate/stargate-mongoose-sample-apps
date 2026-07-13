@@ -7,7 +7,7 @@
     "dotenv": "17.4.2",
     "mongoose": "^9.0",
     "sinon": "22.0.0",
-    "stripe": "22.3.0",
+    "stripe": "22.3.1",
     "vanillatoasts": "1.6.0",
     "webpack": "5.x"
   },
