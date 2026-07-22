@@ -18,9 +18,9 @@
   },
   "dependencies": {
     "@datastax/astra-mongoose": "1.4.1",
-    "@discordjs/rest": "2.6.1",
+    "@discordjs/rest": "2.6.3",
     "@masteringjs/eslint-config": "0.1.1",
-    "discord.js": "14.26.4",
+    "discord.js": "14.27.0",
     "mongoose": "^9.0"
   },
   "devDependencies": {

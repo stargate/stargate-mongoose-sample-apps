@@ -35,7 +35,11 @@ async function createProducts() {
       }
 
       const udtsList = Object.entries(udts).map(([name, definition]) => ({ name, definition }));
-      await mongoose.connection.db.syncTypes(udtsList);
+      for (const { name, definition } of udtsList) {
+        if (!udtNames.includes(name)) {
+          await mongoose.connection.db.createType(name, definition);
+        }
+      }
     }
   }
 
