@@ -19,7 +19,7 @@ function stringifyJSON(v: any) {
 
 export default async function mongooseStudioSetup(connection: typeof mongoose.connection) {
   let StudioDashboards = connection.model('__Studio_Dashboard');
-  const studioDashboardsSchema = StudioDashboards.schema.omit(['createdBy.name', 'createdBy.email']);
+  const studioDashboardsSchema = StudioDashboards.schema.clone();
   studioDashboardsSchema.pre('updateOne', function (this: any) {
     // $setOnInsert not supported in table mode
     delete this.getUpdate().$setOnInsert;
