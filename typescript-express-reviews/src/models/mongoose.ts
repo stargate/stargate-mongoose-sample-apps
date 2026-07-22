@@ -20,11 +20,13 @@ if (process.env.DATA_API_TABLES) {
     });
 
     schema.pre('updateOne', async function () {
-      if (!this.getUpdate()) {
+      const update = this.getUpdate();
+      if (!update || Array.isArray(update) || !update.$setOnInsert) {
         return;
       }
       // $setOnInsert not supported in table mode
-      delete this.getUpdate().$setOnInsert;
+      delete update.$setOnInsert;
+      this.setUpdate(update);
     });
 
     schema.pre('findOneAndUpdate', async function () {
