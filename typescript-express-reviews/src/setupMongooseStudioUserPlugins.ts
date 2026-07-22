@@ -13,6 +13,7 @@ export default function setupMongooseStudioUserPlugins(mongoose: AstraMongoose) 
         await this.model
           .find(this.getFilter())
           .select({ _id: 1 })
+          .lean()
           .then((res: any) => res.length)
       );
     });

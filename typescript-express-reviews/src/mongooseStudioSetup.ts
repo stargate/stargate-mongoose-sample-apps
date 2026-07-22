@@ -2,8 +2,6 @@ import { convertSchemaToUDTColumns, tableDefinitionFromSchema } from "@datastax/
 import mongoose from "./models/mongoose";
 import { Schema } from 'mongoose';
 
-mongoose.set('debug', true);
-
 function overwriteModel(connection: typeof mongoose.connection, name: string, schema: Schema, collection: string) {
   connection.deleteModel(name);
   return connection.model(name, schema, collection);
@@ -64,13 +62,7 @@ export default async function mongooseStudioSetup(connection: typeof mongoose.co
   });
   tollCallSchema.options.udtName = 'ToolCall';
   const studioChatMessageSchema = studioChatMessage.schema.omit(['toolCalls']).add({
-    toolCalls: {
-      type: Set,
-      of: {
-        type: tollCallSchema,
-        required: true
-      }
-    }
+    toolCalls: [tollCallSchema]
   });
   studioChatMessageSchema.path('executionResult').schema = studioChatMessageSchema.path('executionResult').schema.omit(['output']).add({
     output: {
