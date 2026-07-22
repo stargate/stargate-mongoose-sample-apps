@@ -37,6 +37,8 @@ export default async function mongooseStudioSetup(connection: typeof mongoose.co
       set: stringifyJSON
     }
   });
+  studioDashboardResultSchema.set('toJSON', { getters: true });
+  studioDashboardResultSchema.set('toObject', { getters: true });
   studioDashboardResultSchema.pre('updateOne', function (this: any) {
     // $setOnInsert not supported in table mode
     delete this.getUpdate().$setOnInsert;
@@ -61,18 +63,22 @@ export default async function mongooseStudioSetup(connection: typeof mongoose.co
     }
   });
   tollCallSchema.options.udtName = 'ToolCall';
-  const studioChatMessageSchema = studioChatMessage.schema.omit(['toolCalls']).add({
-    toolCalls: [tollCallSchema]
-  });
-  studioChatMessageSchema.path('executionResult').schema = studioChatMessageSchema.path('executionResult').schema.omit(['output']).add({
-    output: {
-      type: String,
-      get: parseJSON,
-      set: stringifyJSON
-    }
+  tollCallSchema.set('toJSON', { getters: true });
+  tollCallSchema.set('toObject', { getters: true });
+  const studioChatMessageSchema = studioChatMessage.schema.omit(['toolCalls', 'executionResult']).add({
+    toolCalls: [tollCallSchema],
+    executionResult: studioChatMessage.schema.path('executionResult').schema.omit(['output']).add({
+      output: {
+        type: String,
+        get: parseJSON,
+        set: stringifyJSON
+      }
+    })
   });
   studioChatMessageSchema.options.versionKey = false;
   studioChatMessageSchema.path('executionResult').options.udtName = 'ExecutionResult';
+  studioChatMessageSchema.path('executionResult').schema.set('toJSON', { getters: true });
+  studioChatMessageSchema.path('executionResult').schema.set('toObject', { getters: true });
   studioChatMessageSchema.pre('updateOne', function (this: any) {
     // $setOnInsert not supported in table mode
     delete this.getUpdate().$setOnInsert;
