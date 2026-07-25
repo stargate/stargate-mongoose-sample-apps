@@ -9,7 +9,7 @@ import bodyParser from 'body-parser';
 import connect from '../models/connect';
 import studio from '@mongoosejs/studio';
 import mongoose from '../models/mongoose';
-import mongooseStudioSetup from '../mongooseStudioSetup';
+import { mongooseStudioSetup } from '@mongoosejs/mongoose-studio-data-api-plugin';
 
 const port = process.env.PORT || 3000;
 
