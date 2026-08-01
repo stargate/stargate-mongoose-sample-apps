@@ -13,7 +13,9 @@ import { mongooseStudioSetup } from '@mongoosejs/mongoose-studio-data-api-plugin
 
 const port = process.env.PORT || 3000;
 
-const googleGeminiAPIKey = process.env.GEMINI_API_KEY;
+const openAIAPIKey = process.env.OPENAI_API_KEY;
+const anthropicAPIKey = process.env.ANTHROPIC_API_KEY;
+const googleGeminiAPIKey = process.env.GOOGLE_GEMINI_API_KEY;
 
 void async function main() {
   const app = addAsync(express());
@@ -24,7 +26,14 @@ void async function main() {
   await connect();
 
   app.use(bodyParser.json());
-  const opts = googleGeminiAPIKey ? { googleGeminiAPIKey } : {};
+  let opts = {};
+  if (openAIAPIKey) {
+    opts = { openAIAPIKey };
+  } else if (anthropicAPIKey) {
+    opts = { anthropicAPIKey };
+  } else if (googleGeminiAPIKey) {
+    opts = { googleGeminiAPIKey };
+  }
 
   const studioConnection = mongoose.connection.useDb(mongoose.connection.keyspaceName as string, { isTable: true });
   app.use(
