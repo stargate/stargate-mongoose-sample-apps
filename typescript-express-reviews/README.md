@@ -35,3 +35,14 @@ From there:
   ]
 }
 ```
+
+### Mongoose Studio AI Chat
+
+To use the AI chat feature in Mongoose Studio, you need to provide your own API key for OpenAI, Anthropic, or Google Gemini.
+Add one of the following environment variables to your `.env` file with your API key.
+
+```
+OPENAI_API_KEY=
+ANTHROPIC_API_KEY=
+GOOGLE_GEMINI_API_KEY=
+```
