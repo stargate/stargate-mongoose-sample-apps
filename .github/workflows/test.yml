@@ -203,7 +203,7 @@ jobs:
         working-directory: typescript-express-reviews
 
 
-  test-photograhy:
+  test-photography:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false

@@ -18,8 +18,8 @@ before(async function() {
     const collectionName = Model.collection.collectionName;
     if (!collections.find(c => c.name === collectionName)) {
       await Model.createCollection();
-      // Prime collections to avoid UnavailableException errors in CI
-      console.log('Test insert for ', collectionName);
+      // Prime collections to avoid "not enough repliaces available" errors in CI
+      console.log('Test insert for', collectionName);
       let attempt = 0;
       let success = false;
       let lastError;
@@ -30,7 +30,7 @@ before(async function() {
           success = true;
           console.log('Successfully primed collection', collectionName);
         } catch (err) {
-          if (!(err instanceof Error) || !err.message.includes('UnavailableException')) {
+          if (!(err instanceof Error) || !err.message.includes('Not enough replicas available for query')) {
             throw err;
           }
           lastError = err;
