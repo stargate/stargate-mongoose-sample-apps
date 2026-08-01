@@ -7,8 +7,15 @@ import findById from './Vehicle/findById';
 import findByVehicle from './Review/findByVehicle';
 import bodyParser from 'body-parser';
 import connect from '../models/connect';
+import studio from '@mongoosejs/studio';
+import mongoose from '../models/mongoose';
+import { mongooseStudioSetup } from '@mongoosejs/mongoose-studio-data-api-plugin';
 
 const port = process.env.PORT || 3000;
+
+const openAIAPIKey = process.env.OPENAI_API_KEY;
+const anthropicAPIKey = process.env.ANTHROPIC_API_KEY;
+const googleGeminiAPIKey = process.env.GOOGLE_GEMINI_API_KEY;
 
 void async function main() {
   const app = addAsync(express());
@@ -19,9 +26,35 @@ void async function main() {
   await connect();
 
   app.use(bodyParser.json());
-  app.get('/status', function(req: express.Request, res: express.Response) {
+  let opts = {};
+  if (openAIAPIKey) {
+    opts = { openAIAPIKey };
+  } else if (anthropicAPIKey) {
+    opts = { anthropicAPIKey };
+  } else if (googleGeminiAPIKey) {
+    opts = { googleGeminiAPIKey };
+  }
+
+  const studioConnection = mongoose.connection.useDb(mongoose.connection.keyspaceName as string, { isTable: true });
+  app.use(
+    '/studio',
+    await studio.express(
+      // @ts-ignore
+      null,
+      mongoose.connection,
+      {
+        changeStream: false,
+        studioConnection,
+        ...opts
+      }
+    )
+  );
+  await mongooseStudioSetup(studioConnection);
+  app.get('/status', function (req: express.Request, res: express.Response) {
     res.json({ ok: 1 });
   });
+
+  //console.log(await mongoose.model('Authentication').estimatedDocumentCount())
 
   app.putAsync('/register', register);
   app.putAsync('/login', login);
