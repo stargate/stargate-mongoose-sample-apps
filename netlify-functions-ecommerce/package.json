@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "eslint": "10.8.0",
-    "globals": "17.8.0",
+    "globals": "17.9.0",
     "mocha": "11.7.6",
     "netlify-cli": "27.0.0"
   },
