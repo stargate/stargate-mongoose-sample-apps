@@ -26,6 +26,7 @@ before(async function() {
       while (attempt < 10 && !success) {
         try {
           await Model.collection.insertOne({});
+          await Model.collection.findOne({});
           await Model.collection.deleteMany({});
           success = true;
           console.log('Successfully primed collection', collectionName);
