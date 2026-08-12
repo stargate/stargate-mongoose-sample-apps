@@ -7,7 +7,7 @@
     "dotenv": "17.4.2",
     "mongoose": "^9.0",
     "sinon": "22.1.0",
-    "stripe": "22.3.2",
+    "stripe": "22.4.0",
     "vanillatoasts": "1.6.0",
     "webpack": "5.x"
   },
@@ -15,7 +15,7 @@
     "eslint": "10.8.0",
     "globals": "17.8.0",
     "mocha": "11.8.0",
-    "netlify-cli": "27.0.0"
+    "netlify-cli": "27.1.0"
   },
   "engines": {
     "node": ">=20.6.0"
