@@ -12,7 +12,7 @@
     "webpack": "5.x"
   },
   "devDependencies": {
-    "eslint": "10.9.1",
+    "eslint": "10.10.0",
     "globals": "17.11.0",
     "mocha": "11.8.0",
     "netlify-cli": "27.4.0"
