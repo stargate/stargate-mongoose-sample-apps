@@ -30,8 +30,20 @@ describe('Vector Search Tests', function() {
     await photo2.save();
 
     //should find photo1, since its vector is the same with targetVector
-    const photo = await Photo.find({}).sort({ $vector: { $meta: targetVector } }).limit(1);
-    assert.equal(photo[0].name, 'testName1');
+    for (let i = 0; i < 5; ++i) {
+      let photo;
+      try {
+        photo = await Photo.find({}).sort({ $vector: { $meta: targetVector } }).limit(1);
+      } catch (err) {
+        if (!(err instanceof Error) || !err.message.includes('Not enough replicas available for query')) {
+          throw err;
+        } else {
+          continue;
+        }
+      }
+      assert.equal(photo[0].name, 'testName1');
+      break;
+    }
 
   });
 

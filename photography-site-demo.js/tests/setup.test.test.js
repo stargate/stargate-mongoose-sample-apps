@@ -18,7 +18,7 @@ before(async function() {
     const collectionName = Model.collection.collectionName;
     if (!collections.find(c => c.name === collectionName)) {
       await Model.createCollection();
-      // Prime collections to avoid "not enough repliaces available" errors in CI
+      // Prime collections to avoid "not enough replicas available" errors in CI
       console.log('Test insert for', collectionName);
       let attempt = 0;
       let success = false;
