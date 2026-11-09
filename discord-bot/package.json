@@ -19,7 +19,7 @@
   "dependencies": {
     "@datastax/astra-mongoose": "1.6.0",
     "@discordjs/rest": "2.6.3",
-    "discord.js": "14.27.0",
+    "discord.js": "14.28.1",
     "mongoose": "^9.0"
   },
   "devDependencies": {
